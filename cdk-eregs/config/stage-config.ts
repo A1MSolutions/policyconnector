@@ -19,13 +19,13 @@ const AWS_SERVICES = {
 /**
  * Configuration class that provides environment-specific settings and resource naming.
  * Handles both regular (dev, prod) and ephemeral (PR-based) environments.
- * 
+ *
  * @example
  * ```typescript
  * // Regular environment
  * const config = await StageConfig.create('dev', undefined, synthesizerConfig.iamPermissionsBoundary);
  * config.aws.lambda('function')  // → /aws/lambda/cms-eregs-dev-function
- * 
+ *
  * // PR environment
  * const config = await StageConfig.create('dev', 'eph-123', synthesizerConfig.iamPermissionsBoundary);
  * config.aws.lambda('function')  // → /aws/lambda/cms-eregs-eph-123-function
@@ -35,7 +35,7 @@ export class StageConfig {
   /**
    * Project name used across all environments
    */
-  public static readonly projectName = 'cms-eregs';
+  public static readonly projectName = 'a1m-eregs';
 
   /**
    * Creates a new StageConfig instance
@@ -44,7 +44,7 @@ export class StageConfig {
    * @param synthesizerPermissionsBoundary - IAM permissions boundary from synthesizer config
    */
   public static async create(
-    environment: string, 
+    environment: string,
     ephemeralId?: string,
     synthesizerPermissionsBoundary?: string
   ): Promise<StageConfig> {
@@ -56,12 +56,7 @@ export class StageConfig {
       throw new Error('Permissions boundary must be provided from synthesizer config');
     }
 
-    return new StageConfig(
-      environment,
-      iamPath,
-      synthesizerPermissionsBoundary,
-      ephemeralId
-    );
+    return new StageConfig(environment, iamPath, synthesizerPermissionsBoundary, ephemeralId);
   }
 
   private constructor(
@@ -106,31 +101,23 @@ export class StageConfig {
 
   // AWS service namespace remains the same
   public readonly aws = {
-    service: (service: string, resource: string): string => 
+    service: (service: string, resource: string): string =>
       `/aws/${service}/${this.getResourceName(resource)}`,
 
-    lambda: (resource: string): string => 
-      this.aws.service(AWS_SERVICES.LAMBDA, resource),
+    lambda: (resource: string): string => this.aws.service(AWS_SERVICES.LAMBDA, resource),
 
-    apiGateway: (resource: string): string => 
-      this.aws.service(AWS_SERVICES.API_GATEWAY, resource),
+    apiGateway: (resource: string): string => this.aws.service(AWS_SERVICES.API_GATEWAY, resource),
 
-    cloudwatch: (resource: string): string => 
-      this.aws.service(AWS_SERVICES.CLOUDWATCH, resource),
+    cloudwatch: (resource: string): string => this.aws.service(AWS_SERVICES.CLOUDWATCH, resource),
 
-    s3: (resource: string): string => 
-      this.aws.service(AWS_SERVICES.S3, resource),
+    s3: (resource: string): string => this.aws.service(AWS_SERVICES.S3, resource),
 
-    dynamodb: (resource: string): string => 
-      this.aws.service(AWS_SERVICES.DYNAMODB, resource),
+    dynamodb: (resource: string): string => this.aws.service(AWS_SERVICES.DYNAMODB, resource),
 
-    sns: (resource: string): string => 
-      this.aws.service(AWS_SERVICES.SNS, resource),
+    sns: (resource: string): string => this.aws.service(AWS_SERVICES.SNS, resource),
 
-    sqs: (resource: string): string => 
-      this.aws.service(AWS_SERVICES.SQS, resource),
+    sqs: (resource: string): string => this.aws.service(AWS_SERVICES.SQS, resource),
 
-    events: (resource: string): string => 
-      this.aws.service(AWS_SERVICES.EVENTS, resource),
+    events: (resource: string): string => this.aws.service(AWS_SERVICES.EVENTS, resource),
   };
 }

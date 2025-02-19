@@ -49,8 +49,8 @@ export class RedirectApiStack extends cdk.Stack {
   private readonly stageConfig: StageConfig;
 
   constructor(
-    scope: Construct, 
-    id: string, 
+    scope: Construct,
+    id: string,
     props: RedirectApiStackProps,
     stageConfig: StageConfig
   ) {
@@ -102,7 +102,7 @@ export class RedirectApiStack extends cdk.Stack {
   private createLambdaFunction(
     role: iam.Role,
     logGroup: logs.LogGroup,
-    config: LambdaConfig,
+    config: LambdaConfig
   ): lambda.Function {
     return new lambda.Function(this, 'RedirectFunctionLambdaFunction', {
       functionName: this.stageConfig.getResourceName('redirect-function'),
@@ -110,7 +110,7 @@ export class RedirectApiStack extends cdk.Stack {
       runtime: config.runtime,
       handler: config.handler ?? 'redirect_lambda.handler',
       code: lambda.Code.fromAsset(config.codePath ?? '../solution/backend/'),
-      
+
       memorySize: config.memorySize,
       timeout: cdk.Duration.seconds(config.timeout),
       role,
@@ -145,16 +145,16 @@ export class RedirectApiStack extends cdk.Stack {
 
   private configureApiGateway() {
     const integration = new apigateway.LambdaIntegration(this.lambdaFunction, { proxy: true });
-    
-    this.api.root.addMethod('ANY', integration, { 
-      apiKeyRequired: false, 
-      methodResponses: [{ statusCode: '200' }] 
+
+    this.api.root.addMethod('ANY', integration, {
+      apiKeyRequired: false,
+      methodResponses: [{ statusCode: '200' }],
     });
-    
+
     const proxyResource = this.api.root.addResource('{proxy+}');
-    proxyResource.addMethod('ANY', integration, { 
-      apiKeyRequired: false, 
-      methodResponses: [{ statusCode: '200' }] 
+    proxyResource.addMethod('ANY', integration, {
+      apiKeyRequired: false,
+      methodResponses: [{ statusCode: '200' }],
     });
   }
 
@@ -175,4 +175,3 @@ export class RedirectApiStack extends cdk.Stack {
     Object.entries(outputs).forEach(([name, props]) => new cdk.CfnOutput(this, name, props));
   }
 }
-

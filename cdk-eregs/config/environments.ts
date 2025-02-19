@@ -16,8 +16,8 @@ export const VALID_ENVIRONMENTS: Environment[] = ['dev', 'val', 'prod', 'ephemer
  * @returns boolean - True if the environment is valid; otherwise, false.
  */
 export function isValidEnvironment(env: string): env is Environment {
-    return VALID_ENVIRONMENTS.includes(env as Environment);
-  }
+  return VALID_ENVIRONMENTS.includes(env as Environment);
+}
 /**
  * Interface representing the context for a deployment environment.
  * This includes standard environment details as well as ephemeral-specific properties.

@@ -50,7 +50,7 @@ export interface TextExtractorStackProps extends cdk.StackProps {
 
 /**
  * CDK Stack implementation for Text Extractor service.
- * 
+ *
  * This stack creates a serverless text extraction service with the following components:
  * - Docker-based Lambda function for text extraction
  * - SQS Queue with Dead Letter Queue for reliable message processing
@@ -100,8 +100,8 @@ export class TextExtractorStack extends cdk.Stack {
    * @param stageConfig - Environment stage configuration
    */
   constructor(
-    scope: Construct, 
-    id: string, 
+    scope: Construct,
+    id: string,
     props: TextExtractorStackProps,
     stageConfig: StageConfig
   ) {
@@ -153,7 +153,7 @@ export class TextExtractorStack extends cdk.Stack {
   private createTextExtractorLambdaFunction(
     config: LambdaConfig,
     envConfig: EnvironmentConfig,
-    role: iam.Role,
+    role: iam.Role
   ): lambda.Function {
     const dockerContextPath = path.resolve(__dirname, '../../../solution/');
     console.log('Docker context path:', dockerContextPath);
@@ -165,7 +165,6 @@ export class TextExtractorStack extends cdk.Stack {
       }),
       memorySize: config.memorySize,
       timeout: cdk.Duration.seconds(config.timeout),
-      reservedConcurrentExecutions: config.reservedConcurrentExecutions,
       environment: {
         LOG_LEVEL: envConfig.logLevel,
         HTTP_AUTH_USER: envConfig.httpUser,
@@ -239,11 +238,7 @@ export class TextExtractorStack extends cdk.Stack {
       statements: [
         new iam.PolicyStatement({
           effect: iam.Effect.ALLOW,
-          actions: [
-            'sqs:ReceiveMessage',
-            'sqs:DeleteMessage',
-            'sqs:GetQueueAttributes'
-          ],
+          actions: ['sqs:ReceiveMessage', 'sqs:DeleteMessage', 'sqs:GetQueueAttributes'],
           resources: [this.queue.queueArn],
         }),
       ],
@@ -284,23 +279,13 @@ export class TextExtractorStack extends cdk.Stack {
       statements: [
         new iam.PolicyStatement({
           effect: iam.Effect.ALLOW,
-          actions: [
-            'logs:CreateLogGroup',
-            'logs:CreateLogStream',
-            'logs:PutLogEvents'
-          ],
+          actions: ['logs:CreateLogGroup', 'logs:CreateLogStream', 'logs:PutLogEvents'],
           resources: [`arn:aws:logs:${this.region}:${this.account}:log-group:/aws/lambda/*:*:*`],
         }),
         new iam.PolicyStatement({
           effect: iam.Effect.ALLOW,
-          actions: [
-            's3:PutObject',
-            's3:GetObject',
-            's3:DeleteObject'
-          ],
-          resources: [
-            `arn:aws:s3:::file-repo-eregs-${this.stageConfig.environment}*`
-          ],
+          actions: ['s3:PutObject', 's3:GetObject', 's3:DeleteObject'],
+          resources: [`arn:aws:s3:::file-repo-eregs-${this.stageConfig.environment}*`],
         }),
       ],
     });
@@ -329,10 +314,9 @@ export class TextExtractorStack extends cdk.Stack {
       TextExtractorQueueArn: {
         value: this.queue.queueArn,
         exportName: this.stageConfig.getResourceName('text-extractor-queue-arn'),
-      }
+      },
     };
 
     Object.entries(outputs).forEach(([name, props]) => new cdk.CfnOutput(this, name, props));
   }
 }
-

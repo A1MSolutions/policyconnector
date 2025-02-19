@@ -1,4 +1,4 @@
-import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
+import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm';
 
 /**
  * Fetches a parameter value from AWS Systems Manager (SSM) Parameter Store with error handling.
@@ -8,7 +8,7 @@ import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
  */
 export async function getParameterValue(path: string): Promise<string> {
   if (!path) {
-    throw new Error("Parameter path is required");
+    throw new Error('Parameter path is required');
   }
 
   const ssm = new SSMClient({});
@@ -25,14 +25,13 @@ export async function getParameterValue(path: string): Promise<string> {
     }
 
     return response.Parameter.Value;
-
   } catch (error) {
     if (error instanceof Error) {
       // Handle specific AWS SDK error names
-      if (error.name === "ParameterNotFound") {
+      if (error.name === 'ParameterNotFound') {
         throw new Error(`Parameter not found: ${path}`);
       }
-      if (error.name === "AccessDeniedException") {
+      if (error.name === 'AccessDeniedException') {
         throw new Error(`Access denied to parameter: ${path}`);
       }
 

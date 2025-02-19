@@ -1,5 +1,10 @@
 // lib/utils/environment.ts
-import { Environment, EnvironmentContext, VALID_ENVIRONMENTS, isValidEnvironment } from './environments';
+import {
+  Environment,
+  EnvironmentContext,
+  VALID_ENVIRONMENTS,
+  isValidEnvironment,
+} from './environments';
 
 /**
  * Validates the environment and constructs the context based on deployment details.
@@ -37,7 +42,9 @@ export function validateEnvironment(env?: string): Environment {
   const environment = (env || 'dev').toLowerCase() as Environment;
 
   if (!isValidEnvironment(environment)) {
-    throw new Error(`Invalid environment: ${environment}. Must be one of: ${VALID_ENVIRONMENTS.join(', ')}`);
+    throw new Error(
+      `Invalid environment: ${environment}. Must be one of: ${VALID_ENVIRONMENTS.join(', ')}`
+    );
   }
 
   return environment;
@@ -49,7 +56,8 @@ export function validateEnvironment(env?: string): Environment {
  */
 export function validateEphemeralId(ephemeralId: string): void {
   if (ephemeralId.length > 20) throw new Error('Ephemeral ID cannot exceed 20 characters');
-  if (!/^[a-z0-9-]+$/.test(ephemeralId)) throw new Error('Ephemeral ID must contain only lowercase letters, numbers, and hyphens');
+  if (!/^[a-z0-9-]+$/.test(ephemeralId))
+    throw new Error('Ephemeral ID must contain only lowercase letters, numbers, and hyphens');
   if (!ephemeralId.startsWith('eph-')) throw new Error('Ephemeral ID must start with "eph-"');
 }
 

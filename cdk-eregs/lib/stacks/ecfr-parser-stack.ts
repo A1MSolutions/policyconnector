@@ -30,12 +30,7 @@ export interface EcfrParserStackProps extends cdk.StackProps {
 export class EcfrParserStack extends cdk.Stack {
   public readonly lambda: lambda.Function;
 
-  constructor(
-    scope: Construct,
-    id: string,
-    props: EcfrParserStackProps,
-    stageConfig: StageConfig
-  ) {
+  constructor(scope: Construct, id: string, props: EcfrParserStackProps, stageConfig: StageConfig) {
     super(scope, id, props);
 
     // Create Lambda infrastructure
@@ -43,14 +38,18 @@ export class EcfrParserStack extends cdk.Stack {
 
     // Get the site stack endpoint using stageConfig
     // const siteEndpoint = cdk.Fn.importValue(`${stageConfig.getResourceName('site')}-ServiceEndpoint`);
-    const siteEndpoint = 'https://dev-site.cms.gov';
+    // Get the API Gateway endpoint from stack outputs
+    // Get API endpoint and trim any trailing slash
+    const siteEndpoint = cdk.Fn.importValue(stageConfig.getResourceName('api-endpoint'));
     // Create Lambda function
     this.lambda = new lambda.DockerImageFunction(this, 'EcfrParserFunction', {
       functionName: stageConfig.getResourceName('ecfr-parser'),
-      code: lambda.DockerImageCode.fromImageAsset(path.join(__dirname, '../../../solution/parser/'), {
-        file: 'ecfr-parser/Dockerfile',
-        
-      }),
+      code: lambda.DockerImageCode.fromImageAsset(
+        path.join(__dirname, '../../../solution/parser/'),
+        {
+          file: 'ecfr-parser/Dockerfile',
+        }
+      ),
       timeout: cdk.Duration.seconds(props.lambdaConfig.timeout || 900),
       environment: {
         PARSER_ON_LAMBDA: 'true',
@@ -65,7 +64,7 @@ export class EcfrParserStack extends cdk.Stack {
 
     // Create CloudWatch Event Rule - note different cron expression
     const rule = new events.Rule(this, 'EcfrParserSchedule', {
-      schedule: events.Schedule.expression('cron(0 0 * * ? *)'),  // Midnight every day
+      schedule: events.Schedule.expression('cron(0 0 * * ? *)'), // Midnight every day
       enabled: true,
     });
 
@@ -78,7 +77,7 @@ export class EcfrParserStack extends cdk.Stack {
   private createLambdaInfrastructure(stageConfig: StageConfig) {
     const logGroup = new logs.LogGroup(this, 'EcfrParserLogGroup', {
       logGroupName: stageConfig.aws.lambda('ecfr-parser'),
-      retention: logs.RetentionDays.INFINITE,
+      retention: logs.RetentionDays.ONE_MONTH,
     });
 
     const lambdaRole = new iam.Role(this, 'LambdaFunctionRole', {
@@ -105,11 +104,7 @@ export class EcfrParserStack extends cdk.Stack {
       statements: [
         new iam.PolicyStatement({
           effect: iam.Effect.ALLOW,
-          actions: [
-            'logs:CreateLogGroup',
-            'logs:CreateLogStream',
-            'logs:PutLogEvents'
-          ],
+          actions: ['logs:CreateLogGroup', 'logs:CreateLogStream', 'logs:PutLogEvents'],
           resources: [`arn:aws:logs:${this.region}:${this.account}:log-group:/aws/lambda/*:*:*`],
         }),
       ],
@@ -121,7 +116,9 @@ export class EcfrParserStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'EcfrParserLambdaFunctionQualifiedArn', {
       value: this.lambda.currentVersion.functionArn,
       description: 'Current Lambda function version',
-      exportName: `sls-${stageConfig.getResourceName('ecfr-parser')}-EcfrParserLambdaFunctionQualifiedArn`,
+      exportName: `sls-${stageConfig.getResourceName(
+        'ecfr-parser'
+      )}-EcfrParserLambdaFunctionQualifiedArn`,
     });
   }
 }

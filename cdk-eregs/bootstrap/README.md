@@ -4,7 +4,7 @@
 
 In order for our CDK scripts to reliably deploy/create AWS resources, we need to keep our CDK stacks up to date.
 
-We decided we wanted to do this automatically via cron'd Github Action, but found it wasn't possible to do this using standard bootstrap procedure because we are relying on a CMS-specific `template.yaml`.  By diffing the CMS `template.yaml` with the [default one from CDK](https://github.com/aws/aws-cdk/blob/main/packages/aws-cdk/lib/api/bootstrap/bootstrap-template.yaml), we found it was feasible to create a script (`update_template.py`) that attempts to automatically apply those needed changes to the default template.
+We decided we wanted to do this automatically via cron'd Github Action, but found it wasn't possible to do this using standard bootstrap procedure because we are relying on a CMS-specific `template.yaml`. By diffing the CMS `template.yaml` with the [default one from CDK](https://github.com/aws/aws-cdk/blob/main/packages/aws-cdk/lib/api/bootstrap/bootstrap-template.yaml), we found it was feasible to create a script (`update_template.py`) that attempts to automatically apply those needed changes to the default template.
 
 From there, we can automate the bootstrap update procedure.
 
@@ -37,14 +37,16 @@ Note that if a role is specified in the list, regardless of the status of the `u
 ## Usage
 
 To run the `update_template.py` script, use the following command:
+
 ```sh
 ./update_template.py <role file> <input template> <output filename> <name of role to assume>
 ```
+
 Where `role file` is the filename of the `roles.json` you created earlier, `input template` is the default CDK template.yaml file, `output filename` is the filename to write the updated template to, and `name of role to assume` is the role unique to your project.
 
 ## Additional options
 
-In addition to the four positional arguments that `update_template.yaml` takes, you can also specify the following: 
+In addition to the four positional arguments that `update_template.yaml` takes, you can also specify the following:
 
 `--boundary-policy-arn-prefix BOUNDARY_POLICY_ARN_PREFIX`<br/>
 ARN prefix of the permissions boundary policy to attach to the roles. Default is: `arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/`.
@@ -67,7 +69,7 @@ name: Update CDK Bootstrap
 
 on:
   schedule:
-    - cron: '0 0 * * 1' # Runs every Monday 
+    - cron: '0 0 * * 1' # Runs every Monday
 
 permissions:
   id-token: write
@@ -79,7 +81,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        environment: ["dev", "val", "prod"]
+        environment: ['dev', 'val', 'prod']
 
     runs-on: ubuntu-latest
 
