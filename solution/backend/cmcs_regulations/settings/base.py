@@ -27,8 +27,6 @@ FORCE_SCRIPT_NAME = os.environ.get("FORCE_SCRIPT_NAME")
 
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'),
                  'localhost',
-                 'regulations-pilot.cms.gov',
-                 'eregulations.cms.gov',
                  'host.docker.internal']
 
 # Application definition
@@ -228,7 +226,7 @@ SIGNUP_URL = os.environ.get(
 )
 DEMO_VIDEO_URL = os.environ.get(
     "DEMO_VIDEO_URL",
-    "https://www.youtube.com/@CMSHHSgov"
+    ""
 )
 
 DEPLOY_NUMBER = os.environ.get("DEPLOY_NUMBER", datetime.now())
@@ -248,8 +246,8 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
 ]
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'CMCS eRegulations API',
-    'DESCRIPTION': 'Medicaid and CHIP regulation content and associated supplemental content (such as subregulatory guidance)'
+    'TITLE': 'Policy Connector API',
+    'DESCRIPTION': ''
 }
 
 LOGIN_URL = "/login/"
