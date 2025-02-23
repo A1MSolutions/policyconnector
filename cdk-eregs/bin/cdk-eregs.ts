@@ -3,6 +3,9 @@ import * as cdk from 'aws-cdk-lib';
 import { VpcStack } from '../lib/stacks/vpc-stack';
 import { BackendStack } from '../lib/stacks/api-stack';
 import { StaticAssetsStack } from '../lib/stacks/static-assets-stack';
+import { EcfrParserStack } from '../lib/stacks/ecfr-parser-stack';
+import { FrParserStack } from '../lib/stacks/fr-parser-stack';
+import { TextExtractorStack } from '../lib/stacks/text-extract-stack';
 import { StageConfig } from '../config/stage-config';
 import { getParameterValue } from '../utils/parameter-store';
 
@@ -21,10 +24,12 @@ async function main() {
   );
 
   // Get infrastructure parameters
-  const [vpcId, subnet1a, subnet1b] = await Promise.all([
+  const [vpcId, subnet1a, subnet1b, httpUser, httpPassword] = await Promise.all([
     getParameterValue('/account_vars/vpc/prod/id'),
     getParameterValue('/account_vars/vpc/prod/subnets/private/1a/id'),
     getParameterValue('/account_vars/vpc/prod/subnets/private/1b/id'),
+    getParameterValue('/eregulations/http/user'),
+    getParameterValue('/eregulations/http/password'),
   ]);
 
   // Only create the VPC stack if we're deploying it
@@ -56,6 +61,50 @@ async function main() {
       lambdaConfig: {
         memorySize: 1024,
         timeout: 30
+      }
+    }, stageConfig);
+  }
+
+  // Add parser stacks
+  if (!stackName || stackName.includes('fr-parser') || stackName.includes('ecfr-parser')) {
+    // Create eCFR Parser Stack
+    new EcfrParserStack(app, 'a1m-eregs-prod-ecfr-parser', {
+      env,
+      environmentConfig: {
+        httpUser,
+        httpPassword,
+        logLevel: 'INFO'
+      },
+      lambdaConfig: {
+        timeout: 900  // 15 minutes
+      }
+    }, stageConfig);
+
+    // Create FR Parser Stack
+    new FrParserStack(app, 'a1m-eregs-prod-fr-parser', {
+      env,
+      environmentConfig: {
+        httpUser,
+        httpPassword,
+        logLevel: 'INFO'
+      },
+      lambdaConfig: {
+        timeout: 900  // 15 minutes
+      }
+    }, stageConfig);
+  }
+
+  if (!stackName || stackName === 'a1m-eregs-prod-text-extractor') {
+    new TextExtractorStack(app, 'a1m-eregs-prod-text-extractor', {
+      env,
+      environmentConfig: {
+        logLevel: 'INFO',
+        httpUser,
+        httpPassword
+      },
+      lambdaConfig: {
+        memorySize: 1024,
+        timeout: 900  // 15 minutes
       }
     }, stageConfig);
   }
