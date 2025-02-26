@@ -17,7 +17,7 @@ class AbstractCitation(models.Model, DisplayNameFieldMixin):
 
 
 class Subpart(AbstractCitation):
-    subpart_id = models.CharField(max_length=12)
+    subpart_id = models.CharField(max_length=50)
 
     def __str__(self):
         return f"{self.title} CFR {self.part} Subpart {self.subpart_id}"
