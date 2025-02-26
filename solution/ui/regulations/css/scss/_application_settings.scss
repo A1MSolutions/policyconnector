@@ -123,7 +123,7 @@ $dark_blue: #07648D; /*main text link*/
 
 $darkest_gray: #1B1B1B; /*base text*/
 $darker_gray: #5B616B; /*public and internal slug*/
-$mid_gray: #767676; /*disabled*/
+$mid_gray: #767676; /*disabled and placeholder*/
 $mid_gray_warm: #A3A3A3; /*?*/
 $light_gray: #DCDCDC; /*side nav top background and disabled button background*/
 $lightest_gray: #F3F3F3; /*side nav main background*/
@@ -131,6 +131,9 @@ $lightest_gray: #F3F3F3; /*side nav main background*/
 $white: #fff; /*default background and reverse button background*/
 
 $green: #2a7a3b;
+$title_color: #1B1B1B;
+$section_highlight_color: #eefafe;
+$mark_highlight: #fce5af;
 
 
 //// Usage ////
@@ -143,28 +146,28 @@ $secondary_color: $teal;
 
 // Links
 
-$primary_link_color: $mid_blue;
-$primary_link_hover: $dark_blue;
+$primary_link_color: $$dark_blue;
+$primary_link_hover: $dark_purple;
 
-$secondary_link_color: $teal;
-$secondary_link_hover: $mid_blue;
+$secondary_link_color: $darker_blue;
+$secondary_link_hover: $darkest_purple;
 
 $teritary_link_color: $darker_blue;
 $teritary_link_hover: $darkest_purple;
 
-$reverse_link_color: $light_blue;
+$reverse_link_color: $light_purple;
 $reverse_link_hover: $white;
 
 $secondary_reverse_link_color: $white;
-$secondary_reverse_link_hover: $light_blue;
+$secondary_reverse_link_hover: $light_purple;
 
-$visited_link_color: $dark_purple; /*updated*/
+$visited_link_color: $dark_purple; 
 
-$secondary_toc_link_color: $light_blue_2;
+$secondary_toc_link_color: $darker_blue;
 
 // Forms
 
-$placeholder_color: $mid_gray_2;
+$placeholder_color: $mid_gray;
 
 // Backgrounds
 
@@ -201,10 +204,11 @@ $formula_left_border: $light_red;
 
 // Text
 
-$primary_text_color: $dark_gray;
-$secondary_text_color: $mid_gray;
+$primary_text_color: $darkest_gray;
+$secondary_text_color: $darker_gray;
 $reverse_text_color: $white;
-$policy_subject_selected_chip_text: #fff;
+
+$policy_subject_selected_chip_text: $white;
 
 // Indicators
 
