@@ -5,7 +5,7 @@
 @import "../application_settings";
 
 @mixin common-context-related-sections {
-    color: $mid_gray;
+    color: $tertiary_text_color;
     font-size: var(--font-size-sm);
     font-weight: 400;
     line-height: 22px;
@@ -22,8 +22,8 @@
 .doc-type__label {
     @include common-label-styles;
 
-    color: #fff;
-    background: $mid_gray;
+    color: $secondary_text_color;
+    background: $teritary_background_color;
 }
 
 .category-labels {
@@ -34,7 +34,7 @@
     .result-label {
         @include common-label-styles;
 
-        background: #e3eef9;
+        background: $reverse_background_darker;
 
         &.category-label,
         &.regulations-label {
@@ -42,8 +42,8 @@
         }
 
         &.regulations-label {
-            color: #fff;
-            background: $primary_color;
+            color: $reverse_text_color;
+            background: $reverse_background_color;
         }
     }
 }
@@ -69,7 +69,7 @@
 
             &--bar {
                 padding-right: 8px;
-                border-right: 1px solid $mid_gray;
+                border-right: 1px solid $border_color;
             }
         }
 
@@ -78,7 +78,7 @@
 
             &--bar {
                 padding-left: 8px;
-                border-left: 1px solid $mid_gray;
+                border-left: 1px solid $border_color;
             }
         }
     }
@@ -144,7 +144,7 @@
     .title__span,
     .section-sign,
     .pipe-separator {
-        color: $mid_gray;
+        color: $secondary_text_color;
         font-size: 14px;
     }
 
@@ -169,12 +169,12 @@
 
     .related-sections {
         margin-bottom: 40px;
-        color: $mid_gray;
+        color: $secondary_text_color;
         font-size: $font-size-xs;
 
         .related-sections-title {
             font-weight: 600;
-            color: $dark_gray;
+            color: $secondary_text_color;
             text-transform: none;
             font-size: $font-size-xs;
         }

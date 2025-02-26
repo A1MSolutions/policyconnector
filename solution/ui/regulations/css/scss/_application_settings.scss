@@ -146,7 +146,7 @@ $secondary_color: $teal;
 
 // Links
 
-$primary_link_color: $$dark_blue;
+$primary_link_color: $dark_blue;
 $primary_link_hover: $dark_purple;
 
 $secondary_link_color: $darker_blue;
@@ -191,8 +191,8 @@ $jump_to_submit_active_focus: $mid_beige;
 
 $policy_subject_selected_chip_background: $dark_blue; 
 
-$choice-checked-background-color: $mid_blue;
-$choice-checked-border-color: $mid_blue;
+$choice-checked-background-color: $dark_blue;
+$choice-checked-border-color: $dark_blue;
 
 // Borders
 
@@ -206,13 +206,14 @@ $formula_left_border: $light_red;
 
 $primary_text_color: $darkest_gray;
 $secondary_text_color: $darker_gray;
+$tertiary_text_color: $mid_gray;
 $reverse_text_color: $white;
 
 $policy_subject_selected_chip_text: $white;
 
 // Indicators
 
-$primary_indicator_background: $teal;
+$primary_indicator_background: $mid_red;
 $primary_indicator_text: $white;
 
 $secondary_indicator_background: $light_gray;
@@ -606,11 +607,10 @@ select {
 // Other Common Settings
 // -------------------------
 
-// Blue chips used for Resources selections and Policy Doc subjects
+// Chips used for Resources selections and Policy Doc subjects
 @mixin common-chip-colors {
-    background: $lightest_blue;
-    color: $mid_blue;
-    border: 1px solid #c0eaf8;
+    background: $darkest_blue;
+    color: $white;
 }
 
 @mixin common-chip-styles {
