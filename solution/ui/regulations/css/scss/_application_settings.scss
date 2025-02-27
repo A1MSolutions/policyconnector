@@ -173,6 +173,7 @@ $placeholder_color: $mid_gray;
 
 $main_background_color: $white;
 $secondary_background_color: $lightest_gray;
+$secondary_background_active: $light_gray;
 $teritary_background_color: $light_red;
 $reverse_background_color: $dark_blue;
 $reverse_background_darker: $darker_blue;
@@ -198,7 +199,7 @@ $choice-checked-border-color: $dark_blue;
 
 $border_color: $light_gray;
 $secondary_border_color: $light_red;
-$tertiary_border_color: $darker_gray;
+$tertiary_border_color: $darker_gray; /*TO DO: swap this value with secondary everywhere*/
 $hover_border_color: $mid_red;
 $table_border_color: $light_gray;
 $formula_left_border: $light_red;
