@@ -315,7 +315,7 @@ export class BackendStack extends cdk.Stack {
       DB_PORT: databasePort,
       GA_ID: ssmParams.gaId,
       DJANGO_SETTINGS_MODULE: ssmParams.djangoSettingsModule,
-      ALLOWED_HOST: '.amazonaws.com policyconnector.digital www.policyconnector.digital',
+      ALLOWED_HOST: 'policyconnector.digital',
       STAGE_ENV: stageConfig.stageName,
       STATIC_URL: cdk.Fn.importValue(stageConfig.getResourceName('static-url')) + '/',
       WORKING_DIR: '/var/task',
