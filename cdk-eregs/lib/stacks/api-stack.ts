@@ -13,6 +13,10 @@ import {
   aws_logs as logs,
   aws_iam as iam,
   aws_secretsmanager as secretsmanager,
+  aws_route53 as route53,
+  aws_route53_targets as route53Targets,
+  aws_certificatemanager as acm,
+  aws_apigateway as apigateway,
 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { StageConfig } from '../../config/stage-config';
@@ -58,6 +62,10 @@ interface BackendStackProps extends cdk.StackProps {
   lambdaConfig: LambdaConfig;
   /** Environment-specific configuration */
   environmentConfig: EnvironmentConfig;
+  /** Optional domain name for the API */
+  domainName?: string;
+  /** Optional ACM certificate ARN for custom domain */
+  certificateArn?: string;
 }
 
 /**
@@ -194,7 +202,6 @@ export class BackendStack extends cdk.Stack {
 // ================================
     // DATABASE SETUP
     // ================================
-    let databaseSecurityGroup: ec2.ISecurityGroup;
     let databaseEndpoint: string;
     let databasePort: string;
     let databaseConstruct: DatabaseConstruct | undefined;
@@ -208,7 +215,6 @@ export class BackendStack extends cdk.Stack {
         serverlessSecurityGroup: serverlessSG,
       });
 
-      databaseSecurityGroup = databaseConstruct.dbSecurityGroup;
       databaseEndpoint = databaseConstruct.cluster.clusterEndpoint.hostname;
       databasePort = databaseConstruct.cluster.clusterEndpoint.port.toString();
     } else {
@@ -309,7 +315,7 @@ export class BackendStack extends cdk.Stack {
       DB_PORT: databasePort,
       GA_ID: ssmParams.gaId,
       DJANGO_SETTINGS_MODULE: ssmParams.djangoSettingsModule,
-      ALLOWED_HOST: '.amazonaws.com',
+      ALLOWED_HOST: '.amazonaws.com policyconnector.digital www.policyconnector.digital',
       STAGE_ENV: stageConfig.stageName,
       STATIC_URL: cdk.Fn.importValue(stageConfig.getResourceName('static-url')) + '/',
       WORKING_DIR: '/var/task',
@@ -452,6 +458,115 @@ export class BackendStack extends cdk.Stack {
     // ================================
     const waf = new WafConstruct(this, 'Waf', stageConfig);
     waf.associateWithApiGateway(api.api);
+
+    // ================================
+    // CUSTOM DOMAIN FOR API
+    // ================================
+    if (props.domainName) {
+      let certificate: acm.ICertificate | undefined;
+
+      // Get certificate from ARN or create a new one
+      if (props.certificateArn) {
+        certificate = acm.Certificate.fromCertificateArn(
+          this, 'ImportedApiCertificate', props.certificateArn
+        );
+      } else {
+        // Try to get certificate from SSM parameter
+        let certArnParam: string | undefined;
+        try {
+          certArnParam = ssm.StringParameter.valueForStringParameter(
+            this,
+            '/eregulations/certificate/arn'
+          );
+          certificate = acm.Certificate.fromCertificateArn(
+            this, 'SSMCertificate', certArnParam
+          );
+        } catch (err) {
+          // Create a new certificate if none exists
+          // Log the error for debugging purposes
+          const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+          console.warn(`No existing certificate found in SSM, creating a new one. Error: ${errorMessage}`);
+
+          certificate = new acm.Certificate(this, 'ApiCertificate', {
+            domainName: props.domainName,
+            subjectAlternativeNames: [`www.${props.domainName}`],
+            validation: acm.CertificateValidation.fromDns(),
+          });
+
+          // Store certificate ARN in SSM for future use
+          new ssm.StringParameter(this, 'CertificateArnParam', {
+            parameterName: '/eregulations/certificate/arn',
+            stringValue: certificate.certificateArn,
+            description: 'ACM Certificate ARN for API Gateway',
+          });
+        }
+      }
+
+      // Set up custom domain for API Gateway
+      const apiDomainName = new apigateway.DomainName(this, 'ApiDomainName', {
+        domainName: props.domainName,
+        certificate: certificate,
+        endpointType: apigateway.EndpointType.REGIONAL,
+        securityPolicy: apigateway.SecurityPolicy.TLS_1_2,
+      });
+
+      // Map the custom domain to the API stage
+      new apigateway.BasePathMapping(this, 'ApiPathMapping', {
+        domainName: apiDomainName,
+        restApi: api.api,
+        stage: api.api.deploymentStage,
+        basePath: '',  // Map to the root path to remove stage name from URL
+      });
+
+      // Try to create DNS records in Route53
+      try {
+        const hostedZone = route53.HostedZone.fromLookup(this, 'ApiHostedZone', {
+          domainName: props.domainName,
+        });
+
+        // Create an A record for the domain pointing to API Gateway
+        new route53.ARecord(this, 'ApiAliasRecord', {
+          recordName: props.domainName,
+          target: route53.RecordTarget.fromAlias(
+            new route53Targets.ApiGatewayDomain(apiDomainName)
+          ),
+          zone: hostedZone,
+        });
+
+        // Create a www subdomain record if needed
+        new route53.ARecord(this, 'WwwApiAliasRecord', {
+          recordName: `www.${props.domainName}`,
+          target: route53.RecordTarget.fromAlias(
+            new route53Targets.ApiGatewayDomain(apiDomainName)
+          ),
+          zone: hostedZone,
+        });
+
+        // Store domain name configuration in SSM
+        new ssm.StringParameter(this, 'ApiDomainNameParam', {
+          parameterName: `/eregulations/api/domain`,
+          stringValue: props.domainName,
+          description: 'Domain name for API Gateway',
+        });
+
+      } catch (error) {
+        // If hosted zone lookup fails, log warning but continue deployment
+        console.warn(`WARNING: Could not find Route53 hosted zone for ${props.domainName}. DNS records were not created.`);
+        console.warn(`Please ensure the domain is registered in Route53 and try again.`);
+        console.warn('Error details:', error instanceof Error ? error.message : String(error));
+      }
+
+      // Add domain URL output
+      new cdk.CfnOutput(this, 'ApiDomainURL', {
+        value: `https://${props.domainName}`,
+        exportName: stageConfig.getResourceName('api-domain-url'),
+        description: 'Custom Domain URL for API',
+      });
+    }
+
+    // ================================
+    // END CUSTOM DOMAIN FOR API
+    // ================================
 
     // ================================
     // STACK OUTPUTS
