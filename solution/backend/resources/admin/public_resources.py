@@ -30,7 +30,13 @@ class PublicLinkForm(AbstractPublicResourceForm):
 class PublicLinkAdmin(AbstractPublicResourceAdmin):
     admin_priority = 10
     form = PublicLinkForm
-    list_display = ["date", "document_id", "title", "category__name", "updated_at", "approved"]
+    
+    def category_name(self, obj):
+        return obj.category.name if obj.category else "-"
+    category_name.short_description = "Category"
+    
+    
+    list_display = ["date", "document_id", "title", "category_name", "updated_at", "approved"]
     list_display_links = ["date", "document_id", "title", "updated_at"]
     search_fields = ["date", "document_id", "title", "url"]
 

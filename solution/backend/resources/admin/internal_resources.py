@@ -25,7 +25,12 @@ class InternalLinkForm(AbstractInternalResourceForm):
 class InternalLinkAdmin(AbstractInternalResourceAdmin):
     admin_priority = 20
     form = InternalLinkForm
-    list_display = ["date", "document_id", "title", "category__name", "updated_at", "approved"]
+    
+    def category_name(self, obj):
+        return obj.category.name if obj.category else "-"
+    category_name.short_description = "Category"
+    
+    list_display = ["date", "document_id", "title", "category_name", "updated_at", "approved"]
     list_display_links = ["date", "document_id", "title", "updated_at"]
     search_fields = ["date", "document_id", "title", "summary"]
 
@@ -68,7 +73,12 @@ class InternalFileForm(AbstractInternalResourceForm):
 class InternalFileAdmin(AbstractInternalResourceAdmin):
     admin_priority = 21
     form = InternalFileForm
-    list_display = ["date", "document_id", "title", "category__name", "updated_at", "approved"]
+    
+    def category_name(self, obj):
+        return obj.category.name if obj.category else "-"
+    category_name.short_description = "Category"
+    
+    list_display = ["date", "document_id", "title", "category_name", "updated_at", "approved"]
     list_display_links = ["date", "document_id", "title", "updated_at"]
     search_fields = ["date", "document_id", "title", "summary"]
     readonly_fields = ["download_file", "file_name", "file_type"]
