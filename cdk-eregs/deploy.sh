@@ -171,20 +171,44 @@ deploy_content() {
 # Function to deploy and invoke parsers
 deploy_parsers() {
     echo "Deploying parsers..."
-    npm run cdk deploy "a1m-eregs-${ENVIRONMENT}-ecfr-parser" "a1m-eregs-${ENVIRONMENT}-fr-parser" -- \
-        --app "npx ts-node --prefer-ts-exts bin/cdk-eregs.ts" \
-        -c environment=${ENVIRONMENT} \
-        --require-approval never
+    # Include domain name context to ensure parsers use the correct API endpoint
+    if [ -n "${DOMAIN_NAME}" ] && [ "${DOMAIN_NAME}" != "none" ]; then
+        echo "Deploying parsers with domain context: ${DOMAIN_NAME}..."
+        npm run cdk deploy "a1m-eregs-${ENVIRONMENT}-ecfr-parser" "a1m-eregs-${ENVIRONMENT}-fr-parser" -- \
+            --app "npx ts-node --prefer-ts-exts bin/cdk-eregs.ts" \
+            -c environment=${ENVIRONMENT} \
+            -c domainName=${DOMAIN_NAME} \
+            --require-approval never
+    else
+        echo "Deploying parsers without custom domain context..."
+        npm run cdk deploy "a1m-eregs-${ENVIRONMENT}-ecfr-parser" "a1m-eregs-${ENVIRONMENT}-fr-parser" -- \
+            --app "npx ts-node --prefer-ts-exts bin/cdk-eregs.ts" \
+            -c environment=${ENVIRONMENT} \
+            -c domainName=false \
+            --require-approval never
+    fi
     check_error "Parser deployment failed"
 }
 
 # Function to deploy text extractor
 deploy_text_extractor() {
     echo "Deploying text extractor..."
-    npm run cdk deploy "a1m-eregs-${ENVIRONMENT}-text-extractor" -- \
-        --app "npx ts-node --prefer-ts-exts bin/cdk-eregs.ts" \
-        -c environment=${ENVIRONMENT} \
-        --require-approval never
+    # Include domain name context to ensure text extractor uses the correct API endpoint
+    if [ -n "${DOMAIN_NAME}" ] && [ "${DOMAIN_NAME}" != "none" ]; then
+        echo "Deploying text extractor with domain context: ${DOMAIN_NAME}..."
+        npm run cdk deploy "a1m-eregs-${ENVIRONMENT}-text-extractor" -- \
+            --app "npx ts-node --prefer-ts-exts bin/cdk-eregs.ts" \
+            -c environment=${ENVIRONMENT} \
+            -c domainName=${DOMAIN_NAME} \
+            --require-approval never
+    else
+        echo "Deploying text extractor without custom domain context..."
+        npm run cdk deploy "a1m-eregs-${ENVIRONMENT}-text-extractor" -- \
+            --app "npx ts-node --prefer-ts-exts bin/cdk-eregs.ts" \
+            -c environment=${ENVIRONMENT} \
+            -c domainName=false \
+            --require-approval never
+    fi
     check_error "Text extractor deployment failed"
 }
 
