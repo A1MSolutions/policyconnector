@@ -51,48 +51,8 @@
       }
     ]
   },
-  "vpc-provider:account=891376964164:filter.vpc-id=vpc-0428d0578e19371c7:region=us-east-1:returnAsymmetricSubnets=true": {
-    "vpcId": "vpc-0428d0578e19371c7",
-    "vpcCidrBlock": "10.0.0.0/16",
-    "ownerAccountId": "891376964164",
-    "availabilityZones": [],
-    "subnetGroups": [
-      {
-        "name": "Private",
-        "type": "Private",
-        "subnets": [
-          {
-            "subnetId": "subnet-0885bcda73c2e2a14",
-            "cidr": "10.0.0.0/24",
-            "availabilityZone": "us-east-1a",
-            "routeTableId": "rtb-07fcae380cf18322f"
-          },
-          {
-            "subnetId": "subnet-0da2d13aea4366b5d",
-            "cidr": "10.0.1.0/24",
-            "availabilityZone": "us-east-1b",
-            "routeTableId": "rtb-0e2990b2e6939b7a4"
-          }
-        ]
-      },
-      {
-        "name": "Public",
-        "type": "Public",
-        "subnets": [
-          {
-            "subnetId": "subnet-0f0e979616b0bbafa",
-            "cidr": "10.0.2.0/24",
-            "availabilityZone": "us-east-1a",
-            "routeTableId": "rtb-08d59be63d329a39b"
-          },
-          {
-            "subnetId": "subnet-001960bb4706e47a5",
-            "cidr": "10.0.3.0/24",
-            "availabilityZone": "us-east-1b",
-            "routeTableId": "rtb-033140a53e5691e34"
-          }
-        ]
-      }
-    ]
+  "hosted-zone:account=891376964164:domainName=policyconnector.digital:region=us-east-1": {
+    "Id": "/hostedzone/Z0415811BICQ9Q30Q74Z",
+    "Name": "policyconnector.digital."
   }
 }

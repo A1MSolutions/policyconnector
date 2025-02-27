@@ -15,6 +15,9 @@ export class VpcStack extends cdk.Stack {
       ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'),
       maxAzs: 2, // Use 2 Availability Zones
 
+      // Specify only 1 NAT Gateway instead of one per AZ
+      natGateways: 1,
+
       // Define subnet configuration
       subnetConfiguration: [
         {
