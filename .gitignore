@@ -32,7 +32,6 @@ solution/backend/static/
 # CDK assets
 .cdk.staging/
 cdk.out/
-cdk-eregs/cdk.out.bak/*
 
 # virtual env
 solution/backend/venv/*
