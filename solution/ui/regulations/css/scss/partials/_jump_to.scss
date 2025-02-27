@@ -34,13 +34,13 @@ form .jump-to-input {
 
     input,
     select {
-        background-color: #fff;
-        border: 1px solid $light_gray;
+        background-color: $main_background_color;
+        border: 1px solid $border_color;
         height: 2rem;
     }
 
     input {
-        color: #000;
+        color:$primary_text_color;
 
         &.submit {
             display: inline-block;

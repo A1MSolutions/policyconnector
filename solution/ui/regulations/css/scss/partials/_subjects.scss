@@ -15,7 +15,7 @@
     &:hover,
     &:focus,
     &:active {
-        background-color: #c0c1c3;
+        background-color: $policy_subject_close_background_hover;
     }
 
     i {
@@ -35,7 +35,8 @@
         .ds-c-choice-wrapper {
             padding: 8px;
             margin-top: 0;
-            border: 1px solid $secondary_border_color;
+            border: 1px solid $tertiary_border_color;
+;
             border-radius: 4px;
 
             .ds-c-choice--small + label::before {
@@ -47,8 +48,8 @@
             }
 
             .ds-c-choice:checked + label::before {
-                background-color: $secondary_border_color;
-                border-color: $secondary_border_color;
+                background-color: $choice-checked-background-color;
+                border-color: $$choice-checked-border-color;
             }
 
             input {
@@ -136,7 +137,7 @@
 
         &::after {
             box-sizing: border-box;
-            border: 2px solid $secondary_border_color !important;
+            border: 2px solid $tertiary_border_color !important;
         }
 
         &[aria-expanded="true"]::after,
@@ -160,14 +161,14 @@
 
                 .v-field__outline {
                     > * {
-                        border-color: $secondary_border_color;
+                        border-color: $tertiary_border_color;
                     }
                 }
             }
 
             .v-field--focused {
                 .v-field__outline > * {
-                    border-color: $secondary_border_color;
+                    border-color: $tertiary_border_color;
                 }
             }
 
@@ -572,7 +573,7 @@
 
         &:hover,
         &:focus {
-            background-color: #e7f4fa;
+            background-color: $main_button_hover_background;
         }
     }
 }

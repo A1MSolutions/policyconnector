@@ -6,7 +6,7 @@
 
 @mixin sidebar-hr-styles {
     height: 1px;
-    background: $light_gray;
+    background: $secondary_background_color;
     border: none;
     margin: 15px 0;
 }
@@ -41,15 +41,14 @@
 
 .default-btn {
     display: flex;
-    color: white;
-    background: $mid-blue;
-    border-color: rgba(0, 0, 0, 0);
+    color: $white;
+    background: $main_button_background;
 
     &:hover,
     &:focus,
     &:focus:visited {
-        background: $mid-dark-blue;
-        background-color: $mid-dark-blue;
+        background: $main_button_hover_background;
+        background-color: $main_button_hover_background;
     }
 }
 
@@ -80,22 +79,23 @@
 
 .trigger-btn,
 .link-btn {
-    color: $mid_blue;
+    color: $main_button_background;
     cursor: pointer;
     line-height: 1.2;
 
     &:focus {
-        color: $dark_blue;
+        color: $main_button_hover_background;
     }
 
     &:hover {
-        color: $dark_blue;
+        color: $main_button_hover_background;
     }
 }
 
 @mixin default-tooltip {
     cursor: default;
-    background: $lightest_blue;
+    background: $tertiary_indicator_background;
+    border: 1px solid $border_color;
     box-shadow: 0px 0px 20px 0px #00000040;
 }
 
@@ -107,7 +107,7 @@
     box-sizing: content-box;
 
     p {
-        color: $dark_gray;
+        color: $secondary_text_color;
         padding: 0;
     }
 
@@ -139,14 +139,14 @@
             width: 40px;
 
             path {
-                stroke: $mid_blue;
-                fill: $mid_blue;
+                stroke: $primary_color;
+                fill: $primary_color;
             }
 
             &:hover {
                 path {
-                    stroke: $dark_blue;
-                    fill: $dark_blue;
+                    stroke: $darkest_purple;
+                    fill: $darkest_purple;
                 }
             }
         }
@@ -165,7 +165,7 @@
     &::after {
         border-right: solid 5px transparent;
         border-left: solid 5px transparent;
-        border-top: solid 5px $lightest_blue;
+        border-top: solid 5px $border_color;
         transform: translateX(-50%);
         position: absolute;
         z-index: -1;
@@ -194,7 +194,7 @@
         top: unset;
         bottom: 100%;
         border-top: unset;
-        border-bottom: solid 5px #eefafe;
+        border-bottom: solid 5px $border_color;
     }
 }
 
@@ -205,7 +205,7 @@
         bottom: 100%;
         left: 20%;
         border-top: unset;
-        border-bottom: solid 5px #eefafe;
+        border-bottom: solid 5px $border_color;
     }
 }
 

@@ -75,6 +75,7 @@ ol {
 // Colors
 //--------------------------
 
+/*
 // Base Colors
 $teal: #026666;
 $teal_blue: #245c68;
@@ -106,6 +107,34 @@ $green: #2a7a3b;
 $title_color: #000;
 $section_highlight_color: #eefafe;
 $mark_highlight: #fce5af;
+*/
+
+// Base Colors - Policy Connector
+$mid_red: #DC3933; /*top nav and popup border*/
+$light_red: #FFEAEA;  /*doc slug background for policy repository*/
+$mid_beige: #D4B086; /*reg border*/
+$light_beige: #F2E4D4; /*reg slug background & jump button*/
+
+$darker_blue: #1A4480; /*side link and button background*/
+$darkest_purple: #222660; /*button hover and policy repository slug*/
+$dark_purple: #3B43BC; /*visited link*/
+$light_purple: #B7BAE5; /*reverse default background and reverse link text*/
+$dark_blue: #07648D; /*main text link*/ 
+
+$darkest_gray: #1B1B1B; /*base text*/
+$darker_gray: #5B616B; /*public and internal slug*/
+$mid_gray: #767676; /*disabled and placeholder*/
+$mid_gray_warm: #A3A3A3; /*?*/
+$light_gray: #DCDCDC; /*side nav top background and disabled button background*/
+$lightest_gray: #F3F3F3; /*side nav main background*/
+
+$white: #fff; /*default background and reverse button background*/
+
+$green: #2a7a3b;
+$title_color: #1B1B1B;
+$section_highlight_color: #F2E4D4;
+$mark_highlight: #F2E4D4;
+
 
 //// Usage ////
 //// Call This Section in Your CSS, Not the Color Names ////
@@ -113,76 +142,80 @@ $mark_highlight: #fce5af;
 // Colors
 
 $primary_color: $dark_blue;
-$secondary_color: $teal;
+$secondary_color: $light_beige;
 
 // Links
 
-$primary_link_color: $mid_blue;
-$primary_link_hover: $dark_blue;
+$primary_link_color: $dark_blue;
+$primary_link_hover: $dark_purple;
 
-$secondary_link_color: $teal;
-$secondary_link_hover: $mid_blue;
+$secondary_link_color: $darker_blue;
+$secondary_link_hover: $darkest_purple;
 
-$teritary_link_color: $dark_blue;
-$teritary_link_hover: $mid_blue;
+$teritary_link_color: $darker_blue;
+$teritary_link_hover: $darkest_purple;
 
-$reverse_link_color: $light_blue;
+$reverse_link_color: $light_purple;
 $reverse_link_hover: $white;
 
 $secondary_reverse_link_color: $white;
-$secondary_reverse_link_hover: $light_blue;
+$secondary_reverse_link_hover: $light_purple;
 
-$visited_link_color: $magenta;
+$visited_link_color: $dark_purple; 
 
-$secondary_toc_link_color: $light_blue_2;
+$secondary_toc_link_color: $darker_blue;
 
 // Forms
 
-$placeholder_color: $mid_gray_2;
+$placeholder_color: $mid_gray;
 
 // Backgrounds
 
 $main_background_color: $white;
 $secondary_background_color: $lightest_gray;
-$teritary_background_color: $lightest_blue;
+$secondary_background_active: $light_gray;
+$teritary_background_color: $light_red;
 $reverse_background_color: $dark_blue;
-$reverse_background_darker: $darkest_blue;
-$reverse_background_lighter: $mid_dark_blue;
-$table_header_background_color: $lightest_gray;
+$reverse_background_darker: $darker_blue;
+$reverse_background_lighter: $dark_blue;
+$table_header_background_color: $light_gray;
 
-$hero_background_color: $teal;
-$hero_link_color: $white;
-$hero_link_hover: $light_blue;
+$hero_background_color: $mid_red; 
+$hero_link_color: $white; 
+$hero_link_hover: $light_red;
 
-$contact_link_color: $lightest_blue;
+$contact_link_color: $light_red;
 
-$jump_to_submit_disabled: $mid_gray_3;
-$jump_to_submit_active: $mid_blue;
-$jump_to_submit_active_focus: $dark_blue;
+$jump_to_submit_disabled: $light_gray; 
+$jump_to_submit_active: $light_beige;
+$jump_to_submit_active_focus: $mid_beige;
 
-$policy_subject_selected_chip_background: $dark_blue;
+$policy_subject_selected_chip_background: $dark_blue; 
 
-$choice-checked-background-color: $mid_blue;
-$choice-checked-border-color: $mid_blue;
+$choice-checked-background-color: $dark_blue;
+$choice-checked-border-color: $dark_blue;
 
 // Borders
 
 $border_color: $light_gray;
-$secondary_border_color: $mid_blue;
-$hover_border_color: $light_blue;
+$secondary_border_color: $light_red;
+$tertiary_border_color: $darker_gray; /*TO DO: swap this value with secondary everywher*/
+$hover_border_color: $mid_red;
 $table_border_color: $light_gray;
-$formula_left_border: $light_blue;
+$formula_left_border: $light_red;
 
 // Text
 
-$primary_text_color: $dark_gray;
-$secondary_text_color: $mid_gray;
+$primary_text_color: $darkest_gray;
+$secondary_text_color: $darker_gray;
+$tertiary_text_color: $mid_gray;
 $reverse_text_color: $white;
-$policy_subject_selected_chip_text: #fff;
+
+$policy_subject_selected_chip_text: $white;
 
 // Indicators
 
-$primary_indicator_background: $teal;
+$primary_indicator_background: $mid_red;
 $primary_indicator_text: $white;
 
 $secondary_indicator_background: $light_gray;
@@ -199,14 +232,14 @@ $tertiary_indicator_background: $white;
 
 // Buttons
 
-$main_button_background: $light_blue;
-$main_button_color: $dark_blue;
-$main_button_hover_background: $white;
-
+$main_button_background: $darker_blue;
+$main_button_color: $white;
+$main_button_hover_background: $darkest_purple;
+$main_button_disabled: $light_gray; 
 $copy_button_success: $green;
 
 $policy_subject_close_background: $light_gray;
-$policy_subject_close_background_hover: $mid_gray_3;
+$policy_subject_close_background_hover: $mid_gray;
 
 //--------------------------
 // Fonts
@@ -576,11 +609,10 @@ select {
 // Other Common Settings
 // -------------------------
 
-// Blue chips used for Resources selections and Policy Doc subjects
+// Chips used for Resources selections and Policy Doc subjects
 @mixin common-chip-colors {
-    background: $lightest_blue;
-    color: $mid_blue;
-    border: 1px solid #c0eaf8;
+    background: $darkest_blue;
+    color: $white;
 }
 
 @mixin common-chip-styles {
