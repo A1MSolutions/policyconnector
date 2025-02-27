@@ -32,6 +32,11 @@ async function main() {
     getParameterValue('/eregulations/http/password'),
   ]);
 
+  // Get domain name from context or default to policyconnector.digital
+  const domainNameContext = app.node.tryGetContext('domainName');
+  // Only set the domain name if a valid value is provided and not 'false'
+  const domainName = domainNameContext === 'false' ? undefined : (domainNameContext || 'policyconnector.digital');
+
   // Only create the VPC stack if we're deploying it
   const stackName = process.argv[3];
   if (!stackName || stackName === 'a1m-eregs-prod-vpc') {
@@ -61,7 +66,9 @@ async function main() {
       lambdaConfig: {
         memorySize: 1024,
         timeout: 30
-      }
+      },
+      domainName,
+      certificateArn: process.env.CERTIFICATE_ARN,
     }, stageConfig);
   }
 

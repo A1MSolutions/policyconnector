@@ -9,7 +9,7 @@ export DOCKER_CLIENT_TIMEOUT=2000
 
 # Function to print usage
 print_usage() {
-    echo "Usage: $0 [-h] [-e environment] [-t type]"
+    echo "Usage: $0 [-h] [-e environment] [-t type] [-d domain]"
     echo "  -h: Show this help message"
     echo "  -e: Environment (default: prod)"
     echo "  -t: Deployment type (static|api|content|parsers|text-extractor|all)"
@@ -19,14 +19,16 @@ print_usage() {
     echo "      content: Deploy content updates"
     echo "      parsers: Deploy and invoke parsers"
     echo "      text-extractor: Deploy text extractor lambda"
+    echo "  -d: Domain name for API (default: policyconnector.digital, use 'none' to deploy without domain)"
 }
 
 # Default values
 ENVIRONMENT="prod"
 DEPLOY_TYPE="all"
+DOMAIN_NAME="policyconnector.digital"
 
 # Parse command line arguments
-while getopts "he:t:" opt; do
+while getopts "he:t:d:" opt; do
     case $opt in
     h)
         print_usage
@@ -38,6 +40,9 @@ while getopts "he:t:" opt; do
     t)
         DEPLOY_TYPE="$OPTARG"
         ;;
+    d)
+        DOMAIN_NAME="$OPTARG"
+        ;;
     \?)
         print_usage
         exit 1
@@ -47,7 +52,7 @@ done
 
 # Validate deploy type
 valid_types=("all" "static" "api" "content" "parsers" "text-extractor")
-if [[ ! " ${valid_types[@]} " =~ " ${DEPLOY_TYPE} " ]]; then
+if [[ ! " ${valid_types[*]} " =~ " ${DEPLOY_TYPE} " ]]; then
     echo "Error: Invalid deployment type: ${DEPLOY_TYPE}"
     print_usage
     exit 1
@@ -98,18 +103,48 @@ deploy_static() {
 
 # Function to deploy API stack
 deploy_api() {
-    echo "Deploying API stack..."
-    npm run cdk deploy "a1m-eregs-${ENVIRONMENT}-api" -- \
-        --app "npx ts-node --prefer-ts-exts bin/cdk-eregs.ts" \
-        -c environment=${ENVIRONMENT} \
-        --require-approval never
+    if [ -n "${DOMAIN_NAME}" ] && [ "${DOMAIN_NAME}" != "none" ]; then
+        echo "Deploying API stack with domain: ${DOMAIN_NAME}..."
+        npm run cdk deploy "a1m-eregs-${ENVIRONMENT}-api" -- \
+            --app "npx ts-node --prefer-ts-exts bin/cdk-eregs.ts" \
+            -c environment=${ENVIRONMENT} \
+            -c domainName=${DOMAIN_NAME} \
+            --require-approval never
+    else
+        echo "Deploying API stack without custom domain..."
+        # Pass domainName=false to explicitly override the default in the CDK app
+        npm run cdk deploy "a1m-eregs-${ENVIRONMENT}-api" -- \
+            --app "npx ts-node --prefer-ts-exts bin/cdk-eregs.ts" \
+            -c environment=${ENVIRONMENT} \
+            -c domainName=false \
+            --require-approval never
+    fi
     check_error "API deployment failed"
 }
 
 # Function to deploy content
 deploy_content() {
     echo "Building Vue app..."
-    cd ../solution  && make regulations
+
+    # Use custom domain for API URL if we're deploying with a domain
+    if [ -n "${DOMAIN_NAME}" ]; then
+        # Check if API domain is accessible, if not, fall back to the default API URL
+        if curl -s -o /dev/null -w "%{http_code}" "https://${DOMAIN_NAME}" | grep -q "200\|301\|302"; then
+            echo "Using custom domain for API URL: https://${DOMAIN_NAME}"
+            export VITE_API_URL="https://${DOMAIN_NAME}/"
+        else
+            echo "Warning: Custom domain not accessible yet. Using default API URL."
+            # Get the API URL from CloudFormation outputs
+            API_URL=$(aws cloudformation describe-stacks \
+                --stack-name "a1m-eregs-${ENVIRONMENT}-api" \
+                --query 'Stacks[0].Outputs[?OutputKey==`ApiEndpoint`].OutputValue' \
+                --output text)
+            export VITE_API_URL="${API_URL}"
+        fi
+    fi
+
+    echo "Using API URL: ${VITE_API_URL}"
+    cd ../solution && make regulations
     check_error "Vue app build failed"
 
     echo "Setting up Python virtual environment and collecting static files..."
@@ -156,6 +191,7 @@ deploy_text_extractor() {
 # Main deployment logic
 echo "Starting deployment for environment: ${ENVIRONMENT}"
 echo "Deployment type: ${DEPLOY_TYPE}"
+echo "API domain: ${DOMAIN_NAME}"
 
 # Check dependencies before proceeding
 check_dependencies
