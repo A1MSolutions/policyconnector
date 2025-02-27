@@ -40,9 +40,22 @@ export class FrParserStack extends cdk.Stack {
 
     // Create Lambda infrastructure
     const { lambdaRole, logGroup } = this.createLambdaInfrastructure(stageConfig);
-    const siteEndpoint = cdk.Fn.importValue(
-      stageConfig.getResourceName('api-endpoint')
-    );
+
+    // Check for domain name in CDK context
+    const domainNameContext = this.node.tryGetContext('domainName');
+    let apiEndpoint: string;
+
+    // Use domain name if provided and not 'false', otherwise use the standard API endpoint
+    if (domainNameContext && domainNameContext !== 'false') {
+      console.log(`Using custom domain for FR Parser: ${domainNameContext}`);
+      apiEndpoint = `https://${domainNameContext}/`;
+    } else {
+      // Get the API Gateway endpoint from stack outputs
+      apiEndpoint = cdk.Fn.importValue(
+        stageConfig.getResourceName('api-endpoint')
+      );
+      console.log(`Using standard API endpoint for FR Parser: ${apiEndpoint}`);
+    }
 
     this.lambda = new lambda.DockerImageFunction(this, 'FrParserFunction', {
       functionName: stageConfig.getResourceName('fr-parser'),
@@ -54,7 +67,7 @@ export class FrParserStack extends cdk.Stack {
         PARSER_ON_LAMBDA: 'true',
         EREGS_USERNAME: props.environmentConfig.httpUser,
         EREGS_PASSWORD: props.environmentConfig.httpPassword,
-        EREGS_API_URL_V3: `${siteEndpoint}v3/`,
+        EREGS_API_URL_V3: `${apiEndpoint}v3/`,
         STAGE_ENV: stageConfig.stageName,
         LOG_LEVEL: props.environmentConfig.logLevel,
       },
