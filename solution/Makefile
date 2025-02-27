@@ -110,7 +110,7 @@ local.regulations: ## Run migrations and restart the regulations-core
 	docker compose exec regulations python manage.py migrate; \
 		docker compose restart regulations; \
 		sleep 5;
-local.spectacular: ## Run swagger locally 
+local.spectacular: ## Run swagger locally
 	docker compose exec regulations python manage.py spectacular --file schema.yaml
 
 tools/ecfr-parser/build/ecfr-parser: tools/ecfr-parser/*.go tools/ecfr-parser/**/*.go
@@ -178,7 +178,7 @@ test.vitest.ui:
 		npm install;\
 		npm run test-vue-ui;
 
-##uncomment the -vvv if there are errors running pytest. 
+##uncomment the -vvv if there are errors running pytest.
 test.pytest:
 	DJANGO_SETTINGS_MODULE="cmcs_regulations.settings.test_settings" docker compose -f docker-compose.yml up -d
 	docker compose exec regulations pytest -v
@@ -233,4 +233,4 @@ local.dump:
 	$(foreach object, $(file_manager_objects), docker compose exec regulations python manage.py dumpdata $(object) --indent 4 > ./backend/file_manager/fixtures/$(object).json;) \
 	$(foreach object, $(auth_objects), docker compose exec regulations python manage.py dumpdata $(object) --indent 4 > ./backend/cmcs_regulations/fixtures/$(object).json;) \
 	docker compose exec regulations python manage.py dumpdata contenttypes.contenttype --indent 4 > ./backend/cmcs_regulations/fixtures/contenttypes.contenttype.json
-	docker compose exec regulations python manage.py dumpdata search.synonym --indent 4 > ./backend/regcore/search/fixtures/search.synonym.json 
+	docker compose exec regulations python manage.py dumpdata search.synonym --indent 4 > ./backend/regcore/search/fixtures/search.synonym.json
