@@ -7,6 +7,10 @@ import * as wafv2 from 'aws-cdk-lib/aws-wafv2';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
 import * as path from 'path';
 import { StageConfig } from '../../config/stage-config';
+import * as route53 from 'aws-cdk-lib/aws-route53';
+import * as route53Targets from 'aws-cdk-lib/aws-route53-targets';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 
 /**
  * Properties for the StaticAssetsStack
@@ -20,6 +24,8 @@ export interface StaticAssetsStackProps extends cdk.StackProps {
   prNumber?: string;
   /** Type of deployment - either infrastructure setup or content deployment */
   deploymentType: 'infrastructure' | 'content';
+  /** Optional domain name for the CloudFront distribution */
+  domainName?: string;
 }
 
 /**
@@ -33,6 +39,8 @@ export class StaticAssetsStack extends cdk.Stack {
   private readonly assetsBucket: s3.Bucket;
   private readonly loggingBucket: s3.Bucket;
   private readonly distribution: cloudfront.Distribution;
+  private readonly certificate?: acm.ICertificate;
+  private readonly domainName?: string;
 
   /**
    * Creates an instance of StaticAssetsStack
@@ -50,15 +58,88 @@ export class StaticAssetsStack extends cdk.Stack {
     super(scope, id, props);
 
     this.stageConfig = stageConfig;
-    this.validateCertificateConfig(props);
+    this.domainName = props.domainName;
+
+    // Create or import certificate if domain name is provided
+    if (props.domainName) {
+      if (props.certificateArn) {
+        this.certificate = acm.Certificate.fromCertificateArn(
+          this, 'Certificate', props.certificateArn
+        );
+      } else {
+        // Create a new certificate for the domain
+        this.certificate = new acm.Certificate(this, 'Certificate', {
+          domainName: props.domainName,
+          subjectAlternativeNames: [`www.${props.domainName}`],
+          validation: acm.CertificateValidation.fromDns(),
+        });
+      }
+
+      // Store domain name in SSM parameter store for reference by other stacks
+      new ssm.StringParameter(this, 'DomainNameParameter', {
+        parameterName: `/eregulations/domain/name`,
+        stringValue: props.domainName,
+        description: 'Domain name for eRegulations application',
+        tier: ssm.ParameterTier.STANDARD,
+      });
+    }
 
     this.assetsBucket = this.createAssetsBucket();
     this.loggingBucket = this.createLoggingBucket();
     const waf = this.createWebACL();
     this.distribution = this.createCloudFrontDistribution(waf, props);
 
+    // Create Route53 record if domain name is provided
+    if (props.domainName) {
+      this.createDnsRecord(props.domainName);
+    }
+
     this.deployStaticAssets();
     this.addStackOutputs();
+  }
+
+  /**
+   * Creates Route53 record for the domain
+   * @private
+   * @param {string} domainName - Domain name to create record for
+   */
+  private createDnsRecord(domainName: string): void {
+    try {
+      // Look up the hosted zone for the domain
+      const hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', {
+        domainName,
+      });
+
+      // Create an A record for the domain pointing to the CloudFront distribution
+      new route53.ARecord(this, 'SiteAliasRecord', {
+        recordName: domainName,
+        target: route53.RecordTarget.fromAlias(
+          new route53Targets.CloudFrontTarget(this.distribution)
+        ),
+        zone: hostedZone,
+      });
+
+      // Create a www subdomain record
+      new route53.ARecord(this, 'WwwSiteAliasRecord', {
+        recordName: `www.${domainName}`,
+        target: route53.RecordTarget.fromAlias(
+          new route53Targets.CloudFrontTarget(this.distribution)
+        ),
+        zone: hostedZone,
+      });
+
+      // Store DNS record information in SSM
+      new ssm.StringParameter(this, 'DomainAliasParameter', {
+        parameterName: `/eregulations/domain/alias`,
+        stringValue: `www.${domainName}`,
+        description: 'WWW alias for eRegulations domain',
+        tier: ssm.ParameterTier.STANDARD,
+      });
+    } catch (error) {
+      // If hosted zone lookup fails, log warning but continue deployment
+      console.warn(`WARNING: Could not find Route53 hosted zone for ${domainName}. DNS records were not created.`);
+      console.warn(`Please ensure the domain is registered in Route53 and try again.`);
+    }
   }
 
   /**
@@ -69,8 +150,8 @@ export class StaticAssetsStack extends cdk.Stack {
    */
   private validateCertificateConfig(props: StaticAssetsStackProps): void {
     // Temporarily disable certificate requirement for initial setup
-    if (false && this.stageConfig.environment === 'prod' && !props.certificateArn) {
-      throw new Error('SSL Certificate ARN is required for production environment');
+    if (false && this.stageConfig.environment === 'prod' && !props.certificateArn && !props.domainName) {
+      throw new Error('SSL Certificate ARN or domain name is required for production environment');
     }
   }
 
@@ -158,6 +239,14 @@ export class StaticAssetsStack extends cdk.Stack {
     waf: wafv2.CfnWebACL,
     props: StaticAssetsStackProps
   ): cloudfront.Distribution {
+    const domainNames = [];
+
+    // Add domain names if certificate is available
+    if (this.certificate && props.domainName) {
+      domainNames.push(props.domainName);
+      domainNames.push(`www.${props.domainName}`);
+    }
+
     return new cloudfront.Distribution(this, 'CloudFrontDistribution', {
       defaultBehavior: {
         origin: origins.S3BucketOrigin.withOriginAccessControl(this.assetsBucket),
@@ -176,7 +265,8 @@ export class StaticAssetsStack extends cdk.Stack {
       defaultRootObject: 'index.html',
       httpVersion: cloudfront.HttpVersion.HTTP2,
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
-      domainNames: props.certificateArn ? [] : undefined,
+      certificate: this.certificate,
+      domainNames: domainNames.length > 0 ? domainNames : undefined,
       errorResponses: [
         {
           httpStatus: 404,
@@ -227,5 +317,14 @@ export class StaticAssetsStack extends cdk.Stack {
       exportName: this.stageConfig.getResourceName('static-url'),
       description: 'CloudFront Distribution URL',
     });
+
+    // Add domain URL output if domain name is provided
+    if (this.domainName) {
+      new cdk.CfnOutput(this, 'DomainURL', {
+        value: `https://${this.domainName}`,
+        exportName: this.stageConfig.getResourceName('domain-url'),
+        description: 'Custom Domain URL',
+      });
+    }
   }
 }
