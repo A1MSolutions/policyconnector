@@ -166,42 +166,21 @@ getStatutesArray();
         <div id="statuteApp" class="statute-view">
             <Banner ref="bannerRef" title="Statute Reference">
                 <template #description>
-                    <h2>Look up statute text in online sources</h2>
+                    <p>Provided for convenience, this is a table of contents for <a href="https://uscode.house.gov/browse/prelim@title5&edition=prelim">5 U.S.C.</a> Part III, with links to the <a href="https://uscode.house.gov/">House U.S. Code website</a>.</p>
                 </template>
             </Banner>
             <div id="main-content" class="statute__container">
                 <div class="content" :style="{ marginLeft: bannerLeftMargin }">
-                    <div class="content__selector">
-                        <div class="selector__parent">
-                            <h3>Included Statute</h3>
-                            <StatuteSelector
-                                v-if="!acts.loading"
-                                :loading="statutes.loading"
-                                :selected-act="queryParams.act"
-                                :selected-title="queryParams.title"
-                                :titles="parsedTitles"
-                            />
-                        </div>
-                    </div>
-                    <div
-                        class="table__parent"
-                        :class="{ loading: statutes.loading }"
-                    >
-                        <SimpleSpinner
-                            v-if="statutes.loading"
-                            class="table__spinner"
-                        />
-                        <template v-else>
-                            <TableCaption
-                                :selected-act="ACT_TYPES[queryParams.act]"
-                                :selected-title="queryParams.title"
-                            />
-                            <StatuteTable
-                                :display-type="isNarrow ? 'list' : 'table'"
-                                :filtered-statutes="statutes.results"
-                                table-type="ssa"
-                            />
-                        </template>
+                    <div>
+
+
+
+
+
+
+
+
+
                     </div>
                 </div>
             </div>
