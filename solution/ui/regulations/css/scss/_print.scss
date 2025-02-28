@@ -87,7 +87,7 @@ $left-right-padding: 40px;
             height: unset;
             display: block;
             background: transparent;
-            color: $mid_blue;
+            color: $darker_blue;
             font-size: calc(var(--font-size-md) * $ratio);
             font-weight: bold;
             padding: 0 $left-right-padding;
@@ -114,11 +114,11 @@ $left-right-padding: 40px;
 
                     rect,
                     line {
-                        stroke: $mid_blue;
+                        stroke: $darker_blue;
                     }
 
                     path {
-                        fill: $mid_blue;
+                        fill: $darker_blue;
                     }
                 }
             }

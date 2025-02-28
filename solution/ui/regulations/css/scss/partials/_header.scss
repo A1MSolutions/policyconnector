@@ -77,7 +77,7 @@ header {
 
         @mixin header__anchor--active-bold {
             @include header__anchor--bold;
-            color: $dark_gray;
+            color: $white;
             border-bottom: 2px solid $tertiary_border_color;
         }
 

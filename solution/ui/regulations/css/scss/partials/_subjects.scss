@@ -49,7 +49,7 @@
 
             .ds-c-choice:checked + label::before {
                 background-color: $choice-checked-background-color;
-                border-color: $$choice-checked-border-color;
+                border-color: $choice-checked-border-color;
             }
 
             input {
