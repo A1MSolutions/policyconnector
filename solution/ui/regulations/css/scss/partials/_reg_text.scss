@@ -269,7 +269,7 @@
         max-width: var(--text-max-width);
         margin: var(--spacer-5) auto 10px !important;
         font-size: var(--font-size-sm);
-        color: $secondary_text_color;
+        color: $mid_gray;
 
         @include screen-xxl {
             padding: 0 0 0 10px;
@@ -429,8 +429,8 @@ article {
 }
 
 .btn{
-    background-color: $main_button_background;
-    color: $main_button_color;
+    background-color: $mid_blue;
+    color: white;
     border-radius: 3px;
     padding: 9px 10px 10px;
     border: none;
@@ -439,22 +439,22 @@ article {
 }
 
 .btn.inverted{
-    color: $primary_color;
-    border: $main_button_background 2px solid;
-    background-color: $main_background_color;
+    color: $mid_blue;
+    border: $mid_blue 2px solid;
+    background-color: white;
     font-weight: 700;
     font-size: 16px;
     line-height: 20px;
     text-align: center;
 }
 .btn.disabled{
-    background-color: $main_button_disabled;
-    color: $secondary_text_color;
+    background-color: #D6D7D9;
+    color: $dark_gray;
 }
 .bold{
     font-weight: 600;
     font-size: 14px;
 }
 .bold.disabled{
-    color: $secondary_text_color;
+    color: $mid_gray_3;
 }

@@ -77,7 +77,7 @@ main {
 
 aside {
     &.left-sidebar {
-        background: $secondary_background_color;
+        background: $reverse_background_color;
         padding: 0;
         flex-shrink: 0;
     }
@@ -159,9 +159,9 @@ footer {
     bottom: 0;
     right: 0;
     padding: 1rem 3rem 1rem 1rem;
-    background-color: $secondary_background_color;
-    border-top: 1px solid $border_color;
-    border-left: 1px solid $border_color;
+    background-color: $lighter_gray;
+    border-top: 1px solid $light_gray;
+    border-left: 1px solid $light_gray;
     border-top-left-radius: 10px;
     box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.08);
     -webkit-box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.08);
@@ -176,15 +176,15 @@ footer {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: $hero_background_color;
+        background-color: $teal;
         margin-right: 0.5rem;
 
         &--success {
-            background-color: $copy_button_success;
+            background-color: $green;
         }
 
         &--error {
-            background-color: $secondary_background_color;
+            background-color: $mid_gray_3;
         }
     }
 

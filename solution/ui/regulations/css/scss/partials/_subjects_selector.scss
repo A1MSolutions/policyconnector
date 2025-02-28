@@ -47,7 +47,7 @@
         }
 
         .subjects__input--sidebar {
-            background-color: $main_background_color;
+            background-color: white;
             position: sticky;
             top: 0px;
         }
@@ -128,7 +128,7 @@
 
             .subjects-li__button {
                 text-align: left;
-                color: $primary_text_color;
+                color: #000;
                 width: 100%;
 
                 &--selected {

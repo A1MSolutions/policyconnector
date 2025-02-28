@@ -172,7 +172,7 @@ button.collapsible-title {
     }
 
     &.visible {
-        color: $primary_text_color;
+        color: $dark-gray;
 
         i.fa {
             color: $primary_link_color;
@@ -190,7 +190,7 @@ button.collapsible-title {
 }
 
 .childless {
-    color: $primary_text_color;
+    color: $mid_gray_3;
 }
 
 .show-more-button {

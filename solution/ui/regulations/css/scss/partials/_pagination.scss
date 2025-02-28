@@ -43,7 +43,7 @@ nav.pagination-controls {
                 text-decoration: none;
 
                 &:visited {
-                    color: $visited_link_color;
+                    color: $mid_blue;
                 }
             }
 
@@ -85,7 +85,7 @@ nav.pagination-controls {
         border: none;
         background: none;
         cursor: pointer;
-        color: $main_button_background;
+        color: $mid_blue;
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -101,7 +101,7 @@ nav.pagination-controls {
         }
 
         &.disabled {
-            color: $main_button_disabled;
+            color: $mid_gray_3;
             cursor: default;
         }
     }

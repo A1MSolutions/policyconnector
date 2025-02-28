@@ -12,10 +12,10 @@ $header_input_height_wide: 40px;
     right: 0px;
     top: 40px;
     white-space: nowrap;
-    background: $secondary_background_color;
+    background: $lightest_gray;
     padding: 20px 30px;
     z-index: 1;
-    border: 1px solid $border_color;
+    border: 1px solid $light_gray;
     border-radius: 3px;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
     -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
@@ -78,7 +78,7 @@ header {
         @mixin header__anchor--active-bold {
             @include header__anchor--bold;
             color: $dark_gray;
-            border-bottom: 2px solid $tertiary_border_color;
+            border-bottom: 2px solid $dark_gray;
         }
 
         @mixin header__anchor--complete {
@@ -128,7 +128,7 @@ header {
 
             &--second {
                 height: 48px;
-                background: $mid_red;
+                background: $lightest_blue;
             }
         }
 
@@ -247,7 +247,7 @@ header {
                             .header--links__anchor {
                                 font-size: var(--font-size-md);
                                 line-height: 22px;
-                                color: $hero_background_color;
+                                color: $mid-gray;
                                 text-decoration: none;
                             }
                         }
@@ -368,7 +368,7 @@ header {
 
                     height: $header_input_height_wide;
                     width: 40px;
-                    border: 1px solid $border_color;
+                    border: 1px solid $light_gray;
                     border-left: none;
                     border-radius: 0 3px 3px 0;
 

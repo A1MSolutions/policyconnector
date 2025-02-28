@@ -90,7 +90,7 @@ aside.left-sidebar {
     .subpart-name {
         font-size: var(--font-size-sm);
         font-weight: normal;
-        color: $secondary_text_color;
+        color: $reverse_text_color;
         padding-right: var(--spacer-4);
     }
 
@@ -111,7 +111,7 @@ aside.left-sidebar {
     }
 
     .toc-section-name {
-        color: $secondary_text_color;
+        color: $reverse_text_color;
         font-weight: normal;
         font-size: var(--font-size-sm);
     }
@@ -124,7 +124,7 @@ aside.left-sidebar {
 
         background: none;
         border: none;
-        color: $secondary_link_color;
+        color: #ccf2ff;
         cursor: pointer;
         display: flex;
         justify-content: center;
@@ -134,8 +134,8 @@ aside.left-sidebar {
 
         &:hover,
         &:focus {
-            color: $secondary_link_hover;
-            background: $secondary_background_active;
+            color: $reverse_link_hover;
+            background: $reverse_background_lighter;
             @include transition;
         }
     }
@@ -154,10 +154,10 @@ aside.left-sidebar {
             //overflow: hidden;
 
             &.active {
-                background: $secondary_background_active;
+                background: $reverse_background_darker;
 
                 .subpart-info {
-                    color: $secondary_text_color;
+                    color: $reverse_text_color;
                 }
             }
 
@@ -180,12 +180,12 @@ aside.left-sidebar {
     }
 
     a {
-        color: $secondary_link_color;
+        color: #ccf2ff;
 
         &:hover,
         &:focus {
-            color: $secondary_link_hover;
-            background: $secondary_background_active;
+            color: $reverse_link_hover;
+            background: $reverse_background_lighter;
         }
 
         &.subpart-info {
@@ -195,7 +195,7 @@ aside.left-sidebar {
             &:hover,
             &:focus {
                 .toc-titles {
-                    background: $secondary_background_active;
+                    background: $reverse_background_lighter;
                     @include transition;
                 }
             }
@@ -215,13 +215,13 @@ aside.left-sidebar {
         &:not(li.active ul a.menu-section) {
             &:hover,
             &:focus {
-                background: $secondary_background_active;
+                background: $reverse_background_lighter;
             }
         }
 
         &.active {
-            background: $secondary_background_active;
-            border-left-color: $tertiary_border_color;
+            background: $reverse_background_lighter;
+            border-left-color: $light_blue;
             border-left-style: solid;
         }
 
@@ -232,15 +232,15 @@ aside.left-sidebar {
 
     li.active ul a.menu-section:hover,
     li.active ul a.menu-section:focus {
-        background: $secondary_background_active;
+        background: $reverse_background_lighter;
     }
 }
 
 .toc-header {
-    border-bottom: 1px solid $tertiary_border_color;
+    border-bottom: 1px solid $secondary_border_color;
     margin: 25px 40px 16px 32px;
     padding-bottom: 16px;
-    color: $secondary_text_color;
+    color: white;
 
     .toc-subchapter {
         font-size: 14px;
@@ -262,7 +262,7 @@ aside.left-sidebar {
 
 .toc-controls {
     box-sizing: border-box;
-    border-bottom: 1px solid $tertiary_border_color;
+    border-bottom: 1px solid $secondary_border_color;
 
     button {
         outline: none;

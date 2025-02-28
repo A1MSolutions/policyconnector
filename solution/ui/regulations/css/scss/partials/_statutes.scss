@@ -43,11 +43,11 @@
                     margin: 0 0 12px;
 
                     &.acts-item__heading {
-                        color: $secondary_link_color;
+                        color: $mid_blue;
                         transition: none;
 
                         &--active {
-                            color: $secondary_link_hover;
+                            color: $dark_gray;
                         }
                     }
                 }
@@ -66,8 +66,8 @@
                     &:hover,
                     &:focus,
                     &--active {
-                        color: $secondary_link_hover;
-                        border-bottom: 1px solid $secondary_link_hover;
+                        color: $dark_gray;
+                        border-bottom: 1px solid $dark_gray;
                     }
 
                     &--loading {
@@ -203,8 +203,8 @@
                         }
 
                         &--header {
-                            background-color: $table_header_background_color;
-                            color: $primary_text_color;
+                            background-color: $mid_blue_2;
+                            color: #fff;
                             text-align: left;
                             vertical-align: top;
                         }
@@ -230,7 +230,7 @@
                     }
 
                     .row__cell--body.row__cell--primary {
-                        background-color: $secondary_background_color;
+                        background-color: $lightest_blue;
                     }
                 }
             }

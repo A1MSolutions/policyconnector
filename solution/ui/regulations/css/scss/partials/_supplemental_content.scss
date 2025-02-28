@@ -24,7 +24,7 @@
             left: 0;
             width: 15px;
             height: 20px;
-            border: solid $border_color;
+            border: solid $light_gray;
             border-width: 0 0 1px 1px;
         }
     }
@@ -137,7 +137,7 @@
     }
 
     .supplemental-content-mid-bar {
-        border-right: 1px solid $tertiary_border_color;
+        border-right: 1px solid black;
     }
 
     .supplemental-content-title {
@@ -216,7 +216,7 @@
     .supplemental-content-category {
         &:not(:last-child) {
             margin-bottom: 1em;
-            border-bottom: 1px solid $border_color;
+            border-bottom: 1px solid $light-gray;
         }
     }
 }
