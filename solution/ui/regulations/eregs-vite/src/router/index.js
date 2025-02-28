@@ -25,7 +25,7 @@ const routes = [
 const router = ({ customUrl = "", host = "" }) =>
     createRouter({
         history: createWebHistory(
-            import.meta.env.VITE_ENV === "prod" && host === customUrl
+            import.meta.env.VITE_ENV === "prod"
                 ? "/"
                 : import.meta.env.VITE_ENV || "/"
         ),
