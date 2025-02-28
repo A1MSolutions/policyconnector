@@ -335,57 +335,49 @@
                 max-width: $width-xxl;
             }
         }
+        
+	    .featured-eos {
+            display: flex;
+            flex-direction: row; /* This makes boxes go side by side */
+            gap: 20px;
+            width: 100%;
+            
+            /* For mobile/small screens */
+            @media (max-width: 629px) {
+                flex-direction: column;
+            }
+            
+            /* Make each box take equal width */
+            > .policy-materials {
+                flex: 1;
+                min-width: 250px; /* Prevents boxes from becoming too narrow */
+            }
+        }
 
-.featured-eos .policy-materials {
-   flex: 1;
-   min-width: 250px;
-   max-width: 100%;
-}
+        .policy-materials {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: $secondary_background_color;
+            padding: 10px;
+            border-radius: 3px;
+        }
 
-.featured-eos {
-    display: flex;
-    flex-direction: row; /* This makes boxes go side by side */
-    gap: 20px;
-    width: 100%;
-}
+        .eo-text {
+            text-align: center;
+        }
 
-/* For mobile/small screens */
-@media (max-width: 629px) {
-    .featured-eos {
-        flex-direction: column;
-    }
-}
+        .eo-text p {
+            margin: 0; /* This removes default paragraph margins */
+            font-size: 90%
+        }
 
-/* Make each box take equal width */
-.featured-eos > .policy-materials {
-    flex: 1;
-    min-width: 250px; /* Prevents boxes from becoming too narrow */
-}
-
-.policy-materials {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   background-color: $secondary_background_color;
-   padding: 10px;
-   border-radius: 3px;
-}
-
-.eo-text {
-    text-align: center;
-}
-
-.eo-text p {
-    margin: 0; /* This removes default paragraph margins */
-    font-size: 90%
-}
-
-.eo-identifiers {
-    text-align: center;
-    color: $secondary_text_color;
-    font-size: 90%;
-    font-weight: 600;
-}
+        .eo-identifiers {
+            text-align: center;
+            color: $secondary_text_color;
+            font-size: 90%;
+            font-weight: 600;
+        }
 
         .cta__container {
             container: cta-container / inline-size;
