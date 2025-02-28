@@ -27,10 +27,57 @@
     </left-nav-collapse>
     <div id="main-content">
         <div class="top-container">
+            
+                    <div class="contact-signup__container">
+            <div class="contact-signup">
+                <div class="contact-signup__column contact__column">
+                    <div class="column__icon contact__icon">
+                      <img
+                            src="{% static 'images/home_icon_testing.svg' %}"
+                            alt="A computer screen displaying a website"
+                        />
+                    </div>
+                    <div>
+                        <h4 class="ds-text-heading--lg">Research federal employment policy</h4>
+                        <p>
+                            Look up cross-referenced government information including US Code, regulations, executive actions, court cases, and guidance.
+                        </p>
+                        <a
+                            class="contact external"
+                            href="{{ SURVEY_URL }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >See how it works</a
+                        >
+                    </div>
+                </div>
+                <div class="contact-signup__column signup__column">
+                    <div class="column__icon signup__icon">
+                        <img
+                            src="{% static 'images/home_icon_contact.svg' %}"
+                            alt="Text messaging bubbles"
+                        />
+  
+                    </div>
+                    <div>
+                        <h4 class="ds-text-heading--lg">Contact us to contribute or hire our team</h4>
+                        <p>Make suggestions, report bugs, or tell us if this site helped you! Learn about this open source project and our company's services.</p>
+                        <a
+                            class="contact external"
+                            href="{{ SIGNUP_URL }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Learn more</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+            
             <div class="cta__container">
                 <div class="cta">
                    
-                    <div class="about-text__container">
+                    <!--<div class="about-text__container">
                         <p>
                             Policy Connector organizes together regulations,
                             subregulatory guidance, and other related policy
@@ -41,7 +88,7 @@
                             class="action-btn default-btn link-btn"
                             >Learn About This Tool</a
                         >
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="cta__container">
@@ -55,52 +102,7 @@
                 </div>
             </div>
         </div>
-        <div class="contact-signup__container">
-            <div class="contact-signup">
-                <div class="contact-signup__column contact__column">
-                    <div class="column__icon contact__icon">
-                        <img
-                            src="{% static 'images/home_icon_contact.svg' %}"
-                            alt="Text messaging bubbles"
-                        />
-                    </div>
-                    <div>
-                        <h4 class="ds-text-heading--lg">Contact</h4>
-                        <p>
-                            Send questions and suggestions about this website
-                            (including bug reports), or schedule a presentation or
-                            training for your group.
-                        </p>
-                        <a
-                            class="contact external"
-                            href="{{ SURVEY_URL }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Contact the team</a
-                        >
-                    </div>
-                </div>
-                <div class="contact-signup__column signup__column">
-                    <div class="column__icon signup__icon">
-                        <img
-                            src="{% static 'images/home_icon_testing.svg' %}"
-                            alt="A computer screen displaying two beta testing versions of the website"
-                        />
-                    </div>
-                    <div>
-                        <h4 class="ds-text-heading--lg">Sign Up For Testing</h4>
-                        <p>Try new features and help make them better.</p>
-                        <a
-                            class="contact external"
-                            href="{{ SIGNUP_URL }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Sign up for a session</a
-                        >
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </main>
 
