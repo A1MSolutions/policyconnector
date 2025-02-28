@@ -164,15 +164,17 @@ getStatutesArray();
             </HeaderComponent>
         </header>
         <div id="statuteApp" class="statute-view">
-            <Banner ref="bannerRef" title="Statute Reference">
+           <!-- <Banner ref="bannerRef" title="Statute Reference">
                 <template #description>
-                    <p>Provided for convenience, this is a table of contents for <a href="https://uscode.house.gov/browse/prelim@title5&edition=prelim">5 U.S.C.</a> Part III, with links to the <a href="https://uscode.house.gov/">House U.S. Code website</a>.</p>
+                    <p>Provided for convenience, this is a table of contents for <a href="https://uscode.house.gov/browse/prelim@title5&edition=prelim">5 U.S.C.</a> Part III, with links to the <a href="https://uscode.house.gov/">House U.S. Code website</a>. Jump to a section using Ctrl+F (or Command+F on a Mac).</p>
                 </template>
-            </Banner>
+            </Banner>-->
             <div id="main-content" class="statute__container">
                 <div class="content" :style="{ marginLeft: bannerLeftMargin }">
                     <div>
+<h1>Statute Reference</h1>
 
+<p>Provided for convenience, this is a table of contents for <a href="https://uscode.house.gov/browse/prelim@title5&edition=prelim">5 U.S.C.</a> Part III, with links to the <a href="https://uscode.house.gov/">House U.S. Code website</a>. Jump to a section using Ctrl+F (or Command+F on a Mac).</p>
 
 <h2>Title 5 — Government Organization and Employees</h2>
 
