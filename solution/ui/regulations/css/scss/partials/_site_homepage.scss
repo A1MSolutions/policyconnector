@@ -495,7 +495,7 @@
                     .content-tabs {
                         font-family: $secondary_site_font;
                         letter-spacing: 0;
-                        color: $primary_text_color;
+                        color: $main_text_color;
                         text-transform: none !important;
                         line-height: 36px;
 
@@ -699,8 +699,8 @@
 
             .contact-signup {
                 display: flex;
-                background-color: $main_background_color;
-                color: $hero_background_color;
+                background-color: $teal;
+                color: white;
 
                 .contact-signup__column {
                     .column__icon {
