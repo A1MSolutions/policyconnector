@@ -9,9 +9,9 @@ const props = defineProps({
     },
 });
 
-const getAccessUrl = computed(() => `${props.base}get-account-access/`);
+const getAccessUrl = computed(() => `${props.base}about/`);
 
-const isActive = window.location.pathname.includes("get-account-access");
+const isActive = window.location.pathname.includes("about");
 
 const propsObj = {
     active: isActive,
@@ -24,12 +24,12 @@ const propsObj = {
         v-bind="propsObj"
         name="get-account-access-narrow"
         class="header__access-link header__access-link--narrow"
-        label="Placeholder"
+        label="About"
     />
     <HeaderLink
         v-bind="propsObj"
         name="get-account-access-wide"
         class="header__access-link header__access-link--wide"
-        label="Placeholder"
+        label="About"
     />
 </template>
