@@ -43,8 +43,8 @@
                             Look up cross-referenced government information including US Code, regulations, executive actions, court cases, and guidance.
                         </p>
                         <a
-                            class="contact external"
-                            href="{{ SURVEY_URL }}"
+                            class="contact"
+                            href="{% url 'about' %}"
                             target="_blank"
                             rel="noopener noreferrer"
                             >See how it works</a
@@ -60,11 +60,11 @@
   
                     </div>
                     <div>
-                        <h4 class="ds-text-heading--lg">Contact us to contribute or hire our team</h4>
-                        <p>Make suggestions, report bugs, or tell us if this site helped you! Learn about this open source project and our company's services.</p>
+                        <h4 class="ds-text-heading--lg">Contribute or hire us</h4>
+                        <p>Make suggestions, tell us if this site helped you, or learn about this open source project and our company.</p>
                         <a
-                            class="contact external"
-                            href="{{ SIGNUP_URL }}"
+                            class="contact"
+                            href="{% url 'about' %}"
                             target="_blank"
                             rel="noopener noreferrer"
                             >Learn more</a
@@ -73,7 +73,67 @@
                 </div>
             </div>
         </div>
+          
+        <div class="homepage-component__heading">Featured Executive Orders and Memos</div>
             
+	         <div class="featured-eos">
+
+                    <div class="policy-materials">
+                            <div class="policy-materials__categories--parent">
+                                <div class="policy-materials__categories">
+                                    <span class="eo-identifiers">February 11, 2025 | EO 14210</span>
+                                </div>
+                            </div>
+                            <div class="eo-text">
+                                <p>
+                                    Implementing the President's "Department of Government Efficiency" Workforce Optimization Initiative
+                                </p>
+                            </div>
+                            <a
+                                href='/subjects?subjects=6'
+                                class="action-btn default-btn link-btn sample-search-btn"
+                                >Find Related Policy</a
+                            >                            
+                        </div>
+                        
+                        <div class="policy-materials">
+                            <div class="policy-materials__categories--parent">
+                                <div class="policy-materials__categories">
+                                    <span class="eo-identifiers">January 20, 2025 | EO 14171</span>
+                                </div>
+                            </div>
+                            <div class="eo-text">
+                                <p>
+                                    Restoring Accountability to Policy-Influencing Positions Within the Federal Workforce
+                                </p>
+                            </div>
+                            <a
+                                href='/subjects?subjects=2'
+                                class="action-btn default-btn link-btn sample-search-btn"
+                                >Find Related Policy</a
+                            >                            
+                        </div>
+                        
+                        <div class="policy-materials">
+                            <div class="policy-materials__categories--parent">
+                                <div class="policy-materials__categories">
+                                    <span class="eo-identifiers">January 20, 2025 | Memo</span>
+                                </div>
+                            </div>
+                            <div class="eo-text">
+                                <p>
+                                    Restoring Accountability for Career Senior Executives
+                                </p>
+                            </div>
+                            <a
+                                href='/subjects?subjects=8'
+                                class="action-btn default-btn link-btn sample-search-btn"
+                                >Find Related Policy</a
+                            >                            
+                        </div>
+                        
+            	</div>
+                            
             <div class="cta__container">
                 <div class="cta">
                    
