@@ -22,13 +22,13 @@
             @include link-common;
 
             width: fit-content;
-            color: white;
+            color: $reverse_text_color;
             padding-top: 8px;
             padding-bottom: 8px;
 
             &:hover,
             &:visited {
-                color: white;
+                color: $reverse_text_color;
             }
         }
 
@@ -54,14 +54,14 @@
 
     nav {
         position: relative;
-        color: white;
-        background-color: $dark_blue;
+        color: $secondary_text_color;
+        background-color: $secondary_background_color;
 
         @mixin hover-background {
             &:hover,
             &:focus,
             &:focus-visible {
-                background-color: $mid_blue;
+                background-color: $secondary_background_active;
                 outline: 0;
                 border: none;
 
@@ -77,7 +77,7 @@
             &:hover,
             &:focus,
             &:focus-visible {
-                background-color: $darkest_blue;
+                background-color: $secondary_background_active;
                 outline: 0;
 
                 &:before,
@@ -140,7 +140,7 @@
             z-index: 1;
 
             &.icon-only {
-                background-color: $dark_blue;
+                background-color: $secondary_background_color;
                 height: 18px;
                 width: 18px;
 
@@ -155,14 +155,14 @@
                 }
 
                 i {
-                    background-color: $mid_blue_2;
+                    background-color: $secondary_background_color;
                     border-radius: 4px;
                     font-size: 18px;
                     padding: 1px 1px 0px;
                     margin-right: 2px;
 
                     &.nav-toggle__button--hovered {
-                        background-color: $mid_blue;
+                        background-color: $secondary_background_active;
                     }
 
                     @media (max-width: $eds-xs-max) {
@@ -172,7 +172,7 @@
             }
 
             &.full-btn {
-                background-color: $mid_blue_2;
+                background-color: $secondary_background_color;
                 height: 36px;
                 width: 36px;
 
@@ -188,7 +188,7 @@
             }
 
             &--label {
-                color: white;
+                color: $teritary_link_color;
                 font-size: 14px;
                 font-weight: 700;
                 text-transform: capitalize;
@@ -213,7 +213,7 @@
                 margin-bottom: 16px;
 
                 .v-slide-group__container {
-                    border-bottom: 1px solid $mid_blue;
+                    border-bottom: 1px solid $border_color;
 
                     .v-tab {
                         box-sizing: border-box;
@@ -224,7 +224,7 @@
                         line-height: 22px;
                         text-transform: capitalize;
                         letter-spacing: normal;
-                        color: white;
+                        color: $secondary_text_color;
                         font-weight: 400;
 
                         @include hover-background--dark;
@@ -246,7 +246,7 @@
 
                         .v-tab__slider {
                             height: 5px;
-                            background-color: $light_blue_2;
+                            background-color: $secondary_background_color;
                             bottom: 1px;
                         }
                     }
@@ -293,7 +293,7 @@
                         .toc-part__label {
                             font-size: 16px;
                             line-height: 24px;
-                            color: $light_blue_2;
+                            color: $secondary_text_color;
                             padding: 6px 12px;
 
                             &--bold {
@@ -428,7 +428,7 @@
 
                     label {
                         font-size: 12px;
-                        color: $mid_gray;
+                        color: $tertiary_text_color;
                         padding-top: var(--spacer-half);
                     }
                 }
@@ -448,7 +448,7 @@
                     .v-tabs {
                         .v-slide-group__container {
                             .v-tab {
-                                border-bottom: 1px solid $light_gray;
+                                border-bottom: 1px solid $border_color;
                                 font-weight: 700;
 
                                 &:focus-visible {
@@ -460,7 +460,7 @@
                                 }
 
                                 &--selected {
-                                    border-bottom: 1px solid $dark_blue;
+                                    border-bottom: 1px solid $border_color;
                                 }
                             }
 
@@ -471,7 +471,7 @@
 
                             .v-tab__slider {
                                 height: 3px;
-                                background-color: $dark_blue;
+                                background-color: $secondary_background_color;
                             }
                         }
                     }
@@ -489,13 +489,13 @@
                     .recent-rules-descriptive-text {
                         font-size: 12px;
                         line-height: 18px;
-                        color: $mid_gray;
+                        color: $tertiary_text_color;
                     }
 
                     .content-tabs {
                         font-family: $secondary_site_font;
                         letter-spacing: 0;
-                        color: $dark_blue;
+                        color: $main_text_color;
                         text-transform: none !important;
                         line-height: 36px;
 
@@ -507,12 +507,12 @@
                     }
 
                     .recent-date {
-                        color: $mid_gray;
+                        color: $tertiary_text_color;
                         font-weight: 400;
                     }
 
                     .recent-fr-citation {
-                        color: $mid_gray;
+                        color: $tertiary_text_color;
                         font-weight: 400;
                     }
 
@@ -526,7 +526,7 @@
                         margin-bottom: unset;
 
                         .supplemental-content-date {
-                            color: $mid_gray;
+                            color: $tertiary_text_color;
                             font-weight: 400;
                             padding-right: var(--spacer-half);
                             margin-right: var(--spacer-half);
@@ -534,7 +534,7 @@
                         }
 
                         .supplemental-content-title {
-                            color: $mid_gray;
+                            color: $tertiary_text_color;
                             font-weight: 400;
                             font-size: var(--font-size-sm);
                         }
@@ -567,7 +567,7 @@
                         display: flex;
                         flex-direction: column;
                         align-items: center;
-                        background-color: $lightest_gray;
+                        background-color: $secondary_background_color;
                         padding: 24px 8px 32px;
                         border-radius: 3px;
 
@@ -591,12 +591,12 @@
                                     font-weight: bold;
                                     font-size: 14px;
                                     line-height: 22px;
-                                    color: $mid_gray;
+                                    color: $secondary_text_color;
 
                                     &:not(:last-child) {
                                         padding-right: 1em;
                                         margin-right: 1em;
-                                        border-right: 1px solid $light_gray;
+                                        border-right: 1px solid $border_color;
                                     }
 
                                     @container policy-materials-categories (max-width: 274px) {
