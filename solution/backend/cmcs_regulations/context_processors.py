@@ -18,7 +18,7 @@ def custom_url(request):
     custom_url = settings.CUSTOM_URL
     host = request.get_host()
 
-    if host == 'eregulations.cms.gov':
+    if host == 'policyconnector.digital':
         custom_url = host
 
     return {'CUSTOM_URL': custom_url}

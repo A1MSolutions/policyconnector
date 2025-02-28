@@ -335,6 +335,49 @@
                 max-width: $width-xxl;
             }
         }
+        
+	    .featured-eos {
+            display: flex;
+            flex-direction: row; /* This makes boxes go side by side */
+            gap: 20px;
+            width: 100%;
+            
+            /* For mobile/small screens */
+            @media (max-width: 629px) {
+                flex-direction: column;
+            }
+            
+            /* Make each box take equal width */
+            > .policy-materials {
+                flex: 1;
+                min-width: 250px; /* Prevents boxes from becoming too narrow */
+            }
+        }
+
+        .policy-materials {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: $secondary_background_color;
+            padding: 10px;
+            border-radius: 3px;
+        }
+
+        .eo-text {
+            text-align: center;
+        }
+
+        .eo-text p {
+            margin: 0; /* This removes default paragraph margins */
+            font-size: 90%
+        }
+
+        .eo-identifiers {
+            text-align: center;
+            color: $secondary_text_color;
+            font-size: 90%;
+            font-weight: 600;
+        }
 
         .cta__container {
             container: cta-container / inline-size;
@@ -414,6 +457,9 @@
                     }
                 }
             }
+
+
+
 
             .cta {
                 display: flex;
@@ -495,7 +541,7 @@
                     .content-tabs {
                         font-family: $secondary_site_font;
                         letter-spacing: 0;
-                        color: $main_text_color;
+                        color: $primary_text_color;
                         text-transform: none !important;
                         line-height: 36px;
 
@@ -644,7 +690,7 @@
 
             @mixin column-common {
                 display: flex;
-                flex: 1;
+                /*flex: 1;*/
                 flex-direction: row;
             }
 
@@ -672,12 +718,16 @@
                     flex-direction: row;
 
                     .contact-signup__column {
-                        margin: 40px 0;
-                        padding: 0 40px;
+                        margin: 20px 0;
+                        padding: 0 20px;
 
                         &.contact__column {
                             border-right: 1px solid $border_color;
+                            flex: 3; 
                         }
+                        &.signup__column {
+             			   flex: 2; 
+            			}
 
                         .column__icon {
                             margin-right: 24px;
@@ -699,13 +749,13 @@
 
             .contact-signup {
                 display: flex;
-                background-color: $teal;
-                color: white;
+                background-color: $main_background_color;
+                color: $hero_background_color;
 
                 .contact-signup__column {
                     .column__icon {
                         img {
-                            height: 90px;
+                            height: 75px;
                         }
                     }
 

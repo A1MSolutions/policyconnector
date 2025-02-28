@@ -9,14 +9,14 @@ class CustomUrlContextProcessorTest(TestCase):
     def test_custom_url_no_match_request(self):
         # domain the request is being made from
         request = HttpRequest()
-        request.META['HTTP_HOST'] = 'eregulations.cms.gov'
+        request.META['HTTP_HOST'] = 'policyconnector.digital'
 
         # custom_url the environment variable is set as.
         settings.CUSTOM_URL = 'regulations-pilot.cms.gov'
 
         context = custom_url(request)
 
-        self.assertEqual(context['CUSTOM_URL'], 'eregulations.cms.gov')
+        self.assertEqual(context['CUSTOM_URL'], 'policyconnector.digital')
 
     def test_custom_url_match_request(self):
         request = HttpRequest()

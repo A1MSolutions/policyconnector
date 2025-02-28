@@ -61,7 +61,7 @@ export default {
         async getRules(catsObj = {}) {
             const args = {
                 page: 1,
-                pageSize: 5,
+                pageSize: 10,
                 type: this.type,
                 ...catsObj,
             };
@@ -91,7 +91,7 @@ export default {
         <RecentSupplementalContent
             v-if="!loading && type == 'supplemental'"
             :supplemental-content="rules"
-            :limit="5"
+            :limit="10"
         />
     </div>
 </template>

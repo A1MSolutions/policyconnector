@@ -62,14 +62,15 @@ The `deploy.sh` script handles building and deploying all components:
 # View available options
 ./deploy.sh -h
 
-# Deploy everything to production
-./deploy.sh -e prod -t all
+# Deploy everything to production (using the default domain: policyconnector.digital)
+./deploy.sh -e prod -t all -d policyconnector.digital
 
-# Deploy specific components
-./deploy.sh -e prod -t static    # Static assets only
-./deploy.sh -e prod -t api       # API stack only
-./deploy.sh -e prod -t content   # Content updates only
-./deploy.sh -e prod -t parsers   # Parser lambdas only
+# Deploy specific components (all use the default domain: policyconnector.digital)
+./deploy.sh -e prod -t static -d policyconnector.digital    # Static assets only
+./deploy.sh -e prod -t api -d policyconnector.digital       # API stack only
+./deploy.sh -e prod -t content -d policyconnector.digital   # Content updates only
+./deploy.sh -e prod -t parsers -d policyconnector.digital   # Parser lambdas only
+
 ```
 
 ### Manual Stack Deployment

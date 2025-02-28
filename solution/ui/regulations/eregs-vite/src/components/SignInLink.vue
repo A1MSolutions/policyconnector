@@ -45,7 +45,7 @@ const linkClasses = computed(() => ({
 }));
 </script>
 
-<template>
+<!--<template>
     <template v-if="location === 'login_page'">
         <span class="disabled">{{ linkLabel }}</span>
     </template>
@@ -60,4 +60,4 @@ const linkClasses = computed(() => ({
     </template>
 </template>
 
-<style></style>
+<style></style>-->
