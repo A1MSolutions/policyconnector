@@ -82,7 +82,7 @@ Proceed to <http://localhost:8000> in your browser to see the results.
 
 Proceed to <http://localhost:8000/admin> to access the admin portion and login with the credentials you created in the previous step.
 
-`make local.seed` will load data from the fixtures folder setting up a usable amount of data for local use.  
+`make local.seed` will load data from the fixtures folder setting up a usable amount of data for local use.
 This data is not maintained and should not be relied on for any purpose other than development.
 
 `make local.stop` will cause the running Docker processes to stop without losing data.
@@ -91,7 +91,7 @@ This data is not maintained and should not be relied on for any purpose other th
 
 ## Update CSS for admin site
 
-To change the styling of the admin site, add custom style rules to `solution/ui/regulations/css/admin/custom_admin.css`.  
+To change the styling of the admin site, add custom style rules to `solution/ui/regulations/css/admin/custom_admin.css`.
 
 To see the changes on the admin site, run `make local.collectstatic`.  This will update/create the CSS files in the `solution/static-assets/css/admin` directory.
 
@@ -157,7 +157,7 @@ In order to update your local data with the most recent version of production, y
 
 1. You must have the correct version of PostgreSQL installed locally on your machine (see [prerequisites](#prerequisites) for version number). Local PostgreSQL server must be turned **off**.
 2. Ensure you have [AWS CLI](#https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed locally on your machine.
-3. Connect to the VPN. 
+3. Connect to the VPN.
 4. Create a backup of the database you intend to restore using pg_dump. Execute the following command:
 
    - `pg_dump -U <DB_USER> -h <DB_HOST> -p <DB_PORT> <DB_NAME> > <name_you_want_your_backupfile_to_be>`
@@ -181,9 +181,9 @@ In order to update your local data with the most recent version of production, y
 
 11. Follow the subsequent prompts, providing the necessary credentials. When prompted for the backup file, enter the name of the file generated during the backup process.
 
-12. Before the database is restored, a backup is created of the db that is being restored. The file will be named in the following format: `<db host name>_<name of your db>_<date>.sql`. 
+12. Before the database is restored, a backup is created of the db that is being restored. The file will be named in the following format: `<db host name>_<name of your db>_<date>.sql`.
 
-   - Visit the local website and ensure that the data has been copied. 
+   - Visit the local website and ensure that the data has been copied.
 
 
 ## Adding a new model
@@ -193,3 +193,49 @@ If adding a new model, update the following files:
 - In populate_content.py add it to both the add it to the fixtures list.  First part of it is the JSON file, the other is the model.
 - In the make file, either add it to the list of objects, or add a new line for the model.
 - In the emptyseedtables.py add the model to the handler command.
+
+## Working with the Upstream Repository
+
+This project is a fork of the [CMCS eRegulations repository](https://github.com/Enterprise-CMCS/cmcs-eregulations). Sometimes you may want to incorporate specific commits from the upstream repository into your local branch to create a PR for this fork.
+
+### Getting a Specific Commit from Upstream
+
+To get a specific commit from the upstream repository into a branch in your fork, follow these steps:
+
+1. **Add the upstream repository as a remote** (if you haven't already):
+   ```bash
+   git remote add upstream git@github.com:Enterprise-CMCS/cmcs-eregulations.git
+   ```
+
+2. **Fetch the latest changes from upstream**:
+   ```bash
+   git fetch upstream
+   ```
+
+3. **View recent commits on the upstream main branch**:
+   ```bash
+   git log upstream/main -n 10 --oneline
+   ```
+
+4. **Create a new branch for your PR**:
+   ```bash
+   git checkout -b your-feature-branch
+   ```
+
+5. **Cherry-pick the specific commit you want**:
+   ```bash
+   git cherry-pick COMMIT_HASH
+   ```
+   Replace `COMMIT_HASH` with the hash of the commit you want to include.
+
+   If there are merge conflicts, resolve them and then continue with:
+   ```bash
+   git cherry-pick --continue
+   ```
+
+6. **Push the branch to your fork**:
+   ```bash
+   git push origin your-feature-branch
+   ```
+
+7. **Create a PR** from your branch to the main branch of this repository.
