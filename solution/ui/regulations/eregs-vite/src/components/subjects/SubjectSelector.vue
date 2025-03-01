@@ -298,7 +298,7 @@ const liDownArrowPress = (event) => {
                 </div>
             </template>
             <template v-else>
-                <div :class="inputContainerClasses">
+                <!--<div :class="inputContainerClasses">
                     <form @submit.prevent>
                         <input
                             id="subjectReduce"
@@ -329,7 +329,7 @@ const liDownArrowPress = (event) => {
                             )
                         "
                     />
-                </div>
+                </div>-->
                 <ul tabindex="-1" class="subjects__list">
                     <li
                         v-for="subject in state.subjects"
