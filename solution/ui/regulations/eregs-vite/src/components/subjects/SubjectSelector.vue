@@ -298,8 +298,8 @@ const liDownArrowPress = (event) => {
                 </div>
             </template>
             <template v-else>
-                <!--<div :class="inputContainerClasses">
-                    <form @submit.prevent>
+                <div :class="inputContainerClasses">
+                    <!--<form @submit.prevent>
                         <input
                             id="subjectReduce"
                             v-model="state.filter"
@@ -308,7 +308,7 @@ const liDownArrowPress = (event) => {
                             type="text"
                             @keydown.up.prevent="inputUpArrowPress"
                             @keydown.down.prevent="inputDownArrowPress"
-                        >
+                        
                         <button
                             aria-label="Clear subject list filter"
                             data-testid="clear-subject-filter"
@@ -318,7 +318,7 @@ const liDownArrowPress = (event) => {
                             @keydown.enter="filterResetClick"
                             @click="filterResetClick"
                         />
-                    </form>
+                    </form>-->
                     <slot
                         name="selection"
                         :selected-subject="
@@ -329,7 +329,7 @@ const liDownArrowPress = (event) => {
                             )
                         "
                     />
-                </div>-->
+                </div>
                 <ul tabindex="-1" class="subjects__list">
                     <li
                         v-for="subject in state.subjects"
