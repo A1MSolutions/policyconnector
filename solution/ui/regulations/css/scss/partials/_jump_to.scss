@@ -8,6 +8,7 @@ form .jump-to-input {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    color: $reverse_text_color;
 
     .section-symbol {
         margin-right: 4px;
@@ -35,19 +36,18 @@ form .jump-to-input {
     input,
     select {
         background-color: $main_background_color;
-        border: 1px solid $border_color;
         height: 2rem;
     }
 
     input {
-        color:$primary_text_color;
+        color: $primary_text_color;
 
         &.submit {
             display: inline-block;
             line-height: 1;
             padding: var(--spacer-half) var(--spacer-1);
-            border: 1px solid $jump_to_submit_disabled;
-            color: $jump_to_submit_disabled;
+            //border: 1px solid $jump_to_submit_disabled;
+            //color: $jump_to_submit_disabled;
             border-radius: var(--radius-default);
             cursor: not-allowed;
 
@@ -58,7 +58,7 @@ form .jump-to-input {
 
             &.active {
                 cursor: pointer;
-                color: #fff;
+                color: #reverse_link_color;
                 background-color: $jump_to_submit_active;
                 border: 1px solid $jump_to_submit_active;
 
@@ -80,6 +80,7 @@ form .jump-to-input {
     select#jumpToPart,
     input#jumpToSection,
     input#jumpBtn {
+        color: $reverse_link_color;
         font-size: var(--font-size-md);
         font-weight: 700;
         margin-top: 0px;
@@ -122,6 +123,8 @@ form .jump-to-input {
     }
 
     input#jumpBtn {
+        color: $reverse_link_color;
+        background-color: $reverse_background_lighter;
         width: 40px;
     }
 }
