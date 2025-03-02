@@ -277,7 +277,7 @@ export default {
 			} finally {
 				this.isFetching = false;
 			}
-		}
+		},
         /* end of LLM code*/
 
         /* start of LLM code */
