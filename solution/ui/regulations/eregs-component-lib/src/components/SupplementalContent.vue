@@ -23,18 +23,31 @@
         </div>
     </div>
     <slot name="authed-documents" />
-    <div class="view-all__container">
-        <a
-            v-if="selectedPart && subparts.length === 1"
-            class="show-subpart-resources"
-            data-testid="view-all-subpart-resources"
-            @click="clearSection"
-        >
-            <span class="bold">
-                View All Subpart {{ subparts[0] }} Documents</span>
-            ({{ resourceCount }})
-        </a>
-    </div>
+
+	<!-- start of LLM code -->
+	<div class="view-all__container">
+		<a
+			v-if="selectedPart && subparts && subparts.length === 1"
+			class="show-subpart-resources"
+			data-testid="view-all-subpart-resources"
+			@click="clearSection"
+		>
+			<span class="bold">
+				View All Subpart {{ subparts[0] }} Documents</span>
+			({{ resourceCount }})
+		</a>
+		<a
+			v-else-if="selectedPart && (!subparts || subparts.length === 0)"
+			class="show-part-resources"
+			data-testid="view-all-part-resources"
+			@click="clearSection"
+		>
+			<span class="bold">
+				View All Part {{ part }} Documents</span>
+			({{ resourceCount }})
+		</a>
+	</div>
+    <!-- end of LLM code -->
 </template>
 
 <script>
@@ -126,7 +139,11 @@ export default {
             if (this.selectedPart !== undefined) {
                 return this.selectedPart;
             }
-            return `Subpart ${this.subparts[0]}`;
+            // Check if subparts array exists and has values
+            return this.subparts && this.subparts.length > 0
+            	? `Subpart ${this.subparts[0]}`
+            	: `Part ${this.part}`;
+            /*return `Subpart ${this.subparts[0]}`;*/
         },
     },
 
@@ -200,71 +217,112 @@ export default {
             this.selectedPart = `§ ${section}`;
             return `citations=${this.title}.${section}`;
         },
-        async fetchContent(location) {
-            try {
-                // Page size is set to 1000 to attempt to get all resources.
-                // Defualt page size of 100 was omitting resources from the right sidebar.
-                // Right now no single subpart hits this number so this shouldn't be an issue
 
-                let response = "";
-                if (location) {
-                    response = await getSupplementalContent({
-                        apiUrl: this.apiUrl,
-                        builtCitationString: location,
-                        pageSize: 1000,
-                    });
-                }
-                await this.getPartDictionary();
+		/* start of LLM code*/
+		async fetchContent(location) {
+			try {
+				// Page size is set to 1000 to attempt to get all resources.
+				// Default page size of 100 was omitting resources from the right sidebar.
+				// Right now no single subpart hits this number so this shouldn't be an issue
+		
+				let response = "";
+				if (location) {
+					response = await getSupplementalContent({
+						apiUrl: this.apiUrl,
+						builtCitationString: location,
+						pageSize: 1000,
+					});
+				}
+				
+				// Get the part dictionary with or without subparts
+				await this.getPartDictionary();
+		
+				// For sections without subparts, we need a different approach to fetch resources
+				let subpartResponse;
+				let categories;
+				
+				// First, fetch categories separately
+				categories = await getCategories(this.apiUrl);
+				
+				if (this.subparts && this.subparts.length > 0) {
+					// With subparts, use existing logic
+					subpartResponse = await getSupplementalContent({
+						apiUrl: this.apiUrl,
+						partDict: this.partDict,
+						pageSize: 1000,
+					});
+				} else {
+					// Without subparts, use a simplified citation string
+					subpartResponse = await getSupplementalContent({
+						apiUrl: this.apiUrl,
+						builtCitationString: `${this.title}.${this.part}`,
+						pageSize: 1000,
+					});
+				}
+		
+				this.resourceCount = subpartResponse.count;
+		
+				if (response !== "") {
+					this.categories = formatResourceCategories({
+						apiUrl: this.apiUrl,
+						categories: categories.results,
+						resources: response.results,
+					});
+				} else {
+					this.categories = formatResourceCategories({
+						apiUrl: this.apiUrl,
+						categories: categories.results,
+						resources: subpartResponse.results,
+					});
+				}
+			} catch (error) {
+				console.error(error);
+			} finally {
+				this.isFetching = false;
+			}
+		},
+        /* end of LLM code*/
 
-                const results = await Promise.all([
-                    getCategories(this.apiUrl),
-                    getSupplementalContent({
-                        apiUrl: this.apiUrl,
-                        partDict: this.partDict,
-                        pageSize: 1000,
-                    }),
-                ]);
-
-                const categories = results[0];
-                const subpartResponse = results[1];
-
-                this.resourceCount = subpartResponse.count;
-
-                if (response !== "") {
-                    this.categories = formatResourceCategories({
-                        apiUrl: this.apiUrl,
-                        categories: categories.results,
-                        resources: response.results,
-                    });
-                } else {
-                    this.categories = formatResourceCategories({
-                        apiUrl: this.apiUrl,
-                        categories: categories.results,
-                        resources: subpartResponse.results,
-                    });
-                }
-            } catch (error) {
-                console.error(error);
-            } finally {
-                this.isFetching = false;
-            }
-        },
-        async getPartDictionary() {
-            const sections = await getSubpartTOC({
-                apiUrl: this.apiUrl,
-                title: this.title,
-                part: this.part,
-                subPart: this.subparts[0],
-            });
-
-            const secList = getSectionsRecursive(sections);
-
-            this.partDict[this.part] = {
-                title: this.title,
-                subparts: this.subparts,
-                sections: secList,
-            };
-        },
+        /* start of LLM code */
+		async getPartDictionary() {
+			// Only call getSubpartTOC if subparts array exists and has values
+			if (this.subparts && this.subparts.length > 0) {
+				try {
+					const sections = await getSubpartTOC({
+						apiUrl: this.apiUrl,
+						title: this.title,
+						part: this.part,
+						subPart: this.subparts[0],
+					});
+		
+					const secList = getSectionsRecursive(sections);
+		
+					this.partDict[this.part] = {
+						title: this.title,
+						subparts: this.subparts,
+						sections: secList,
+					};
+				} catch (error) {
+					console.error("Error fetching subpart TOC:", error);
+					// Set empty sections if there's an error
+					this.partDict[this.part] = {
+						title: this.title,
+						subparts: this.subparts,
+						sections: [],
+					};
+				}
+			} else {
+				// When no subparts exist, set up partDict with empty sections
+				this.partDict[this.part] = {
+					title: this.title,
+					subparts: [],
+					sections: [],
+				};
+			}
+		},
+        /*  end of LLM code*/        
+        
+        
         clearSection() {
             this.selectedPart = undefined;
             this.location = undefined;

@@ -34,7 +34,7 @@
     .result-label {
         @include common-label-styles;
 
-        background: $reverse_background_darker;
+        background: $teritary_background_color;
 
         &.category-label,
         &.regulations-label {
