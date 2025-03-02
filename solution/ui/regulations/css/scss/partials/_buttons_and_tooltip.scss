@@ -41,13 +41,12 @@
 
 .default-btn {
     display: flex;
-    color: $white;
-    background: $main_button_background;
+    color: $main_button_color;
+    background-color: $main_button_background;
 
     &:hover,
     &:focus,
     &:focus:visited {
-        background: $main_button_hover_background;
         background-color: $main_button_hover_background;
     }
 }
