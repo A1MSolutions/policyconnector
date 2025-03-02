@@ -12,7 +12,7 @@ $header_input_height_wide: 40px;
     right: 0px;
     top: 40px;
     white-space: nowrap;
-    background: $secondary_background_color;
+    background: $tertiary_color;
     padding: 20px 30px;
     z-index: 1;
     border: 1px solid $border_color;
@@ -30,6 +30,7 @@ header {
     align-items: center;
     height: $header_height_mobile;
 
+
     // Sticky Header and Content Adjustments
 
     &.sticky {
@@ -37,7 +38,7 @@ header {
         top: 0;
         background: $main_background_color;
         z-index: 3;
-        box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 1px 10px 0px rgba(0, 0, 0, 0.08);
         -webkit-box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.08);
         -moz-box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.08);
 
@@ -58,6 +59,7 @@ header {
         height: 100%;
         width: 100%;
 
+
         @mixin header__button {
             cursor: pointer;
             background: none;
@@ -67,7 +69,7 @@ header {
 
         @mixin header__anchor {
             text-decoration: none;
-            color: $secondary_link_color;
+            color: $tertiary_color;
         }
 
         @mixin header__anchor--bold {
@@ -77,14 +79,13 @@ header {
 
         @mixin header__anchor--active-bold {
             @include header__anchor--bold;
-            color: $white;
-            border-bottom: 2px solid $tertiary_border_color;
+            border-bottom: 2px solid $secondary_border_color;
         }
 
         @mixin header__anchor--complete {
             @include header__anchor--bold;
 
-            color: $primary_link_color;
+            color: $reverse_link_color;
             height: 24px;
             line-height: 24px;
             text-decoration: none;
@@ -92,7 +93,7 @@ header {
             &:hover,
             &:focus,
             &.active {
-                @include header__anchor--active-bold;
+                border-bottom: 2px solid $secondary_reverse_link_color;
                 padding: 0;
             }
         }
@@ -128,7 +129,7 @@ header {
 
             &--second {
                 height: 48px;
-                background: $mid_red;
+                background: $tertiary_color;
             }
         }
 
@@ -156,9 +157,16 @@ header {
         }
 
         .header__access-link {
+            @include header__anchor--bold;
+
             &--wide {
                 @include custom-max(calc((calc($width-sm - 1px)) / 1px)) {
                     display: none;
+                }
+
+                &.hover {
+                @include header__anchor--active-bold;
+
                 }
             }
 
@@ -166,11 +174,12 @@ header {
                 @include custom-min(calc($width-sm / 1px)) {
                     display: none;
                 }
+                &.hover {
+                @include header__anchor--active-bold;
+                }
             }
 
-            &.header--links__anchor {
-                @include header__anchor--complete;
-
+            &.header--links__anchor {   
                 &.active {
                     cursor: default;
                     pointer-events: none;
@@ -201,7 +210,7 @@ header {
                     @include header__anchor--bold;
                     @include header__button;
 
-                    color: $primary_link_color;
+                    color: $reverse_link_color;
                     display: flex;
                     align-items: center;
                     padding: 0 12px;
@@ -221,13 +230,14 @@ header {
                         margin-right: 5px;
 
                         path {
-                            fill: $primary_link_color;
+                            fill: $reverse_link_color;
                         }
                     }
                 }
 
                 .more--dropdown-menu {
                     @include custom-min(calc($eds-width-sm / 1px)) {
+                    background: $tertiary_color;
                         display: none;
                     }
                 }
@@ -247,8 +257,7 @@ header {
                             .header--links__anchor {
                                 font-size: var(--font-size-md);
                                 line-height: 22px;
-                                color: $hero_background_color;
-                                text-decoration: none;
+                                @include header__anchor--complete;
                             }
                         }
                     }
@@ -290,7 +299,7 @@ header {
                 width: 100%;
 
                 @include custom-max(calc((calc($eds-width-sm - 1px)) / 1px)) {
-                    background-color: #fff;
+                    background-color: $main_background_color;
                     left: 10px;
                     display: flex;
                     justify-content: flex-end;
@@ -321,7 +330,7 @@ header {
                     width: 100%;
                     max-width: 320px;
                     padding: var(--spacer-1) 0 var(--spacer-1) var(--spacer-2);
-                    border: 1px solid $light_gray;
+                    border: 1px solid $border_color;
                     border-right: none;
                     border-radius: 3px 0 0 3px;
                     outline: none;
@@ -366,6 +375,7 @@ header {
                 .search__button--submit {
                     @include header__button;
 
+                    color: #reverse_link_color;
                     height: $header_input_height_wide;
                     width: 40px;
                     border: 1px solid $border_color;
@@ -418,6 +428,7 @@ header {
             span.disabled {
                 @include header__anchor--bold;
                 text-transform: capitalize;
+
             }
 
             a {
@@ -458,7 +469,7 @@ header {
                         }
 
                         path {
-                            fill: white;
+                            fill: $main_background_color;
                         }
                     }
                 }
@@ -554,7 +565,6 @@ header {
             &.active {
                 span.disabled {
                     @include header__anchor--active-bold;
-
                     cursor: default;
                     padding: 0;
                 }
