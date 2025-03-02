@@ -688,7 +688,6 @@
             container: contact-signup-container / inline-size;
             background-color: $reverse_background_lighter;
 
-
             @mixin column-common {
                 display: flex;
                 /*flex: 1;*/
@@ -704,7 +703,7 @@
                         padding: 20px 0;
 
                         &.contact__column {
-                            border-bottom: 1px solid $border_color;
+                            border-bottom: 1px solid $secondary_border_color;
                         }
 
                         .column__icon {
@@ -752,7 +751,7 @@
             .contact-signup {
                 display: flex;
                 background-color: $reverse_background_lighter;
-                color: $hero_background_color;
+                color: $tertiary_color;
 
                 .contact-signup__column {
                     .column__icon {
