@@ -7,148 +7,44 @@
 {% block body %}
     <div class="site-container">
         <main class="about">
-            <h1>About This Tool</h1>
+            <h1>About</h1>
             <section>
                 <p>
-                    Policy Connector organizes together regulations, subregulatory
-                    guidance, and other related policy materials. Our team updates
-                    content and functionality several times a week.
+                    <strong>Policy Connector</strong> organizes together policy materials from U.S. government websites to make it easier to do policy research. You can use it to:</p>
+                    <ul>
+    	                <li>Find materials <strong>related to a regulation</strong>, including statutes, executive orders, memos, and agency handbooks: <em><a href="/5/351/Subpart-H/2017-01-01/#351-801">5 CFR 351.801</a></em>.</li>
+    	                <li>Find materials <strong>related to an executive order or memo</strong>, such as regulations, agency guidance, and court cases: <em><a href="/subjects?subjects=4">Return to In-Person Work</a></em>.</li>
+    	                <li>Search across all policy materials: <em><a href="/search?q=probationary+period">probationary period</a></em>.</li>
+                    </ul>
+
+                    <p>This is an independent open source adaptation of <a href="https://eregs.github.io/" class="external" target="_blank" rel="noopener noreferrer">an open source codebase</a> with many contributors and versions. For example, <a href="https://regulations.atf.gov/" class="external" target="_blank" rel="noopener noreferrer">check out the Bureau of Alcohol, Tobacco, Firearms and Explosives</a>. The code is <a href="https://creativecommons.org/publicdomain/zero/1.0/" class="external" target="_blank" rel="noopener noreferrer">in the public domain</a>, and our instance is not supported by or affiliated with any government agency.
                 </p>
-            </section>
-            <section>
-                <h2>Contact</h2>
+                
+                <h2>Contact Us</h2>
                 <p>
-                   
+                If this site helps you, please send us a note: <strong>hello@a1msolutions.com</strong>! To correct an error or omission, report a bug, or make a suggestion, <strong><a href="https://github.com/A1MSolutions/policyconnector/issues">file an issue on GitHub</a></strong> or email us. You are also invited to <a href="https://github.com/A1MSolutions/policyconnector" class="external" target="_blank" rel="noopener noreferrer">contribute to the code</a>.
                 </p>
+                <h2>Our Company</h2>
                 <p>
-                    
-                </p>
+                   We are <a href="https://www.a1msolutions.com/" class="external" target="_blank" rel="noopener noreferrer">A1M Solutions</a>, a small business software contractor in Chico, CA, that combines policy expertise with UX design, UX research, and product management.</p>
+                   <p>Want a <strong>new instance of Policy Connector</strong> for your nonprofit or government agency, adapted to your policy area and unique needs? Want to discuss another project or partnership? <strong><a href="https://www.a1msolutions.com/hire-us">Send us a message</a></strong>.</p>
+
             </section>
             <section id="automated-updates">
-                <h2>Automated Updates</h2>
-                <div class="ds-l-container">
-                    <div class="ds-l-row">
-                        <div class="ds-l-col--6">
-                            <h3>Regulation Text</h3>
-                            <p>
-                                This tool displays regulation text from
-                                <a href="https://www.ecfr.gov/"
-                                   class="external"
-                                   target="_blank"
-                                   rel="noopener noreferrer">eCFR</a>.
-                            </p>
-                            <p>
-                                When new rules (changes to regulations) become
-                                effective, the Office of the Federal Register
-                                incorporates them into eCFR
-                                <a href="https://www.ecfr.gov/reader-aids/understanding-the-ecfr/how-is-the-ecfr-updated"
-                                   class="external"
-                                   target="_blank"
-                                   rel="noopener noreferrer">about two business days</a>
-                                after their effective date.
-                            </p>
-                            <p>
-                                This tool automatically syncs with eCFR
-                                <b>once a day</b>.
-                            </p>
-                            <p>
-                                So, it can take up to <b>three business days</b> for
-                                new rules to be incorporated into this tool.
-                            </p>
-                            <p class="note">
-                                Note: eCFR and this tool are
-                                <a href="https://www.ecfr.gov/reader-aids/understanding-the-ecfr/what-is-the-ecfr"
-                                   class="external"
-                                   target="_blank"
-                                   rel="noopener noreferrer">not official legal editions</a>
-                                of the CFR.
-                            </p>
-                        </div>
-                        <div class="ds-l-col--6">
-                            <img src="{% static 'images/about_automated_updates.svg' %}"
-                                 alt="Diagram showing eCFR information going to this website"
-                                 class="ecfr-graphic" />
-                        </div>
-                    </div>
-                    <div class="ds-l-row">
-                        <div class="ds-l-col--6">
-                            <h3>Links to Federal Register Rules</h3>
-                            <p>
-                                Rules from 1994–present are pulled automatically
-                                from the
-                                <a href="https://www.federalregister.gov/"
-                                   class="external"
-                                   target="_blank"
-                                   rel="noopener noreferrer">Office of the Federal Register</a>
-                                once a day.
-                            </p>
-                            <p>
-                                Subject matter experts on our team use the
-                                <a href="https://www.govinfo.gov/app/collection/fr"
-                                   class="external"
-                                   target="_blank"
-                                   rel="noopener noreferrer">GovInfo Federal Register archive</a>
-                                to add links to selected rules before 1994 that may
-                                be helpful for policy research.
-                            </p>
-                        </div>
-                        <div class="ds-l-col--6">
-                            <img src="{% static 'images/about_fr_rules.svg' %}"
-                                 alt="Screenshot of Rules with Preambles in the right sidebar of this site" />
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h2>Subject Matter Expert Updates</h2>
-                <div class="ds-l-container">
-                    <div class="ds-l-row">
-                        <div class="ds-l-col--6">
-                            <h3>Links to Additional Resources</h3>
-                            
-                        </div>
-                        <div class="ds-l-col--6">
-                            <img src="{% static 'images/about_additional_resources.svg' %}"
-                                 alt="Screenshot of Subregulatory Guidance in the right sidebar of this site" />
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h2>Technical Details</h2>
-                <p>
-                    This tool has an
-                    <a href="https://github.com/A1MSolutions/policyconnector"
-                       class="external"
-                       target="_blank"
-                       rel="noopener noreferrer">open source code repository</a>
-                    available for reuse.
-                </p>
-                <p>
-                    It uses APIs maintained by the Office of the Federal Register
-                    and the Government Publishing Office:
-                </p>
-                <ul>
-                    <li>
-                        <a href="https://www.ecfr.gov/reader-aids/ecfr-developer-resources/rest-api-interactive-documentation"
-                           class="external"
-                           target="_blank"
-                           rel="noopener noreferrer">eCFR regulation text</a>
-                    </li>
-                    <li>
-                        <a href="https://www.federalregister.gov/developers/documentation/api/v1"
-                           class="external"
-                           target="_blank"
-                           rel="noopener noreferrer">Federal Register rules</a>
-                    </li>
-                    <li>
-                        <a href="https://www.govinfo.gov/link-docs/"
-                           class="external"
-                           target="_blank"
-                           rel="noopener noreferrer">GovInfo links</a>
-                    </li>
-                </ul>
-            </section>
+                <h2>How This Site Is Updated</h2>
+				
+				<h3>Curated links to resources</h3>
+                <p>To incorporate executive orders, memos, guidance, agency publications, and other kinds of resources, we add links to the database by hand and annotate them with related regulations and executive actions. We make an effort to keep this site up to date, but we cannot promise a specific cadence of updates.</p>
+				<h3>Free public government APIs</h3>
+				<p>
+					This tool displays regulation text from <a href="https://www.ecfr.gov/" class="external" target="_blank" rel="noopener noreferrer">eCFR</a>. When new rules become effective, the Office of the Federal Register incorporates them into eCFR <a href="https://www.ecfr.gov/reader-aids/understanding-the-ecfr/how-is-the-ecfr-updated" class="external" target="_blank" rel="noopener noreferrer">within two business days</a>. This tool syncs with eCFR once a day using the <a href="https://www.ecfr.gov/reader-aids/ecfr-developer-resources/rest-api-interactive-documentation" class="external" target="_blank" rel="noopener noreferrer">eCFR API</a>. So, it can take up to three business days for changes to be incorporated into this tool.
+				</p>
+				<p>
+					Links to new rules are pulled automatically from the <a href="https://www.federalregister.gov/" class="external" target="_blank" rel="noopener noreferrer">Office of the Federal Register</a> once a day, using the <a href="https://www.federalregister.gov/developers/documentation/api/v1" class="external" target="_blank" rel="noopener noreferrer">Federal Register API</a>.
+				</p>
+				<p>This tool uses the <a href="https://www.govinfo.gov/link-docs/" class="external" target="_blank" rel="noopener noreferrer">GovInfo link API</a> to provide links to past versions of regulations.</p>
+				<p>Learn more about APIs and bulk data downloads for U.S. government laws and regulations: <a href="https://usgpo.github.io/innovation/resources/" class="external" target="_blank" rel="noopener noreferrer">Legislative Branch Innovation Hub</a>.</p>
+                </section>
         </main>
     </div>
 {% endblock body %}

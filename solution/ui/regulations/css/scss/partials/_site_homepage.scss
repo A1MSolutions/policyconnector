@@ -18,7 +18,7 @@
             flex-direction: column;
         }
 
-        .link-btn {
+        .link-btn { //find related policy
             @include link-common;
 
             width: fit-content;
@@ -32,19 +32,17 @@
             }
         }
 
-        a.contact {
+        a.contact { //link to about pages
             @include link-common;
             text-decoration: underline;
 
-            color: $contact_link_color;
+            color: $tertiary_color;
 
             &:link::after {
                 filter: brightness(0.02) invert(1);
             }
 
             &:visited {
-                color: $contact_link_color;
-
                 &::after {
                     filter: brightness(0.02) invert(1);
                 }
@@ -188,7 +186,7 @@
             }
 
             &--label {
-                color: $teritary_link_color;
+                color: $secondary_link_color;
                 font-size: 14px;
                 font-weight: 700;
                 text-transform: capitalize;

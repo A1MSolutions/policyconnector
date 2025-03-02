@@ -12,7 +12,7 @@ footer {
 
     p {
         margin: 0 !important;
-        font-size: $font-size-xs;
+        font-size: var(--font-size-sm);
         color: $secondary_text_color;
         box-sizing: content-box;
     }
