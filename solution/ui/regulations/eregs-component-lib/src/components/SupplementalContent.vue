@@ -237,28 +237,25 @@ export default {
 				// Get the part dictionary with or without subparts
 				await this.getPartDictionary();
 		
-				// For sections without subparts, we need a different approach to fetch resources
-				let subpartResponse;
-				let categories;
-				
-				// First, fetch categories separately
-				categories = await getCategories(this.apiUrl);
-				
-				if (this.subparts && this.subparts.length > 0) {
-					// With subparts, use existing logic
-					subpartResponse = await getSupplementalContent({
-						apiUrl: this.apiUrl,
-						partDict: this.partDict,
-						pageSize: 1000,
-					});
-				} else {
-					// Without subparts, use a simplified citation string
-					subpartResponse = await getSupplementalContent({
-						apiUrl: this.apiUrl,
-						builtCitationString: `${this.title}.${this.part}`,
-						pageSize: 1000,
-					});
-				}
+				// Run these requests in parallel for better performance
+				const results = await Promise.all([
+					getCategories(this.apiUrl),
+					// Choose the appropriate method to get resources based on whether subparts exist
+					this.subparts && this.subparts.length > 0
+						? getSupplementalContent({
+							apiUrl: this.apiUrl,
+							partDict: this.partDict,
+							pageSize: 1000,
+						  })
+						: getSupplementalContent({
+							apiUrl: this.apiUrl,
+							builtCitationString: `${this.title}.${this.part}`,
+							pageSize: 1000,
+						  })
+				]);
+		
+				const categories = results[0];
+				const subpartResponse = results[1];
 		
 				this.resourceCount = subpartResponse.count;
 		
@@ -280,7 +277,7 @@ export default {
 			} finally {
 				this.isFetching = false;
 			}
-		},
+		}
         /* end of LLM code*/
 
         /* start of LLM code */
