@@ -75,8 +75,8 @@ ol {
 // Colors
 //--------------------------
 
-/* ------ DELETE AFTER FINISHING WITH COLORS --------
-// Base Colors 
+/*
+// Base Colors
 $teal: #026666;
 $teal_blue: #245c68;
 $darkest_blue: #102e43;
@@ -107,30 +107,33 @@ $green: #2a7a3b;
 $title_color: #000;
 $section_highlight_color: #eefafe;
 $mark_highlight: #fce5af;
-------------------------------------------------*/
+*/
 
 // Base Colors - Policy Connector
-$mid_red: #DC3933;  /*top nav and popup border */
+$mid_red: #DC3933; /*top nav and popup border*/
 $light_red: #FFEAEA;  /*doc slug background for policy repository*/
-
 $mid_beige: #D4B086; /*reg border*/
 $light_beige: #F2E4D4; /*reg slug background & jump button*/
 
-$dark_blue: #07648D; /*main text link*/ 
 $darker_blue: #1A4480; /*side link and button background*/
 $darkest_purple: #222660; /*button hover and policy repository slug*/
 $dark_purple: #3B43BC; /*visited link*/
 $light_purple: #B7BAE5; /*reverse default background and reverse link text*/
+$dark_blue: #07648D; /*main text link*/ 
 
 $darkest_gray: #1B1B1B; /*base text*/
 $darker_gray: #5B616B; /*public and internal slug*/
 $mid_gray: #767676; /*disabled and placeholder*/
+$mid_gray_warm: #A3A3A3; /*?*/
 $light_gray: #DCDCDC; /*side nav top background and disabled button background*/
 $lightest_gray: #F3F3F3; /*side nav main background*/
 
 $white: #fff; /*default background and reverse button background*/
 
 $green: #2a7a3b;
+$title_color: #1B1B1B;
+$section_highlight_color: #F2E4D4;
+$mark_highlight: #F2E4D4;
 
 
 //// Usage ////
@@ -140,17 +143,11 @@ $green: #2a7a3b;
 
 $primary_color: $dark_blue;
 $secondary_color: $light_beige;
-$tertiary_color: $mid_red; 
-
-$title_color: $darkest_gray;
-$section_highlight_color: $light_beige;
-$mark_highlight: $light_beige;
 
 // Links
 
 $primary_link_color: $dark_blue;
 $primary_link_hover: $dark_purple;
-$visited_link_color: $darkest_purple; 
 
 $secondary_link_color: $darker_blue;
 $secondary_link_hover: $darkest_purple;
@@ -158,11 +155,13 @@ $secondary_link_hover: $darkest_purple;
 $teritary_link_color: $darker_blue;
 $teritary_link_hover: $darkest_purple;
 
-$reverse_link_color: $white;
-$reverse_link_hover: $light_purple;
+$reverse_link_color: $light_purple;
+$reverse_link_hover: $white;
 
 $secondary_reverse_link_color: $white;
-$secondary_reverse_link_hover: $light_red;
+$secondary_reverse_link_hover: $light_purple;
+
+$visited_link_color: $dark_purple; 
 
 $secondary_toc_link_color: $darker_blue;
 
@@ -178,7 +177,7 @@ $secondary_background_active: $light_gray;
 $teritary_background_color: $light_red;
 $reverse_background_color: $dark_blue;
 $reverse_background_darker: $darker_blue;
-$reverse_background_lighter: $mid_beige;
+$reverse_background_lighter: $dark_blue;
 $table_header_background_color: $light_gray;
 
 $hero_background_color: $mid_red; 
@@ -187,11 +186,9 @@ $hero_link_hover: $light_red;
 
 $contact_link_color: $light_red;
 
-
-$jump_to_submit_disabled: $mid_gray; 
+$jump_to_submit_disabled: $light_gray; 
 $jump_to_submit_active: $light_beige;
 $jump_to_submit_active_focus: $mid_beige;
-
 
 $policy_subject_selected_chip_background: $dark_blue; 
 
@@ -201,7 +198,7 @@ $choice-checked-border-color: $dark_blue;
 // Borders
 
 $border_color: $light_gray;
-$secondary_border_color: $mid_red;
+$secondary_border_color: $light_red;
 $tertiary_border_color: $darker_gray; /*TO DO: swap this value with secondary everywher*/
 $hover_border_color: $mid_red;
 $table_border_color: $light_gray;
@@ -575,8 +572,8 @@ select {
 
     &:focus-visible {
         box-shadow:
-            0 0 3px $border_color,
-            0 0 7px $border_color;
+            0 0 3px #3e94cf,
+            0 0 7px #3e94cf;
     }
 }
 
