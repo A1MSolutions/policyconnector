@@ -16,7 +16,7 @@ const $route = useRoute();
     <div class="subj-landing__container">
     <h1>Research Executive Actions</h1>
     
-    <p><strong>Pick an Executive Order or Memo</strong> to find related guidance, statutes, and prior Executive Orders.</p>
+    <p><strong>Pick an executive order or memo</strong> to find related guidance, statutes, and prior executive orders.</p>
     
     <span>Or browse by category:</span>
     <ul>
