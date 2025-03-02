@@ -686,6 +686,8 @@
 
         .contact-signup__container {
             container: contact-signup-container / inline-size;
+            background-color: $reverse_background_lighter;
+
 
             @mixin column-common {
                 display: flex;
@@ -696,7 +698,6 @@
             @container contact-signup-container (max-width: 629px) {
                 .contact-signup {
                     flex-direction: column;
-                    background-color: $reverse_background_lighter;
 
                     .contact-signup__column {
                         margin: 0 10px;
@@ -714,6 +715,7 @@
             }
 
             @container contact-signup-container (min-width: 630px) {
+
                 .contact-signup {
                     flex-direction: row;
 
@@ -722,7 +724,7 @@
                         padding: 0 20px;
 
                         &.contact__column {
-                            border-right: 1px solid $border_color;
+                            border-right: 1px solid $secondary_border_color;
                             flex: 3; 
                         }
                         &.signup__column {
@@ -743,13 +745,13 @@
             }
 
             p {
-                font-size: 14px;
-                line-height: 22px;
+                font-size: 16px;
+                line-height: 24px;
             }
 
             .contact-signup {
                 display: flex;
-                background-color: $main_background_color;
+                background-color: $reverse_background_lighter;
                 color: $hero_background_color;
 
                 .contact-signup__column {
