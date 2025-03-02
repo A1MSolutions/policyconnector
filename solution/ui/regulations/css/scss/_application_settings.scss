@@ -176,7 +176,7 @@ $main_background_color: $white;
 $secondary_background_color: $lightest_gray;
 $secondary_background_active: $light_gray;
 $teritary_background_color: $light_red;
-$reverse_background_color: $dark_blue;
+$reverse_background_color: $mid_red;
 $reverse_background_darker: $darker_blue;
 $reverse_background_lighter: $light_beige;
 $table_header_background_color: $light_gray;
@@ -218,11 +218,11 @@ $policy_subject_selected_chip_text: $white;
 
 // Indicators
 
-$primary_indicator_background: $mid_red;
-$primary_indicator_text: $white;
+$primary_indicator_background: $light_beige;
+$primary_indicator_text: $darkest_gray;
 
-$secondary_indicator_background: $light_gray;
-$secondary_indicator_text: $title_color;
+$secondary_indicator_background: $light_beige;
+$secondary_indicator_text: $darkest_gray;
 
 $tertiary_indicator_background: $white;
 
