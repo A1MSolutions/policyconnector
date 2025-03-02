@@ -40,14 +40,11 @@ form .jump-to-input {
     }
 
     input {
-        color: $primary_text_color;
 
         &.submit {
             display: inline-block;
             line-height: 1;
             padding: var(--spacer-half) var(--spacer-1);
-            //border: 1px solid $jump_to_submit_disabled;
-            //color: $jump_to_submit_disabled;
             border-radius: var(--radius-default);
             cursor: not-allowed;
 
@@ -58,15 +55,18 @@ form .jump-to-input {
 
             &.active {
                 cursor: pointer;
-                color: #reverse_link_color;
                 background-color: $jump_to_submit_active;
-                border: 1px solid $jump_to_submit_active;
 
                 &:hover,
                 &:focus {
                     background-color: $jump_to_submit_active_focus;
                     border: 1px solid $jump_to_submit_active_focus;
                 }
+
+            &:disabled {
+            background-color: $jump_to_submit_disabled;
+            }
+
             }
         }
     }
@@ -78,9 +78,10 @@ form .jump-to-input {
 
     select#jumpToTitle,
     select#jumpToPart,
+    select#jumpToSection,
     input#jumpToSection,
     input#jumpBtn {
-        color: $reverse_link_color;
+        color: $primary_text_color;
         font-size: var(--font-size-md);
         font-weight: 700;
         margin-top: 0px;
@@ -88,8 +89,9 @@ form .jump-to-input {
         padding: 5px 8px;
 
         &:disabled {
-            padding: 4px 7px;
+        background-color: $jump_to_submit_disabled;
         }
+
     }
 
     select#jumpToTitle {
@@ -123,8 +125,9 @@ form .jump-to-input {
     }
 
     input#jumpBtn {
-        color: $reverse_link_color;
+        color: $secondary_link_color;
         background-color: $reverse_background_lighter;
         width: 40px;
+
     }
 }
