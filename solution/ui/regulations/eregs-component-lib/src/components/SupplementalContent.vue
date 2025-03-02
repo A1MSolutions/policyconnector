@@ -47,7 +47,6 @@
 			({{ resourceCount }})
 		</a>
 	</div>
-    </div>
     <!-- end of LLM code -->
 </template>
 
