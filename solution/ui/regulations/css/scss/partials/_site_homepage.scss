@@ -208,7 +208,7 @@
 
             .v-tabs {
                 padding-right: 25px;
-                margin-bottom: 16px;
+                margin-bottom: var(--spacer-1-5);
 
                 .v-slide-group__container {
                     border-bottom: 1px solid $border_color;
@@ -335,6 +335,9 @@
         }
         
 	    .featured-eos {
+            margin-top: 20px;
+            margin-bottom: 20px;
+
             display: flex;
             flex-direction: row; /* This makes boxes go side by side */
             gap: 20px;
@@ -357,7 +360,7 @@
             flex-direction: column;
             align-items: center;
             background-color: $secondary_background_color;
-            padding: 10px;
+            padding: 14px;
             border-radius: 3px;
         }
 
@@ -687,6 +690,7 @@
         .contact-signup__container {
             container: contact-signup-container / inline-size;
             background-color: $reverse_background_lighter;
+            margin-bottom: 20px;
 
             @mixin column-common {
                 display: flex;
@@ -745,7 +749,7 @@
 
             p {
                 font-size: 16px;
-                line-height: 24px;
+                line-height: 22px;
             }
 
             .contact-signup {
