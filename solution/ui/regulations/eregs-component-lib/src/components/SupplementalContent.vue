@@ -249,7 +249,7 @@ export default {
 						  })
 						: getSupplementalContent({
 							apiUrl: this.apiUrl,
-							builtCitationString: `${this.title}.${this.part}`,
+							builtCitationString: `citations=${this.title}.${this.part}`,
 							pageSize: 1000,
 						  })
 				]);
