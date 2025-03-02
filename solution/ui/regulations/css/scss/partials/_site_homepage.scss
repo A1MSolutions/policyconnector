@@ -696,6 +696,7 @@
             @container contact-signup-container (max-width: 629px) {
                 .contact-signup {
                     flex-direction: column;
+                    background-color: $reverse_background_lighter;
 
                     .contact-signup__column {
                         margin: 0 10px;
