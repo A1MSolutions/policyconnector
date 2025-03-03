@@ -3,7 +3,6 @@
         <h1 id="subpart-resources-heading">
             {{ activePart }} Resources
         </h1>
-        <h2>Documents</h2>
         <slot name="login-banner" />
         <slot name="public-label" />
         <div class="supplemental-content-container">
