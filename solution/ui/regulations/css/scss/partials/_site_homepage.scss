@@ -208,7 +208,7 @@
 
             .v-tabs {
                 padding-right: 25px;
-                margin-bottom: 16px;
+                margin-bottom: var(--spacer-1-5);
 
                 .v-slide-group__container {
                     border-bottom: 1px solid $border_color;
@@ -335,6 +335,9 @@
         }
         
 	    .featured-eos {
+            margin-top: 20px;
+            margin-bottom: 20px;
+
             display: flex;
             flex-direction: row; /* This makes boxes go side by side */
             gap: 20px;
@@ -356,8 +359,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: $secondary_background_color;
-            padding: 10px;
+            background-color: $featured_background_color;
+            padding: 14px;
             border-radius: 3px;
         }
 
@@ -686,6 +689,8 @@
 
         .contact-signup__container {
             container: contact-signup-container / inline-size;
+            background-color: $reverse_background_lighter;
+            margin-bottom: 20px;
 
             @mixin column-common {
                 display: flex;
@@ -702,7 +707,7 @@
                         padding: 20px 0;
 
                         &.contact__column {
-                            border-bottom: 1px solid $border_color;
+                            border-bottom: 1px solid $secondary_border_color;
                         }
 
                         .column__icon {
@@ -713,6 +718,7 @@
             }
 
             @container contact-signup-container (min-width: 630px) {
+
                 .contact-signup {
                     flex-direction: row;
 
@@ -721,7 +727,7 @@
                         padding: 0 20px;
 
                         &.contact__column {
-                            border-right: 1px solid $border_color;
+                            border-right: 1px solid $secondary_border_color;
                             flex: 3; 
                         }
                         &.signup__column {
@@ -742,14 +748,14 @@
             }
 
             p {
-                font-size: 14px;
+                font-size: 16px;
                 line-height: 22px;
             }
 
             .contact-signup {
                 display: flex;
-                background-color: $main_background_color;
-                color: $hero_background_color;
+                background-color: $reverse_background_lighter;
+                color: $tertiary_color;
 
                 .contact-signup__column {
                     .column__icon {

@@ -110,16 +110,17 @@ $mark_highlight: #fce5af;
 ------------------------------------------------*/
 
 // Base Colors - Policy Connector
-$mid_red: #DC3933;  /*top nav and popup border */
+$mid_red: #BC1C16;  /*top nav and popup border */
 $light_red: #FFEAEA;  /*doc slug background for policy repository*/
 
-$mid_beige: #D4B086; /*reg border*/
+$mid_beige: #D4B086; /*reg borders*/
 $light_beige: #F2E4D4; /*reg slug background & jump button*/
+$lightest_beige: #f6efe9; /*featured background*/
 
 $dark_blue: #07648D; /*main text link*/ 
 $darker_blue: #1A4480; /*side link and button background*/
 $darkest_purple: #222660; /*button hover and policy repository slug*/
-$dark_purple: #3B43BC; /*visited link*/
+$dark_purple: #5e519e; /*visited link*/
 $light_purple: #B7BAE5; /*reverse default background and reverse link text*/
 
 $darkest_gray: #1B1B1B; /*base text*/
@@ -186,6 +187,7 @@ $hero_link_color: $white;
 $hero_link_hover: $light_red;
 
 $contact_link_color: $light_red;
+$featured_background_color: $lightest_beige;
 
 
 $jump_to_submit_disabled: $light_red; 
@@ -235,10 +237,11 @@ $tertiary_indicator_background: $white;
 
 // Buttons
 
-$main_button_background: $darker_blue;
+$main_button_background: $dark_purple;
 $main_button_color: $white;
-$main_button_hover_background: $darkest_purple;
+$main_button_hover_background: $darker_blue;
 $main_button_disabled: $light_gray; 
+
 $copy_button_success: $green;
 
 $policy_subject_close_background: $light_gray;
