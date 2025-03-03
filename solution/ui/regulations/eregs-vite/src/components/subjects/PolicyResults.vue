@@ -249,11 +249,11 @@ const currentPageResultsRange = getCurrentPageResultsRange({
                 </a>
             </template>
             <template #labels>
-                <DocTypeLabel
+                <!--<DocTypeLabel
                     v-if="doc.type"
                     :icon-type="doc.type"
                     :doc-type="DOCUMENT_TYPES_MAP[doc.type]"
-                />
+                />-->
                 <CategoryLabel
                     v-if="doc.type === 'reg_text'"
                     name="Regulations"
