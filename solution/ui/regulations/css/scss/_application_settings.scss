@@ -110,11 +110,12 @@ $mark_highlight: #fce5af;
 ------------------------------------------------*/
 
 // Base Colors - Policy Connector
-$mid_red: #DC3933;  /*top nav and popup border */
+$mid_red: #BC1C16;  /*top nav and popup border */
 $light_red: #FFEAEA;  /*doc slug background for policy repository*/
 
-$mid_beige: #D4B086; /*reg border*/
+$mid_beige: #D4B086; /*reg borders*/
 $light_beige: #F2E4D4; /*reg slug background & jump button*/
+$lightest_beige: #f6efe9; /*featured background*/
 
 $dark_blue: #07648D; /*main text link*/ 
 $darker_blue: #1A4480; /*side link and button background*/
@@ -186,6 +187,7 @@ $hero_link_color: $white;
 $hero_link_hover: $light_red;
 
 $contact_link_color: $light_red;
+$featured_background_color: $lightest_beige;
 
 
 $jump_to_submit_disabled: $light_red; 
