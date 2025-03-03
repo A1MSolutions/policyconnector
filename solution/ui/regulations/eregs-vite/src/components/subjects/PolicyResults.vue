@@ -339,11 +339,11 @@ const currentPageResultsRange = getCurrentPageResultsRange({
                     class="related-citations__btn--collapse"
                 >
                     <template #expanded>
-                        Hide Related Citations
+                        Hide Related Regulations
                         <i class="fa fa-chevron-up" />
                     </template>
                     <template #collapsed>
-                        Show Related Citations
+                        Show Related Regulations
                         <i class="fa fa-chevron-down" />
                     </template>
                 </CollapseButton>
