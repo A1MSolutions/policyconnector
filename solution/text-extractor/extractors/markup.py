@@ -2,8 +2,9 @@ import warnings
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from .extractor import Extractor
 
+# Modified by LLM to handle a bunch of special cases
+
 class MarkupExtractor(Extractor):
-    # Modified by LLM to handle a bunch of special cases
     # Expanded file types to include ASP and other common web formats
     file_types = ("html", "xml", "javascript", "js", "asp", "aspx", "php")
     
@@ -22,10 +23,10 @@ class MarkupExtractor(Extractor):
             
             # This is likely HTML content, proceed with HTML parsing
             warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
-            extractor = BeautifulSoup(file, "html.parser")
+            extractor = BeautifulSoup(file, "html.parser")  # Use html.parser to avoid lxml dependency (has M1 issues)
             warnings.resetwarnings()
             
-            # Remove script and style tags regardless of approach
+            # Remove <script> and <style> inline tags
             for i in extractor(["script", "style"]):
                 i.decompose()
             
