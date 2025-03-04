@@ -12,7 +12,7 @@ class MarkupExtractor(Extractor):
         # Convert bytes to string for initial inspection
         try:
             content_str = file.decode('utf-8', errors='replace')
-        except:
+        except Exception as e:
             content_str = str(file)
         
         # Check if this is likely HTML content regardless of file extension
