@@ -55,10 +55,19 @@ export default {
     },
     methods: {
         clickHandler() {
+            // Emit the existing event
             eventbus.emit(EventCodes.SetSection, {
                 section: this.section,
                 count: this.count,
             });
+            
+            // Scroll to resources section on mobile; LLM code
+            if (window.innerWidth < 767) {
+                const resourcesHeading = document.querySelector('#right-sidebar');
+                if (resourcesHeading) {
+                    resourcesHeading.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
         },
         isLink() {
             return this.type === "link";
