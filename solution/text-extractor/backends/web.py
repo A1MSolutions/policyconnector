@@ -40,7 +40,7 @@ class WebBackend(FileBackend):
             logger.info("Domain %s is in allowlist. Ignoring robots.txt.", domain)
             self._ignore_robots = True
             return
-        
+
         if self._ignore_robots:
             logger.info("Ignoring robots.txt")
             return

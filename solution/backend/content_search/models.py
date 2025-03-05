@@ -63,8 +63,8 @@ class ContentIndexQuerySet(models.QuerySet):
         cover_density = self._is_quoted(search_query)
         rank_filter = float(settings.QUOTED_SEARCH_FILTER if cover_density else settings.BASIC_SEARCH_FILTER)
 
-		# Start LLM code
-		
+        # Start LLM code
+
         # First, get the basic rank annotation
         queryset = self.annotate(rank=SearchRank(
             RawSQL("vector_column", [], output_field=SearchVectorField()),
@@ -93,8 +93,8 @@ class ContentIndexQuerySet(models.QuerySet):
         return queryset.filter(rank__gt=rank_filter)\
             .order_by('-adjusted_rank', '-id')
 
-		# End LLM code
-		
+        # End LLM code
+        
 
        # return self.annotate(rank=SearchRank(
        #     RawSQL("vector_column", [], output_field=SearchVectorField()),
