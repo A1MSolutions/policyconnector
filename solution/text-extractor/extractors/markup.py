@@ -1,4 +1,5 @@
 import warnings
+import re
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from .extractor import Extractor
 
@@ -30,56 +31,74 @@ class MarkupExtractor(Extractor):
             for i in extractor(["script", "style"]):
                 i.decompose()
             
-            # For this specific type of page (OSC.gov SharePoint pages)
-            content_area = extractor.find("div", id="DeltaPlaceHolderMain")
-            if content_area:
-                # Find the article content within the main content area
-                article_content = content_area.find("div", class_="ms-rtestate-field")
-                if article_content:
-                    return article_content.get_text(" ")
-                return content_area.get_text(" ")
+            # Primary content extraction strategy - common patterns across gov sites
             
-            # Other targeted extraction approaches
-            main_content_div = extractor.find("div", id="main-main-content")
-            if main_content_div:
-                content_section = main_content_div.find("section", class_="body-content")
-                if content_section:
-                    return content_section.get_text(" ")
-                return main_content_div.get_text(" ")
-                
-            # Try specific content containers common in content management systems
-            for content_id in ["contentBox", "pageTitle", "content", "main-content", 
-                              "article", "post", "entry-content", "contentContainer"]:
-                content_div = extractor.find(id=content_id) or extractor.find(class_=content_id)
-                if content_div:
-                    return content_div.get_text(" ")
+            # 1. Try to find main content container by ID
+            for main_id in ["main-main-content", "DeltaPlaceHolderMain", "mainContent", "main-content"]:
+                main_content = extractor.find(id=main_id)
+                if main_content:
+                    # If it contains a "body-content" section, use that
+                    body_content = main_content.find(class_="body-content") or main_content.find(class_="ms-rtestate-field")
+                    if body_content:
+                        return self._clean_extracted_text(body_content.get_text(" "))
+                    return self._clean_extracted_text(main_content.get_text(" "))
             
-            # Try semantic HTML tags
+            # 2. Try to find by semantic HTML5 tags
             main_tag = extractor.find("main")
             if main_tag:
-                # Try to find and remove navigation elements within main
-                nav_elements = main_tag.find_all(["nav", "div"], 
-                                                class_=["SideNavContainer", "usa-sidenav", "navigation", "sidebar"])
-                for nav in nav_elements:
+                # Remove navigation elements within main
+                for nav in main_tag.find_all(["nav"], recursive=True):
                     nav.decompose()
-                return main_tag.get_text(" ")
+                for side_nav in main_tag.find_all(class_=["SideNavContainer", "usa-sidenav", "navigation", "sidebar"]):
+                    side_nav.decompose()
+                # Remove breadcrumbs
+                for breadcrumb in main_tag.find_all(class_=lambda c: c and "breadcrumb" in str(c).lower()):
+                    breadcrumb.decompose()
+                return self._clean_extracted_text(main_tag.get_text(" "))
             
             article_tag = extractor.find("article")
             if article_tag:
-                return article_tag.get_text(" ")
+                return self._clean_extracted_text(article_tag.get_text(" "))
             
-            # Fallback: extract from the entire body but try to exclude navigation
+            # 3. Try common content container classes
+            for content_class in ["body-content", "entry-content", "ContentPlaceHolder", "contentBox", "contentContainer", "main-content", "content", "region-content", "ms-rtestate-field"]:
+                content_div = extractor.find(class_=lambda c: c and content_class in str(c).lower())
+                if content_div:
+                    return self._clean_extracted_text(content_div.get_text(" "))
+            
+            # Special handling for documents with <pre> tags (like Federal Register)
+            pre_tags = extractor.find_all("pre")
+            if pre_tags:
+                pre_text = " ".join(pre.get_text(" ") for pre in pre_tags)
+                if pre_text.strip():
+                    return self._clean_extracted_text(pre_text)
+            
+            # 4. Fallback to body tag with navigation removed
             body = extractor.find("body")
             if body:
-                # Try to remove common navigation elements
-                for nav in body.find_all(["header", "nav", "footer", "aside"], 
-                                        class_=["usa-nav", "usa-footer", "SideNavContainer", 
-                                              "navigation", "menu", "sidebar"]):
-                    nav.decompose()
-                return body.get_text(" ")
+                # Remove common navigation elements
+                for element_type in ["header", "nav", "footer", "aside"]:
+                    for element in body.find_all(element_type):
+                        element.decompose()
+                
+                # Remove common navigation classes
+                for class_name in ["usa-nav", "usa-footer", "usa-header", "SideNavContainer", "navigation", "menu", "sidebar"]:
+                    for element in body.find_all(class_=lambda c: c and class_name in str(c).lower()):
+                        element.decompose()
+                
+                return self._clean_extracted_text(body.get_text(" "))
             
-            # Final fallback: use the entire document
-            return extractor.get_text(" ")
+            # 5. Final fallback - use the entire document
+            extracted_text = extractor.get_text(" ")
+            if extracted_text.strip():
+                return self._clean_extracted_text(extracted_text)
+            
+            # Last resort - try to extract paragraphs if we still have no content
+            paragraphs = extractor.find_all("p")
+            if paragraphs:
+                return self._clean_extracted_text(" ".join(p.get_text(" ") for p in paragraphs))
+            
+            return self._clean_extracted_text(content_str)
             
         else:
             # This is not HTML-like content, return cleaned version
@@ -104,4 +123,15 @@ class MarkupExtractor(Extractor):
                 if line.strip():
                     cleaned_content.append(line)
             
-            return " ".join(cleaned_content)
+            return self._clean_extracted_text(" ".join(cleaned_content))
+    
+    def _clean_extracted_text(self, text: str) -> str:
+        """Clean up the extracted text to remove header/footer patterns and repeated symbols."""
+        # Replace consecutive === or ___ patterns (common in Federal Register)
+        text = re.sub(r'={3,}', ' ', text)
+        text = re.sub(r'_{3,}', ' ', text)
+
+        # Clean up extra whitespace from all the replacements
+        text = re.sub(r'\s+', ' ', text).strip()
+        
+        return text
