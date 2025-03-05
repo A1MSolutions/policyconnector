@@ -249,11 +249,11 @@ const currentPageResultsRange = getCurrentPageResultsRange({
                 </a>
             </template>
             <template #labels>
-                <DocTypeLabel
+                <!--<DocTypeLabel
                     v-if="doc.type"
                     :icon-type="doc.type"
                     :doc-type="DOCUMENT_TYPES_MAP[doc.type]"
-                />
+                />-->
                 <CategoryLabel
                     v-if="doc.type === 'reg_text'"
                     name="Regulations"
@@ -339,11 +339,11 @@ const currentPageResultsRange = getCurrentPageResultsRange({
                     class="related-citations__btn--collapse"
                 >
                     <template #expanded>
-                        Hide Related Citations
+                        Hide Related Regulations
                         <i class="fa fa-chevron-up" />
                     </template>
                     <template #collapsed>
-                        Show Related Citations
+                        Show Related Regulations
                         <i class="fa fa-chevron-down" />
                     </template>
                 </CollapseButton>

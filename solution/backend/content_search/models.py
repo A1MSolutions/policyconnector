@@ -62,11 +62,45 @@ class ContentIndexQuerySet(models.QuerySet):
     def search(self, search_query):
         cover_density = self._is_quoted(search_query)
         rank_filter = float(settings.QUOTED_SEARCH_FILTER if cover_density else settings.BASIC_SEARCH_FILTER)
-        return self.annotate(rank=SearchRank(
+
+        # Start LLM code
+
+        # First, get the basic rank annotation
+        queryset = self.annotate(rank=SearchRank(
             RawSQL("vector_column", [], output_field=SearchVectorField()),
-            self._get_search_query_object(search_query), cover_density=cover_density))\
-            .filter(rank__gt=rank_filter)\
-            .order_by('-rank', '-id')
+            self._get_search_query_object(search_query), cover_density=cover_density))
+        
+        # Import required models to keep the method self-contained
+        from django.db.models import Case, When, F, Value, FloatField, Q, Exists, OuterRef
+        from resources.models import FederalRegisterLink
+        
+        # Identify if a resource is a FederalRegisterLink using subquery
+        fed_register_resources = FederalRegisterLink.objects.filter(
+            id=OuterRef('resource_id')
+        )
+        
+        queryset = queryset.annotate(
+            is_fed_register=Exists(fed_register_resources),
+            adjusted_rank=Case(
+                # Check if the resource is a FederalRegisterLink
+                When(is_fed_register=True, 
+                     then=F('rank') * Value(0.8)),  # Reduce rank by 20%
+                default=F('rank'),
+                output_field=FloatField(),
+            )
+        )
+        
+        return queryset.filter(rank__gt=rank_filter)\
+            .order_by('-adjusted_rank', '-id')
+
+        # End LLM code
+        
+
+       # return self.annotate(rank=SearchRank(
+       #     RawSQL("vector_column", [], output_field=SearchVectorField()),
+       #     self._get_search_query_object(search_query), cover_density=cover_density))\
+       #     .filter(rank__gt=rank_filter)\
+       #     .order_by('-rank', '-id')
 
     def generate_headlines(self, search_query):
         query_object = self._get_search_query_object(search_query)

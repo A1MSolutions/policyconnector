@@ -363,7 +363,7 @@ getDocsOnLoad();
                         <span class="no-results__span">Your search for
                             <strong>{{ searchQuery }}</strong> did not match any
                             results
-                            <span v-if="hasActiveFilters">with the selected filters</span><span v-else>on eRegulations</span>.</span>
+                            <span v-if="hasActiveFilters">with the selected filters</span><span v-else>here</span>.</span>
                     </div>
                     <SearchContinueResearch
                         :query="searchQuery"

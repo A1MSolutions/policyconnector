@@ -22,8 +22,25 @@ class WebBackend(FileBackend):
         self._parser = robotparser.RobotFileParser()
         self._headers = requests.utils.default_headers()
         self._headers["User-Agent"] = self._user_agent
+        
+        # Allowlist of domains with known robots.txt issues
+        self._allowlist_domains = config.get("allowlist_domains", [
+            "mspb.gov", # https://www.mspb.gov/robots.txt redirects to an error page
+            "www.mspb.gov",
+        ])
 
     def _get_robots_txt(self, url: str):
+        
+        # Parse the URL to get the domain
+        parsed_url = urlsplit(url)
+        domain = parsed_url.netloc
+
+        # Check if domain is in our allowlist
+        if domain in self._allowlist_domains:
+            logger.info("Domain %s is in allowlist. Ignoring robots.txt.", domain)
+            self._ignore_robots = True
+            return
+
         if self._ignore_robots:
             logger.info("Ignoring robots.txt")
             return
