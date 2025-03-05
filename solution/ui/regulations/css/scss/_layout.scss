@@ -226,3 +226,11 @@ footer {
 .display-none {
     display: none !important;
 }
+
+/* LLM code */
+.reg-text.match-middle {
+    @include custom-max(calc($mobile-max / 1px)) {
+        width: 100%;
+        padding: 0 var(--spacer-3);
+    }
+}
