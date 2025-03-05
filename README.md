@@ -13,6 +13,8 @@ This is an independent non-government adaptation of an open source codebase, [eR
 2. At the General Services Administration, [18F helped a few agencies adapt eRegulations for their needs](https://18f.gsa.gov/our-work/eregulations/), including the Bureau of Alcohol, Tobacco, Firearms, and Explosives: [ATF eRegulations](https://regulations.atf.gov/) ([archived repository](https://github.com/18F/atf-eregs)).
 3. The Center for Medicare & Medicaid Services reused eRegulations and developed additional features. This version is based on [the CMS codebase](https://github.com/Enterprise-CMCS/cmcs-eregulations).
 
+Please note that this specific repository is a quick adaptation of the upstream repository, with many broken tests and other terrible shortcuts because it's an experimental side project. If you want to see decent code, look upstream!
+
 # Local setup
 
 ## Prerequisites
