@@ -33,12 +33,12 @@ class MarkupExtractor(Extractor):
 
             # Primary content extraction strategy - common patterns across gov sites
 
-            # 1. Try to find main content container by ID
-            for main_id in ["main-main-content", "DeltaPlaceHolderMain", "mainContent", "main-content"]:
+            # 1. Try to find main content container by ID. docViewer is for uscode.house.gov
+            for main_id in ["main-main-content", "DeltaPlaceHolderMain", "mainContent", "main-content", "MainContentDiv", "SpecialContentContainer", "content", "docViewer", "MainContent_Container"]:
                 main_content = extractor.find(id=main_id)
                 if main_content:
                     # If it contains a "body-content" section, use that
-                    body_content = main_content.find(class_="body-content") or main_content.find(class_="ms-rtestate-field")
+                    body_content = main_content.find(class_="body-content")  # body-content is because OPM.gov puts a huge nav in its <main>
                     if body_content:
                         return self._clean_extracted_text(body_content.get_text(" "))
                     return self._clean_extracted_text(main_content.get_text(" "))
@@ -61,7 +61,7 @@ class MarkupExtractor(Extractor):
                 return self._clean_extracted_text(article_tag.get_text(" "))
 
             # 3. Try common content container classes
-            for content_class in ["body-content", "entry-content", "ContentPlaceHolder", "contentBox", "contentContainer", "main-content", "content", "region-content", "ms-rtestate-field"]:
+            for content_class in ["body-content", "entry-content", "ContentPlaceHolder", "contentBox", "contentContainer", "main-content", "content", "region-content", "ms-rtestate-field", "umb-block-list"]:
                 content_div = extractor.find(class_=lambda c: c and content_class in str(c).lower())
                 if content_div:
                     return self._clean_extracted_text(content_div.get_text(" "))
