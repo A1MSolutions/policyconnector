@@ -25,8 +25,8 @@ aside.right-sidebar {
         position: static; /* Remove sticky positioning on mobile */
         overflow: visible; /* No need for scrolling when height is auto */
         max-width: 100%; /* Full width on mobile */
-        width: calc(100% - 56px); // Adds margin on each side
-        margin: 0 auto; // Centers the sidebar
+        width: calc(100% - 56px); /* Adds margin on each side */
+        margin: 0 auto; /* Centers the sidebar */
     }
 
     h1 {
