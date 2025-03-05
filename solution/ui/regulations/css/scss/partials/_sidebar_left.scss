@@ -266,20 +266,20 @@ aside.left-sidebar {
 
     button {
         outline: none;
-        color: #ccf2ff;
+        color: $teritary_link_color;
         border: none;
         background: none;
         cursor: pointer;
         text-transform: uppercase;
-        font-weight: 600;
+        font-weight: 700;
         padding: var(--spacer-2);
         border-radius: 0;
         line-height: 1.2;
 
         &:hover,
         &:focus {
-            background: $secondary_link_hover;
-            color: $reverse_text_color;
+            background: $reverse_background_lighter;
+            color: $teritary_link_hover;
             @include transition;
         }
 
@@ -289,6 +289,7 @@ aside.left-sidebar {
             display: inline-block;
             vertical-align: middle;
             line-height: var(--font-size-md);
+            fill: $hero_background_color;
         }
 
         span {
