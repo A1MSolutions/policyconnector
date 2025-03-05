@@ -26,6 +26,7 @@ class WebBackend(FileBackend):
         # Allowlist of domains with known robots.txt issues
         self._allowlist_domains = config.get("allowlist_domains", [
             "mspb.gov", # https://www.mspb.gov/robots.txt redirects to an error page
+            "www.mspb.gov",
         ])
 
     def _get_robots_txt(self, url: str):
