@@ -82,6 +82,9 @@ def handler(event: dict, context: dict) -> dict:
     try:
         extractor = Extractor.get_extractor(file_type, config)
         text = extractor.extract(file)
+        # Log the first ~200 characters of extracted text
+        preview = text[:200].replace('\n', ' ').replace('\r', '')
+        logger.info(f"Extracted text preview: '{preview}...'")
     except ExtractorInitException as e:
         return lambda_failure(500, f"Failed to initialize text extractor: {str(e)}")
     except ExtractorException as e:
