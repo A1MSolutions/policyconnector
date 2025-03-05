@@ -44,7 +44,7 @@ body {
     display: flex;
     width: 100%;
     
-    /* Remove any existing grid code and use this instead; LLM code */
+    /* To enable viewing resources on mobile; LLM code */
     @include custom-max(calc($mobile-max / 1px)) {
         flex-direction: column;
     }
@@ -54,7 +54,7 @@ body {
     &[data-state="collapsed"] {
         flex: 0 0 $collapsed-sidebar-width;
     }
-    
+
     @include screen-md {
         flex: 0 0 275px;
     }
@@ -86,7 +86,7 @@ aside {
         padding: 0;
         flex-shrink: 0;
         
-        /* Hide on mobile; LLM code */
+        /* Hide left nav on mobile; LLM code */
         @include custom-max(calc($mobile-max / 1px)) {
             display: none;
         }
@@ -102,7 +102,7 @@ aside {
 
         @include custom-max(calc($mobile-max / 1px)) {
             /*display: none;*/
-            /* LLM code */
+            /* Show resources at bottom of page on mobile; LLM code */
             display: block;
             width: 100%;
             border-left: none;
@@ -227,10 +227,3 @@ footer {
     display: none !important;
 }
 
-/* LLM code */
-.reg-text.match-middle {
-    @include custom-max(calc($mobile-max / 1px)) {
-        width: 100%;
-        padding: 0 var(--spacer-3);
-    }
-}

@@ -55,7 +55,6 @@ export default {
     },
     methods: {
         clickHandler() {
-            // Emit the existing event
             eventbus.emit(EventCodes.SetSection, {
                 section: this.section,
                 count: this.count,
