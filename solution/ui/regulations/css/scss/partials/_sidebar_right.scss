@@ -17,6 +17,15 @@ aside.right-sidebar {
     @include screen-lg {
         height: calc(100vh - #{$header_height} - #{var(--spacer-5)});
     }
+    
+    /* LLM code */
+    @include custom-max(calc($mobile-max / 1px)) {
+        height: auto; /* Let content determine height on mobile */
+        max-height: none; /* Remove any max height constraints */
+        position: static; /* Remove sticky positioning on mobile */
+        overflow: visible; /* No need for scrolling when height is auto */
+        max-width: 100%; /* Full width on mobile */
+    }
 
     h1 {
         font-size: calc(var(--font-size-base) * 1.4);

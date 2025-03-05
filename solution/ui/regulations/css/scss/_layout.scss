@@ -43,13 +43,18 @@ body {
 .flexbox {
     display: flex;
     width: 100%;
+    
+    /* Remove any existing grid code and use this instead; LLM code */
+    @include custom-max(calc($mobile-max / 1px)) {
+        flex-direction: column;
+    }
 }
 
 .match-sides {
     &[data-state="collapsed"] {
         flex: 0 0 $collapsed-sidebar-width;
     }
-
+    
     @include screen-md {
         flex: 0 0 275px;
     }
@@ -80,6 +85,11 @@ aside {
         background: $secondary_background_color;
         padding: 0;
         flex-shrink: 0;
+        
+        /* Hide on mobile; LLM code */
+        @include custom-max(calc($mobile-max / 1px)) {
+            display: none;
+        }
     }
 
     &.right-sidebar {
@@ -91,7 +101,14 @@ aside {
         }
 
         @include custom-max(calc($mobile-max / 1px)) {
-            display: none;
+            /*display: none;*/
+            /* LLM code */
+            display: block;
+            width: 100%;
+            border-left: none;
+            border-top: 1px solid $border_color;
+            margin-top: var(--spacer-3);
+            padding-top: var(--spacer-3);
         }
     }
 
@@ -208,4 +225,12 @@ footer {
 
 .display-none {
     display: none !important;
+}
+
+/* LLM code */
+.reg-text.match-middle {
+    @include custom-max(calc($mobile-max / 1px)) {
+        width: 100%;
+        padding: 0 var(--spacer-3);
+    }
 }
