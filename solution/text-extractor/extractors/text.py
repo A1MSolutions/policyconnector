@@ -1,7 +1,7 @@
 from bs4 import UnicodeDammit
 
 from .extractor import Extractor
-from .markup_extractor import MarkupExtractor  # Import existing markup extractor
+from .markup import MarkupExtractor  # Import existing markup extractor
 
 # Modified with the help of a LLM to use the markup extractor if it's not really a text file
 
