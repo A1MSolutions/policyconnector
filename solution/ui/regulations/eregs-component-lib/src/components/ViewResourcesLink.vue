@@ -78,14 +78,22 @@ export default {
                 count: this.count,
             });
 
-            // Scroll to resources section, using width defined in $mobile-max in _application_settings.scss; LLM code
+            // Scroll to resources section, using width defined in $mobile-max; LLM code
             if (window.innerWidth < 767) {
                 const resourcesHeading = document.querySelector('#right-sidebar');
                 if (resourcesHeading) {
-                    resourcesHeading.scrollIntoView({ behavior: 'smooth' });
-                }
+                // Get the position of the element relative to the top of the page
+                const elementPosition = resourcesHeading.getBoundingClientRect().top + window.pageYOffset;
+                // Get the height of your fixed header
+                const headerHeight = document.querySelector('#header').offsetHeight;
+                // Scroll to the element minus the header height
+                window.scrollTo({
+                    top: elementPosition - headerHeight,
+                    behavior: 'smooth'
+                });
             }
-        },
+        }
+    },
         goBack() {
             if (this.scrollOrigin !== null) {
                 window.scrollTo({
