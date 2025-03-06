@@ -263,10 +263,10 @@ export default {
                             partDict: this.partDict,
                             pageSize: 1000,
                         })
-                      : getSupplementalContent({
-                          apiUrl: this.apiUrl,
-                          builtCitationString: `citations=${this.title}.${this.part}`,
-                          pageSize: 1000,
+                        : getSupplementalContent({
+                            apiUrl: this.apiUrl,
+                            builtCitationString: `citations=${this.title}.${this.part}`,
+                            pageSize: 1000,
                         })
                 ]);
         
