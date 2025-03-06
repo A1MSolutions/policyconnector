@@ -197,8 +197,8 @@ $jump_to_submit_active_focus: $mid_beige;
 
 $policy_subject_selected_chip_background: $dark_blue; 
 
-$choice-checked-background-color: $dark_blue;
-$choice-checked-border-color: $dark_blue;
+$choice-checked-background-color: $dark_purple;
+$choice-checked-border-color: $dark_purple;
 
 // Borders
 
@@ -617,7 +617,7 @@ select {
 
 // Chips used for Resources selections and Policy Doc subjects
 @mixin common-chip-colors {
-    background: $darker_blue;
+    background: $main_button_color;
     color: $white;
 }
 
