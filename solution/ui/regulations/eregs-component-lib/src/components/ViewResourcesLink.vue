@@ -78,7 +78,7 @@ export default {
                 count: this.count,
             });
 
-            // Scroll to resources section on mobile; LLM code
+            // Scroll to resources section, using width defined in $mobile-max in _application_settings.scss; LLM code
             if (window.innerWidth < 767) {
                 const resourcesHeading = document.querySelector('#right-sidebar');
                 if (resourcesHeading) {
