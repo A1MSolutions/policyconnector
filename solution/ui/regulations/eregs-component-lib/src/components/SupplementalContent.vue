@@ -46,6 +46,16 @@
 			({{ resourceCount }})
 		</a>
 	</div>
+	<!-- New go-back button, only show if scrollOrigin is set; LLM code -->
+	<button
+		v-if="hasScrolled"
+		class="btn"
+		@click="goBack"
+	>
+		<div class="view-resources-link">
+			<span class="bold">Go back to regulation</span>
+		</div>
+	</button>
     <!-- end of LLM code -->
 </template>
 
@@ -130,6 +140,9 @@ export default {
             selectedPart: undefined,
             resourceCount: 0,
             partDict: {},
+            // To support go-back button; LLM code
+            scrollOrigin: null,
+            hasScrolled: false
         };
     },
 
@@ -181,10 +194,14 @@ export default {
         eventbus.on(EventCodes.SetSection, (args) => {
             this.selectedPart = args.section;
         });
+        // Add listener for scroll tracking; LLM code
+        eventbus.on(EventCodes.TrackScrollOrigin, this.handleScrollTracking);
         this.categories = getDefaultCategories();
     },
     beforeUnmount() {
         eventbus.off(EventCodes.SetSection);
+        // Remove the scroll tracking listener; LLM code
+        eventbus.off(EventCodes.TrackScrollOrigin, this.handleScrollTracking);
     },
     unmounted() {
         window.removeEventListener("hashchange", this.handleHashChange);
@@ -318,6 +335,26 @@ export default {
 		},
         /*  end of LLM code*/        
         
+        /* start of more LLM code */
+        // New method to handle scroll tracking
+        handleScrollTracking(data) {
+            this.scrollOrigin = data.origin;
+            this.hasScrolled = true;
+        },
+
+        // New method to handle going back
+        goBack() {
+            if (this.scrollOrigin !== null) {
+                window.scrollTo({
+                    top: this.scrollOrigin,
+                    behavior: 'smooth'
+                });
+                // Reset the origin and scrolled state after scrolling back
+                this.scrollOrigin = null;
+                this.hasScrolled = false;
+            }
+        },
+        /*  end of more LLM code*/
         
         clearSection() {
             this.selectedPart = undefined;

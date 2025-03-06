@@ -146,6 +146,10 @@ The project uses GitHub Actions for continuous deployment. The workflow is defin
 2. Ensure all required environment variables are set
 3. Verify AWS credentials and roles are properly configured
 
+### 500 Errors
+
+If starting from scratch in a new AWS account, note that [new AWS accounts have reduced concurrency and memory quotas](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html). If your Lambdas have a limit of 10 concurrent executions, you can request an increase in service quota.
+
 ## Contributing
 
 1. Create a feature branch
