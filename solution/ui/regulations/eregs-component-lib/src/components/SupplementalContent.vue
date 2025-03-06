@@ -262,12 +262,12 @@ export default {
                             apiUrl: this.apiUrl,
                             partDict: this.partDict,
                             pageSize: 1000,
-                          })
-                        : getSupplementalContent({
-                            apiUrl: this.apiUrl,
-                            builtCitationString: `citations=${this.title}.${this.part}`,
-                            pageSize: 1000,
-                          })
+                        })
+                      : getSupplementalContent({
+                          apiUrl: this.apiUrl,
+                          builtCitationString: `citations=${this.title}.${this.part}`,
+                          pageSize: 1000,
+                        })
                 ]);
         
                 const categories = results[0];

@@ -63,7 +63,7 @@ export default {
         },
     },
     methods: {
-    /* Start partially LLM code */
+        /* Start partially LLM code */
         clickHandler() {
             // Store the current scroll position before navigating
             const scrollOrigin = window.pageYOffset;
@@ -82,18 +82,18 @@ export default {
             if (window.innerWidth < 767) {
                 const resourcesHeading = document.querySelector('#right-sidebar');
                 if (resourcesHeading) {
-                // Get the position of the element relative to the top of the page
-                const elementPosition = resourcesHeading.getBoundingClientRect().top + window.pageYOffset;
-                // Get the height of your fixed header
-                const headerHeight = document.querySelector('#header').offsetHeight;
-                // Scroll to the element minus the header height
-                window.scrollTo({
-                    top: elementPosition - headerHeight,
-                    behavior: 'smooth'
-                });
+                    // Get the position of the element relative to the top of the page
+                    const elementPosition = resourcesHeading.getBoundingClientRect().top + window.pageYOffset;
+                    // Get the height of your fixed header
+                    const headerHeight = document.querySelector('#header').offsetHeight;
+                    // Scroll to the element minus the header height
+                    window.scrollTo({
+                        top: elementPosition - headerHeight,
+                        behavior: 'smooth'
+                    });
+                }
             }
-        }
-    },
+        },
         goBack() {
             if (this.scrollOrigin !== null) {
                 window.scrollTo({
