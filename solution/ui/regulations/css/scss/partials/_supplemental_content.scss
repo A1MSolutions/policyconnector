@@ -220,3 +220,14 @@
         }
     }
 }
+
+/* LLM code */
+.go-back-button {
+    // Button is hidden by default
+    display: none;
+
+    // Only show on mobile screens
+    @media (max-width: $mobile-max) {
+        display: block;
+    }
+}

@@ -48,8 +48,8 @@
 	</div>
 	<!-- New go-back button, only show if scrollOrigin is set; LLM code -->
 	<button
-		v-if="hasScrolled && isMobileView"
-		class="btn"
+		v-if="hasScrolled"
+		class="btn go-back-button"
 		@click="goBack"
 	>
 		<div class="view-resources-link">
