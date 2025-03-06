@@ -575,6 +575,7 @@
 
         &:hover,
         &:focus {
+            color: $main_button_hover;
             background-color: $main_button_hover_background;
         }
     }
