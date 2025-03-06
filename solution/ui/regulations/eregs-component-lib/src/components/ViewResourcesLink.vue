@@ -38,6 +38,15 @@ import eventbus from "../eventbus";
 export default {
     name: "ViewResourcesLink",
 
+    /* Start LLM code */
+    data() {
+        return {
+            scrollOrigin: null,
+            hasScrolled: false
+        };
+    },
+    /* End LLM code */
+
     props: {
         section: {
             type: String,
@@ -54,12 +63,21 @@ export default {
         },
     },
     methods: {
+    /* Start partially LLM code */
         clickHandler() {
+            // Store the current scroll position before navigating
+            const scrollOrigin = window.pageYOffset;
+
+            // Emit an event with the scroll origin
+            eventbus.emit(EventCodes.TrackScrollOrigin, {
+                origin: scrollOrigin
+            });
+
             eventbus.emit(EventCodes.SetSection, {
                 section: this.section,
                 count: this.count,
             });
-            
+
             // Scroll to resources section on mobile; LLM code
             if (window.innerWidth < 767) {
                 const resourcesHeading = document.querySelector('#right-sidebar');
@@ -68,6 +86,18 @@ export default {
                 }
             }
         },
+        goBack() {
+            if (this.scrollOrigin !== null) {
+                window.scrollTo({
+                    top: this.scrollOrigin,
+                    behavior: 'smooth'
+                });
+                // Reset the origin and scrolled state after scrolling back
+                this.scrollOrigin = null;
+                this.hasScrolled = false;
+            }
+        },
+        /* End partially LLM code */
         isLink() {
             return this.type === "link";
         },

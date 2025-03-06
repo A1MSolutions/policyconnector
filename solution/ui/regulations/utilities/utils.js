@@ -9,6 +9,8 @@ import lodashGet from "lodash/get";
 const EventCodes = {
     SetSection: "SetSection",
     ClearSections: "ClearSections",
+    // For go-back on reg sidebars; LLM code
+    TrackScrollOrigin: "TrackScrollOrigin",
 };
 
 const DOCUMENT_TYPES = ["regulations", "external", "internal"];
