@@ -278,7 +278,7 @@ aside.left-sidebar {
 
         &:hover,
         &:focus {
-            background: $reverse_background_lighter;
+            background: $secondary_background_active;
             color: $teritary_link_hover;
             @include transition;
         }
@@ -289,7 +289,6 @@ aside.left-sidebar {
             display: inline-block;
             vertical-align: middle;
             line-height: var(--font-size-md);
-            fill: $hero_background_color;
         }
 
         span {
