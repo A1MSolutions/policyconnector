@@ -404,7 +404,7 @@ header {
 
                     .fa {
                         font-size: 16px;
-                        color: $primary_link_color;
+                        color: $hero_background_color;
 
                         @include custom-max(
                             calc((calc($eds-width-sm - 1px)) / 1px)
@@ -539,7 +539,7 @@ header {
                         form input {
                             @include header__anchor--bold;
 
-                            color: $primary_link_color;
+                            color: $teritary_link_hover;
 
                             &:hover,
                             &:focus,

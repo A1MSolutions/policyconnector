@@ -22,7 +22,7 @@
 .doc-type__label {
     @include common-label-styles;
 
-    color: $secondary_text_color;
+    color: $primary_text_color;
     background: $teritary_background_color;
 }
 
@@ -36,7 +36,7 @@
 
         &.category-label,
         &.regulations-label {
-            font-weight: 700;
+            font-weight: 600;
         }
 
         &.regulations-label {
