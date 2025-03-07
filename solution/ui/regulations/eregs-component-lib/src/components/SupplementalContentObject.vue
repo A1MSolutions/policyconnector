@@ -39,9 +39,9 @@
                 />
             </div>
         </a>
-        <subject-chips
-            v-if="subjects && subjects.length > 0"
-            :subjects="subjects"
+        <subject-chips 
+            v-if="subjects && subjects.length > 0" 
+            :subjects="subjects" 
         />
     </div>
 </template>
