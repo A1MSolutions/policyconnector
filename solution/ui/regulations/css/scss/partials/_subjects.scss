@@ -55,6 +55,10 @@
             input {
                 margin-top: 1px;
             }
+ 
+            .ds-c-label {
+                font-family: $primary_site_font;
+            }
 
             label {
                 display: flex;
@@ -335,7 +339,7 @@
 
         h2 {
             margin: 0 0 1rem !important; // !important to override the default h2 margin due to vuetify defaults
-            font-family: "Open Sans", Helvetica, sans-serif;
+            font-family: $primary_site_font;
         }
 
         .sidebar-toggle__button {

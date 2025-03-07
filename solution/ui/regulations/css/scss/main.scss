@@ -8,6 +8,8 @@
 $fa-font-path: "../fonts/webfonts" !default;
 $additional-font-path: "../fonts" !default;
 
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto+Slab:wght@100..900&display=swap');
+
 // CMS Design System
 @import '@cmsgov/design-system/dist/css/index';
 @import '@cmsgov/design-system/dist/css/core-theme';
