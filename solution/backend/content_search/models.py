@@ -8,6 +8,7 @@ from django.contrib.postgres.search import (
     SearchVectorField,
 )
 from django.db import models
+from django.db.models import Case, Exists, F, FloatField, OuterRef, Value, When
 from django.db.models.expressions import RawSQL
 from django.db.models.functions import Substr
 from django.db.models.signals import post_save
@@ -24,7 +25,6 @@ from resources.models import (
     PublicLink,
     ResourceContent,
 )
-
 
 class Synonym(models.Model):
     is_active = models.BooleanField(default=True)
@@ -69,38 +69,33 @@ class ContentIndexQuerySet(models.QuerySet):
         queryset = self.annotate(rank=SearchRank(
             RawSQL("vector_column", [], output_field=SearchVectorField()),
             self._get_search_query_object(search_query), cover_density=cover_density))
-        
-        # Import required models to keep the method self-contained
-        from django.db.models import Case, When, F, Value, FloatField, Q, Exists, OuterRef
-        from resources.models import FederalRegisterLink
-        
+
         # Identify if a resource is a FederalRegisterLink using subquery
         fed_register_resources = FederalRegisterLink.objects.filter(
             id=OuterRef('resource_id')
         )
-        
+
         queryset = queryset.annotate(
             is_fed_register=Exists(fed_register_resources),
             adjusted_rank=Case(
                 # Check if the resource is a FederalRegisterLink
-                When(is_fed_register=True, 
+                When(is_fed_register=True,
                      then=F('rank') * Value(0.8)),  # Reduce rank by 20%
                 default=F('rank'),
                 output_field=FloatField(),
             )
         )
-        
+
         return queryset.filter(rank__gt=rank_filter)\
             .order_by('-adjusted_rank', '-id')
 
         # End LLM code
-        
 
-       # return self.annotate(rank=SearchRank(
-       #     RawSQL("vector_column", [], output_field=SearchVectorField()),
-       #     self._get_search_query_object(search_query), cover_density=cover_density))\
-       #     .filter(rank__gt=rank_filter)\
-       #     .order_by('-rank', '-id')
+        #return self.annotate(rank=SearchRank(
+        #    RawSQL("vector_column", [], output_field=SearchVectorField()),
+        #    self._get_search_query_object(search_query), cover_density=cover_density))\
+        #    .filter(rank__gt=rank_filter)\
+        #    .order_by('-rank', '-id')
 
     def generate_headlines(self, search_query):
         query_object = self._get_search_query_object(search_query)
@@ -110,6 +105,7 @@ class ContentIndexQuerySet(models.QuerySet):
                 query_object,
                 start_sel="<span class='search-highlight'>",
                 stop_sel='</span>',
+                highlight_all=True,
                 min_words=self._min_words,
                 max_words=self._max_words,
                 config='english',
