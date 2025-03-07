@@ -131,7 +131,7 @@ class ContentIndexQuerySet(models.QuerySet):
                 config='english',
                 highlight_all=True,
                 fragment_delimiter='...',
-                max_fragments=self._max_fragments,
+                max_fragments=None,  # Fragment setting should only apply to content
             ),
             content_headline=SearchHeadline(
                 "content_short",
