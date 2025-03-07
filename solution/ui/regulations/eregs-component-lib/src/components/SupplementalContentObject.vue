@@ -39,16 +39,20 @@
                 />
             </div>
         </a>
-        <subject-chips 
-            v-if="subjects && subjects.length > 0" 
-            :subjects="subjects" 
-        />
+        <div v-if="subjects && subjects.length > 0" class="document__subjects">
+            <a v-for="subject in subjects"
+             :key="subject.id"
+             class="subject__chip"
+             :title="subject.full_name || subject.name"
+             :href="`/subjects/?subjects=${subject.id}`">
+             {{ subject.name || subject.short_name || subject.full_name }}
+          </a>
+       </div>
     </div>
 </template>
 
 <script>
 import { DOCUMENT_TYPES_MAP, getFileTypeButton } from "utilities/utils";
-import SubjectChips from "spaComponents/subjects/SubjectChips.vue";
 
 //import DivisionLabel from "./shared-components/results-item-parts/DivisionLabel.vue";
 
@@ -57,7 +61,6 @@ export default {
 
     components: {
         //DivisionLabel,
-        SubjectChips,
     },
 
     props: {
