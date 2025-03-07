@@ -110,7 +110,7 @@ class ContentIndexQuerySet(models.QuerySet):
                 max_words=self._max_words,
                 config='english',
                 fragment_delimiter='...',
-                max_fragments=self._max_fragments,
+                max_fragments=None,  # Fragment setting should only apply to content
             ),
             name_headline=SearchHeadline(
                 "name",
