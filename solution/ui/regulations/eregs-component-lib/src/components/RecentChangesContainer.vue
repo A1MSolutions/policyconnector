@@ -34,6 +34,11 @@ export default {
             required: false,
             default: null,
         },
+        partsLastUpdated: {
+            type: Object,
+            required: false,
+            default: () => ({}),
+        },
     },
 
     async created() {
@@ -91,6 +96,8 @@ export default {
         <RecentSupplementalContent
             v-if="!loading && type == 'supplemental'"
             :supplemental-content="rules"
+            :parts-last-updated="partsLastUpdated"
+            :home-url="homeUrl"
             :limit="10"
         />
     </div>

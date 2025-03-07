@@ -2,6 +2,7 @@
 import CategoryLabel from "sharedComponents/results-item-parts/CategoryLabel.vue";
 import SupplementalContentObject from "./SupplementalContentObject.vue";
 import SubjectChips from "spaComponents/subjects/SubjectChips.vue";
+import RelatedSections from "sharedComponents/results-item-parts/RelatedSections.vue";
 
 export default {
     name: "RecentSupplementalContent",
@@ -10,6 +11,7 @@ export default {
         CategoryLabel,
         SubjectChips,
         SupplementalContentObject,
+        RelatedSections,
     },
 
     props: {
@@ -22,12 +24,32 @@ export default {
             required: false,
             default: 3,
         },
+        homeUrl: {
+            type: String,
+            required: false,
+            default: "/",
+        },
+        partsLastUpdated: {
+            type: Object,
+            required: true,
+        },
     },
 
     computed: {
         limitedContent() {
             return this.supplementalContent.slice(0, this.limit);
         },
+        hasValidRegulations() {
+            return (item) => {
+                if (!item.cfr_citations || item.cfr_citations.length === 0) {
+                    return false;
+                }
+
+                return item.cfr_citations.some(citation =>
+                    this.partsLastUpdated[citation.part]
+                );
+            };
+        }
     },
 };
 </script>
@@ -48,6 +70,13 @@ export default {
                 :url="content.url"
             />
             <SubjectChips :subjects="content.subjects" />
+            <RelatedSections
+                v-if="hasValidRegulations(content)"
+                :base="homeUrl"
+                :item="content"
+                :parts-last-updated="partsLastUpdated"
+                label="Related Regulations"
+            />
             <div class="spacer" />
         </template>
     </div>

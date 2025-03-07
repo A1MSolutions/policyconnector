@@ -1,5 +1,5 @@
 <script>
-import { getExternalCategories } from "utilities/api";
+import { getExternalCategories, getLastUpdatedDates, getTitles } from "utilities/api";
 
 import RecentChangesContainer from "./RecentChangesContainer.vue";
 
@@ -32,12 +32,26 @@ export default {
             .map((cat) => `&categories=${cat.id}`)
             .join("");
 
-	},
+        // Fetch parts last updated data using the same pattern from the other component
+        try {
+            const titles = await getTitles({ apiUrl: this.apiUrl });
+            this.partsLastUpdated = await getLastUpdatedDates({
+                apiUrl: this.apiUrl,
+                titles,
+            });
+        } catch (error) {
+            console.error("Error fetching parts last updated:", error);
+        } finally {
+            this.partsLastUpdatedLoading = false;
+        }
+    },
 
     data() {
         return {
             tab: 0,
             categories: null,
+            partsLastUpdated: {},
+            partsLastUpdatedLoading: true,
         };
     },
 
@@ -63,6 +77,7 @@ export default {
                     :api-url="apiUrl"
                     :home-url="homeUrl"
                     :categories="categories"
+                    :parts-last-updated="partsLastUpdated"
                     type="supplemental"
                     class="recent-supplemental-content"
                 />
