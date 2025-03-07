@@ -110,6 +110,7 @@ class ContentIndexQuerySet(models.QuerySet):
                 query_object,
                 start_sel="<span class='search-highlight'>",
                 stop_sel='</span>',
+                highlight_all=True,
                 min_words=self._min_words,
                 max_words=self._max_words,
                 config='english',
