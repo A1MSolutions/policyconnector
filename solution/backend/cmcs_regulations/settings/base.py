@@ -274,12 +274,15 @@ CSP_STYLE_SRC = [
     "'unsafe-inline'",
     STATIC_URL,
     "https://cdn.jsdelivr.net/npm/@mdi/font@4.x/",
-    "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/swagger-ui.css"
+    "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/swagger-ui.css",
+    "https://fonts.googleapis.com/css2",
 ]
 CSP_FONT_SRC = [
     "'self'",
     STATIC_URL,
     "https://cdn.jsdelivr.net/npm/@mdi/font@4.x/",
+    "https://fonts.googleapis.com/css2",
+    "https://fonts.gstatic.com",
 ]
 CSP_MANIFEST_SRC = [
     "'self'",

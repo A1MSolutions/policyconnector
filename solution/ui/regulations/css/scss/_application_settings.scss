@@ -57,7 +57,7 @@ ol {
 
 .v-application {
     font-family:
-        Open Sans,
+        Lora,
         Helvetica,
         sans-serif;
 
@@ -255,32 +255,8 @@ $policy_subject_close_background_hover: $mid_gray;
 // Fonts
 //--------------------------
 
-@font-face {
-    font-family: "Open Sans";
-    font-style: italic;
-    font-weight: 700;
-    src: url("#{$additional-font-path}/OpenSans-BoldItalic.ttf")
-        format("truetype");
-}
-
-@font-face {
-    font-family: "Merriweather";
-    font-style: normal;
-    font-weight: 400;
-    src: url("#{$additional-font-path}/Merriweather-Regular.ttf")
-        format("truetype");
-}
-
-@font-face {
-    font-family: "Merriweather";
-    font-style: bold;
-    font-weight: 700;
-    src: url("#{$additional-font-path}/Merriweather-Bold.ttf")
-        format("truetype");
-}
-
-$primary_site_font: var(--font-family-body); // Open Sans
-$secondary_site_font: "Merriweather", Georgia, serif;
+$primary_site_font: "Lora", Helvetica, sans-serif;
+$secondary_site_font: "Roboto Slab", Georgia, serif;
 $font_size_xxs: 10px;
 $font_size_xs: 12px;
 $font_size_xxl: 30px; // Aligns with the CMS Design System, but their variable is depreciated
