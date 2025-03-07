@@ -34,16 +34,15 @@
     .result-label {
         @include common-label-styles;
 
-        background: $teritary_background_color;
-
         &.category-label,
         &.regulations-label {
-            font-weight: 600;
+            font-weight: 700;
         }
 
         &.regulations-label {
-            color: $reverse_text_color;
-            background: $reverse_background_color;
+            color: $primary_text_color;
+            background: $teritary_background_color;
+;
         }
     }
 }

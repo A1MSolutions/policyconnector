@@ -122,7 +122,7 @@ $darker_blue: #1A4480; /*side link and button background*/
 
 $darkest_purple: #222660; /*button hover and policy repository slug*/
 $dark_purple: #5e519e; /*visited link*/
-$light_purple: #B7BAE5; /*reverse default background and reverse link text*/
+$light_purple: #B7BAE5; /*guidance label background and reverse link text*/
 
 $darkest_gray: #1B1B1B; /*base text*/
 $darker_gray: #5B616B; /*public and internal slug*/
@@ -177,7 +177,7 @@ $placeholder_color: $mid_gray;
 $main_background_color: $white;
 $secondary_background_color: $lightest_gray;
 $secondary_background_active: $light_gray;
-$teritary_background_color: $light_red;
+$teritary_background_color: $light_purple;
 $reverse_background_color: $mid_red;
 $reverse_background_darker: $dark_purple;
 $reverse_background_lighter: $light_beige;
