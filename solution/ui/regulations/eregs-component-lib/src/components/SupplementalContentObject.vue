@@ -39,11 +39,16 @@
                 />
             </div>
         </a>
+        <subject-chips
+            v-if="subjects && subjects.length > 0"
+            :subjects="subjects"
+        />
     </div>
 </template>
 
 <script>
 import { DOCUMENT_TYPES_MAP, getFileTypeButton } from "utilities/utils";
+import SubjectChips from "spaComponents/subjects/SubjectChips.vue";
 
 //import DivisionLabel from "./shared-components/results-item-parts/DivisionLabel.vue";
 
@@ -52,6 +57,7 @@ export default {
 
     components: {
         //DivisionLabel,
+        SubjectChips,
     },
 
     props: {
@@ -93,6 +99,11 @@ export default {
             type: String,
             required: false,
             default: undefined,
+        },
+        subjects: {
+            type: Array,
+            required: false,
+            default: () => [],
         },
     },
 
