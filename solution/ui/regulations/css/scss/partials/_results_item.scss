@@ -34,6 +34,8 @@
     .result-label {
         @include common-label-styles;
 
+        background: $teritary_background_color;
+
         &.category-label,
         &.regulations-label {
             font-weight: 600;
@@ -41,7 +43,6 @@
 
         &.regulations-label {
             color: $primary_text_color;
-            background: $teritary_background_color;
 ;
         }
     }

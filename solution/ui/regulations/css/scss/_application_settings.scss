@@ -621,8 +621,8 @@ select {
 
 // Chips used for Resources selections and Policy Doc subjects
 @mixin common-chip-colors {
-    background: $main_button_color;
-    color: $white;
+    background: $main_button_background;
+    color: $main_button_color;
 }
 
 @mixin common-chip-styles {
