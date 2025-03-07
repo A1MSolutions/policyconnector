@@ -166,7 +166,6 @@ header {
 
                 &.hover {
                 @include header__anchor--active-bold;
-
                 }
             }
 
@@ -375,7 +374,7 @@ header {
                 .search__button--submit {
                     @include header__button;
 
-                    color: #reverse_link_color;
+                    color: $teritary_link_hover;
                     height: $header_input_height_wide;
                     width: 40px;
                     border: 1px solid $border_color;
