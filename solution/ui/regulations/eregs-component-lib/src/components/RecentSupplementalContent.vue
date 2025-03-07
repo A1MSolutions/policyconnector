@@ -3,6 +3,8 @@ import CategoryLabel from "sharedComponents/results-item-parts/CategoryLabel.vue
 import SupplementalContentObject from "./SupplementalContentObject.vue";
 import SubjectChips from "spaComponents/subjects/SubjectChips.vue";
 import RelatedSections from "sharedComponents/results-item-parts/RelatedSections.vue";
+import CollapseButton from "./CollapseButton.vue";
+import Collapsible from "./Collapsible.vue";
 
 export default {
     name: "RecentSupplementalContent",
@@ -12,6 +14,8 @@ export default {
         SubjectChips,
         SupplementalContentObject,
         RelatedSections,
+        CollapseButton,
+        Collapsible,
     },
 
     props: {
@@ -51,6 +55,21 @@ export default {
             };
         }
     },
+
+    methods: {
+        getCollapseName(content, index) {
+            return `related-regulations-collapsible-${content.id || index}`;
+        },
+        hasValidRegulations(item) {
+            if (!item.cfr_citations || item.cfr_citations.length === 0) {
+                return false;
+            }
+
+            return item.cfr_citations.some(citation =>
+                this.partsLastUpdated[citation.part]
+            );
+        }
+    },
 };
 </script>
 
@@ -70,13 +89,38 @@ export default {
                 :url="content.url"
             />
             <SubjectChips :subjects="content.subjects" />
-            <RelatedSections
+            <!-- Add collapse button if there are valid regulations -->
+            <CollapseButton
                 v-if="hasValidRegulations(content)"
-                :base="homeUrl"
-                :item="content"
-                :parts-last-updated="partsLastUpdated"
-                label="Related Regulations"
-            />
+                :name="getCollapseName(content, index)"
+                state="collapsed"
+                class="related-citations__btn--collapse"
+            >
+                <template #expanded>
+                    Hide Related Regulations
+                    <i class="fa fa-chevron-up" />
+                </template>
+                <template #collapsed>
+                    Show Related Regulations
+                    <i class="fa fa-chevron-down" />
+                </template>
+            </CollapseButton>
+            
+            <!-- Add collapsible section with RelatedSections component -->
+            <Collapsible
+                v-if="hasValidRegulations(content)"
+                :name="getCollapseName(content, index)"
+                state="collapsed"
+                class="collapse-content"
+                overflow
+            >
+                <RelatedSections
+                    :base="homeUrl"
+                    :item="content"
+                    :parts-last-updated="partsLastUpdated"
+                    label="Regulations"
+                />
+            </Collapsible>
             <div class="spacer" />
         </template>
     </div>
