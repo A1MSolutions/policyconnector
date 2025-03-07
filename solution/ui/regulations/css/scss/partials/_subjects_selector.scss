@@ -30,6 +30,10 @@
         }
     }
 
+    .selections__li .subjects-li__button-text--sidebar {
+        color: $main_button_color;
+    }
+
     .sidebar__li {
         border-bottom: 1px solid $border_color;
     }
@@ -134,6 +138,7 @@
                 &--selected {
                     pointer-events: none;
                     font-weight: 700;
+                    color: $main_button_color;
                 }
 
                 .subjects-li__button-subtitle {

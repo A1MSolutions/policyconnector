@@ -22,7 +22,7 @@
 .doc-type__label {
     @include common-label-styles;
 
-    color: $secondary_text_color;
+    color: $primary_text_color;
     background: $teritary_background_color;
 }
 
@@ -42,8 +42,8 @@
         }
 
         &.regulations-label {
-            color: $reverse_text_color;
-            background: $reverse_background_color;
+            color: $primary_text_color;
+;
         }
     }
 }

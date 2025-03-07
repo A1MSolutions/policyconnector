@@ -119,9 +119,10 @@ $lightest_beige: #f6efe9; /*featured background*/
 
 $dark_blue: #07648D; /*main text link*/ 
 $darker_blue: #1A4480; /*side link and button background*/
+
 $darkest_purple: #222660; /*button hover and policy repository slug*/
 $dark_purple: #5e519e; /*visited link*/
-$light_purple: #B7BAE5; /*reverse default background and reverse link text*/
+$light_purple: #C5C5F3; /*guidance label background and reverse link text*/
 
 $darkest_gray: #1B1B1B; /*base text*/
 $darker_gray: #5B616B; /*public and internal slug*/
@@ -143,9 +144,14 @@ $primary_color: $dark_blue;
 $secondary_color: $light_beige;
 $tertiary_color: $mid_red; 
 
+
+// Text
+
 $title_color: $darkest_gray;
-$section_highlight_color: $light_beige;
-$mark_highlight: $light_beige;
+$primary_text_color: $darkest_gray;
+$secondary_text_color: $darker_gray;
+$tertiary_text_color: $mid_gray;
+$reverse_text_color: $white;
 
 // Links
 
@@ -176,9 +182,9 @@ $placeholder_color: $mid_gray;
 $main_background_color: $white;
 $secondary_background_color: $lightest_gray;
 $secondary_background_active: $light_gray;
-$teritary_background_color: $light_red;
+$teritary_background_color: $light_purple;
 $reverse_background_color: $mid_red;
-$reverse_background_darker: $darker_blue;
+$reverse_background_darker: $dark_purple;
 $reverse_background_lighter: $light_beige;
 $table_header_background_color: $light_gray;
 
@@ -187,18 +193,19 @@ $hero_link_color: $white;
 $hero_link_hover: $light_red;
 
 $contact_link_color: $light_red;
+
 $featured_background_color: $lightest_beige;
 
+$section_highlight_color: $light_beige;
+$mark_highlight: $light_beige;
 
 $jump_to_submit_disabled: $light_red; 
 $jump_to_submit_active: $light_beige;
 $jump_to_submit_active_focus: $mid_beige;
 
 
-$policy_subject_selected_chip_background: $dark_blue; 
-
-$choice-checked-background-color: $dark_blue;
-$choice-checked-border-color: $dark_blue;
+$choice-checked-background-color: $dark_purple;
+$choice-checked-border-color: $dark_purple;
 
 // Borders
 
@@ -209,13 +216,9 @@ $hover_border_color: $mid_red;
 $table_border_color: $light_gray;
 $formula_left_border: $light_red;
 
-// Text
 
-$primary_text_color: $darkest_gray;
-$secondary_text_color: $darker_gray;
-$tertiary_text_color: $mid_gray;
-$reverse_text_color: $white;
-
+// Chips
+$policy_subject_selected_chip_background: $dark_purple; 
 $policy_subject_selected_chip_text: $white;
 
 // Indicators
@@ -239,6 +242,7 @@ $tertiary_indicator_background: $white;
 
 $main_button_background: $dark_purple;
 $main_button_color: $white;
+$main_button_hover: $light_purple; 
 $main_button_hover_background: $darker_blue;
 $main_button_disabled: $light_gray; 
 
@@ -617,8 +621,8 @@ select {
 
 // Chips used for Resources selections and Policy Doc subjects
 @mixin common-chip-colors {
-    background: $darker_blue;
-    color: $white;
+    background: $main_button_background;
+    color: $main_button_color;
 }
 
 @mixin common-chip-styles {
