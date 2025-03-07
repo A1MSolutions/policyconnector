@@ -8,7 +8,15 @@ from django.contrib.postgres.search import (
     SearchVectorField,
 )
 from django.db import models
-from django.db.models import Case, Exists, F, FloatField, OuterRef, Value, When
+from django.db.models import (
+    Case,
+    Exists,
+    F,
+    FloatField,
+    OuterRef,
+    Value,
+    When,
+)
 from django.db.models.expressions import RawSQL
 from django.db.models.functions import Substr
 from django.db.models.signals import post_save
@@ -25,6 +33,7 @@ from resources.models import (
     PublicLink,
     ResourceContent,
 )
+
 
 class Synonym(models.Model):
     is_active = models.BooleanField(default=True)
@@ -91,7 +100,7 @@ class ContentIndexQuerySet(models.QuerySet):
 
         # End LLM code
 
-        #return self.annotate(rank=SearchRank(
+        # return self.annotate(rank=SearchRank(
         #    RawSQL("vector_column", [], output_field=SearchVectorField()),
         #    self._get_search_query_object(search_query), cover_density=cover_density))\
         #    .filter(rank__gt=rank_filter)\
@@ -110,7 +119,7 @@ class ContentIndexQuerySet(models.QuerySet):
                 max_words=self._max_words,
                 config='english',
                 fragment_delimiter='...',
-                max_fragments=self._max_fragments,
+                max_fragments=None,  # Fragment setting should only apply to content
             ),
             name_headline=SearchHeadline(
                 "name",
