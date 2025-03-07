@@ -39,11 +39,17 @@
                 />
             </div>
         </a>
+        <subject-chips
+            v-if="subjects && subjects.length > 0"
+            :subjects="subjects"
+        />
     </div>
 </template>
 
 <script>
 import { DOCUMENT_TYPES_MAP, getFileTypeButton } from "utilities/utils";
+import SubjectChips from "spaComponents/subjects/SubjectChips.vue";
+import { provide } from "vue";
 
 //import DivisionLabel from "./shared-components/results-item-parts/DivisionLabel.vue";
 
@@ -52,6 +58,11 @@ export default {
 
     components: {
         //DivisionLabel,
+        SubjectChips,
+    },
+
+    setup() {
+        provide("currentRouteName", "regulations"); // Just need to tell it that we're not currently on the subjects page
     },
 
     props: {
@@ -93,6 +104,11 @@ export default {
             type: String,
             required: false,
             default: undefined,
+        },
+        subjects: {
+            type: Array,
+            required: false,
+            default: () => [],
         },
     },
 

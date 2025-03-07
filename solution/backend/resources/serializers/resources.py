@@ -176,7 +176,7 @@ class ResourceSerializer(serializers.Serializer):
     updated_at = serializers.CharField()
     approved = serializers.BooleanField()
     category = AbstractCategorySerializer()
-    cfr_citations = AbstractCitationSerializer(many=True)
+    cfr_citations = serializers.SerializerMethodField()
     subjects = SubjectSerializer(many=True)
     document_id = serializers.CharField()
     title = serializers.CharField()
@@ -184,6 +184,32 @@ class ResourceSerializer(serializers.Serializer):
     url = serializers.CharField()
     related_resources = serializers.SerializerMethodField()
 
+    def get_cfr_citations(self, obj):
+        # Get all citations
+        citations_data = AbstractCitationSerializer(obj.cfr_citations.all(), many=True).data
+        
+        # Sort the serialized data
+        def sort_key(x):
+            title = int(x['title'])
+            part = int(x['part'])
+            
+            # Handle section_id or subpart_id
+            if 'subpart_id' in x:
+                # Subpart ID is usually a string (like "A", "B", etc.)
+                return (title, part, 0, x['subpart_id'])  # 0 to prioritize subparts over sections
+            elif 'section_id' in x:
+                # If section_id is numeric, convert to int for proper sorting
+                section_value = x['section_id']
+                if isinstance(section_value, str) and section_value.isdigit():
+                    section_value = int(section_value)
+                return (title, part, 1, section_value)  # 1 to sort sections after subparts
+            else:
+                return (title, part, 2, '')  # 2 to put entries without either at the end
+        
+        sorted_citations = sorted(citations_data, key=sort_key)
+        
+        return sorted_citations
+    
     @extend_schema_field(serializers.ListField(child=serializers.DictField()))
     def get_related_resources(self, obj):
         if self.context.get("show_related", False):

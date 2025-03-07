@@ -3,7 +3,6 @@
         <form @submit.prevent="getLink">
             <div class="jump-to-input">
                 <select
-                    v-if="defaultTitle === ''"
                     id="jumpToTitle"
                     v-model="selectedTitle"
                     name="title"
@@ -116,16 +115,14 @@ export default {
     },
 
     async created() {
-        // When title 45 or another title is added uncomment line below, and remove the hardcoded
+        // Always display the title drop-down, even if only one title, but default to the title
         this.titles = await getTitles({ apiUrl: this.apiUrl });
         if (this.titles.length === 1) {
             this.selectedTitle = this.titles[0];
             this.defaultTitle = this.selectedTitle;
-            this.hideTitle = true;
         }
         if (this.title !== "") {
             this.selectedTitle = this.title;
-            this.hideTitle = true;
         }
         if (this.part !== "") {
             this.selectedPart = this.part;
