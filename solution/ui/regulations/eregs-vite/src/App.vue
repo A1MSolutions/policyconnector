@@ -39,7 +39,7 @@ ul {
 }
 
 .v-application {
-    font-family: Lora, Helvetica, sans-serif;
+    font-family: Roboto Slab, Helvetica, sans-serif;
 
     .v-application--wrap {
         min-height: unset;
