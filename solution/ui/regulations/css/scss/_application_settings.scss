@@ -144,9 +144,14 @@ $primary_color: $dark_blue;
 $secondary_color: $light_beige;
 $tertiary_color: $mid_red; 
 
+
+// Text
+
 $title_color: $darkest_gray;
-$section_highlight_color: $light_beige;
-$mark_highlight: $light_beige;
+$primary_text_color: $darkest_gray;
+$secondary_text_color: $darker_gray;
+$tertiary_text_color: $mid_gray;
+$reverse_text_color: $white;
 
 // Links
 
@@ -188,15 +193,16 @@ $hero_link_color: $white;
 $hero_link_hover: $light_red;
 
 $contact_link_color: $light_red;
+
 $featured_background_color: $lightest_beige;
 
+$section_highlight_color: $light_beige;
+$mark_highlight: $light_beige;
 
 $jump_to_submit_disabled: $light_red; 
 $jump_to_submit_active: $light_beige;
 $jump_to_submit_active_focus: $mid_beige;
 
-
-$policy_subject_selected_chip_background: $dark_purple; 
 
 $choice-checked-background-color: $dark_purple;
 $choice-checked-border-color: $dark_purple;
@@ -210,13 +216,9 @@ $hover_border_color: $mid_red;
 $table_border_color: $light_gray;
 $formula_left_border: $light_red;
 
-// Text
 
-$primary_text_color: $darkest_gray;
-$secondary_text_color: $darker_gray;
-$tertiary_text_color: $mid_gray;
-$reverse_text_color: $white;
-
+// Chips
+$policy_subject_selected_chip_background: $dark_purple; 
 $policy_subject_selected_chip_text: $white;
 
 // Indicators
