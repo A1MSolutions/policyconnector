@@ -14,7 +14,6 @@ from django.db.models import (
     F,
     FloatField,
     OuterRef,
-    Q,
     Value,
     When,
 )
