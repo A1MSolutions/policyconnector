@@ -79,48 +79,50 @@ export default {
             v-for="(content, index) in limitedContent"
             :key="content.category.name + index"
         >
-            <div class="category-labels">
-                <CategoryLabel :name="content.category.name" type="category" />
-            </div>
-            <SupplementalContentObject
-                :name="content.document_id"
-                :description="content.title"
-                :date="content.date"
-                :url="content.url"
-            />
-            <SubjectChips :subjects="content.subjects" />
-            <!-- Add collapse button if there are valid regulations -->
-            <CollapseButton
-                v-if="hasValidRegulations(content)"
-                :name="getCollapseName(content, index)"
-                state="collapsed"
-                class="related-citations__btn--collapse"
-            >
-                <template #expanded>
-                    Hide Related Regulations
-                    <i class="fa fa-chevron-up" />
-                </template>
-                <template #collapsed>
-                    Show Related Regulations
-                    <i class="fa fa-chevron-down" />
-                </template>
-            </CollapseButton>
-            
-            <!-- Add collapsible section with RelatedSections component -->
-            <Collapsible
-                v-if="hasValidRegulations(content)"
-                :name="getCollapseName(content, index)"
-                state="collapsed"
-                class="collapse-content"
-                overflow
-            >
-                <RelatedSections
-                    :base="homeUrl"
-                    :item="content"
-                    :parts-last-updated="partsLastUpdated"
-                    label="Regulations"
+            <div class="result">
+                <div class="category-labels">
+                    <CategoryLabel :name="content.category.name" type="category" />
+                </div>
+                <SupplementalContentObject
+                    :name="content.document_id"
+                    :description="content.title"
+                    :date="content.date"
+                    :url="content.url"
                 />
-            </Collapsible>
+                <SubjectChips :subjects="content.subjects" />
+                <!-- Add collapse button if there are valid regulations -->
+                <CollapseButton
+                    v-if="hasValidRegulations(content)"
+                    :name="getCollapseName(content, index)"
+                    state="collapsed"
+                    class="related-citations__btn--collapse"
+                >
+                    <template #expanded>
+                        Hide Related Regulations
+                        <i class="fa fa-chevron-up" />
+                    </template>
+                    <template #collapsed>
+                        Show Related Regulations
+                        <i class="fa fa-chevron-down" />
+                    </template>
+                </CollapseButton>
+
+                <!-- Add collapsible section with RelatedSections component -->
+                <Collapsible
+                    v-if="hasValidRegulations(content)"
+                    :name="getCollapseName(content, index)"
+                    state="collapsed"
+                    class="collapse-content"
+                    overflow
+                >
+                    <RelatedSections
+                        :base="homeUrl"
+                        :item="content"
+                        :parts-last-updated="partsLastUpdated"
+                        label="Regulations"
+                    />
+                </Collapsible>
+            </div>
             <div class="spacer" />
         </template>
     </div>
