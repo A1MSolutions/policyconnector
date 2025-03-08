@@ -12,7 +12,7 @@ class CustomUrlContextProcessorTest(TestCase):
         request.META['HTTP_HOST'] = 'policyconnector.digital'
 
         # custom_url the environment variable is set as.
-        settings.CUSTOM_URL = 'regulations-pilot.cms.gov'
+        settings.CUSTOM_URL = 'policyconnector.digital'
 
         context = custom_url(request)
 
@@ -20,10 +20,10 @@ class CustomUrlContextProcessorTest(TestCase):
 
     def test_custom_url_match_request(self):
         request = HttpRequest()
-        request.META['HTTP_HOST'] = 'regulations-pilot.cms.gov'
+        request.META['HTTP_HOST'] = 'policyconnector.digital'
 
-        settings.CUSTOM_URL = 'regulations-pilot.cms.gov'
+        settings.CUSTOM_URL = 'policyconnector.digital'
 
         context = custom_url(request)
 
-        self.assertEqual(context['CUSTOM_URL'], 'regulations-pilot.cms.gov')
+        self.assertEqual(context['CUSTOM_URL'], 'policyconnector.digital')

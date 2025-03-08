@@ -27,10 +27,8 @@ import SearchErrorMsg from "@/components/SearchErrorMsg.vue";
 import SearchInput from "@/components/SearchInput.vue";
 import SubjectsDropdown from "@/components/dropdowns/Subjects.vue";
 
-const accessUrl = inject("accessUrl");
 const adminUrl = inject("adminUrl");
 const apiUrl = inject("apiUrl");
-const customLoginUrl = inject("customLoginUrl");
 const hasEditableJobCode = inject("hasEditableJobCode");
 const homeUrl = inject("homeUrl");
 const isAuthenticated = inject("isAuthenticated");
@@ -382,8 +380,7 @@ getDocsOnLoad();
                         :has-editable-job-code="hasEditableJobCode"
                         :search-query="searchQuery"
                         :selected-subject-parts="selectedSubjectParts"
-                    >
-                    </PolicyResults>
+                    />
                     <div class="pagination-expand-row">
                         <div class="pagination-expand-container">
                             <PaginationController
