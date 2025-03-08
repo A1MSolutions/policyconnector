@@ -32,10 +32,8 @@ import SelectedSubjectHeading from "@/components/subjects/SelectedSubjectHeading
 import SubjectSelector from "@/components/subjects/SubjectSelector.vue";
 import SubjectLanding from "@/components/subjects/SubjectLanding.vue";
 
-const accessUrl = inject("accessUrl");
 const adminUrl = inject("adminUrl");
 const apiUrl = inject("apiUrl");
-const customLoginUrl = inject("customLoginUrl");
 const hasEditableJobCode = inject("hasEditableJobCode");
 const homeUrl = inject("homeUrl");
 const isAuthenticated = inject("isAuthenticated");

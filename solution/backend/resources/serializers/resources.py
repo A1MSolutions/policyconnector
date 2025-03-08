@@ -187,12 +187,12 @@ class ResourceSerializer(serializers.Serializer):
     def get_cfr_citations(self, obj):
         # Get all citations
         citations_data = AbstractCitationSerializer(obj.cfr_citations.all(), many=True).data
-        
+
         # Sort the serialized data
         def sort_key(x):
             title = int(x['title'])
             part = int(x['part'])
-            
+
             # Handle section_id or subpart_id
             if 'subpart_id' in x:
                 # Subpart ID is usually a string (like "A", "B", etc.)
@@ -205,11 +205,11 @@ class ResourceSerializer(serializers.Serializer):
                 return (title, part, 1, section_value)  # 1 to sort sections after subparts
             else:
                 return (title, part, 2, '')  # 2 to put entries without either at the end
-        
+
         sorted_citations = sorted(citations_data, key=sort_key)
-        
+
         return sorted_citations
-    
+
     @extend_schema_field(serializers.ListField(child=serializers.DictField()))
     def get_related_resources(self, obj):
         if self.context.get("show_related", False):
