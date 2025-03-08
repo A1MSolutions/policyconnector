@@ -2,8 +2,11 @@ import warnings
 import re
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 from .extractor import Extractor
+import logging
 
 # Modified by LLM to handle a bunch of special cases
+
+logger = logging.getLogger(__name__)
 
 class MarkupExtractor(Extractor):
     # Expanded file types to include ASP and other common web formats
@@ -14,6 +17,7 @@ class MarkupExtractor(Extractor):
         try:
             content_str = file.decode('utf-8', errors='replace')
         except Exception as e:
+            logger.warning(f"Failed to decode file using utf-8: {str(e)}. Falling back to str(file).")
             content_str = str(file)
 
         # Check if this is likely HTML content regardless of file extension
