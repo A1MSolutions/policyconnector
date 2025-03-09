@@ -32,16 +32,10 @@ const getSubjectClasses = ({ subjectId, subjectQueryParam }) => {
     };
 };
 
-const getFilterResetClasses = ({ filter }) => ({
-    "subjects__filter-reset": true,
-    "subjects__filter-reset--hidden": !filter,
-});
-
 export default {
     getInputContainerClasses,
     getListItemClasses,
     getSubjectClasses,
-    getFilterResetClasses,
     getUnselectedSubjects,
 };
 </script>
@@ -230,37 +224,6 @@ const inputContainerClasses = computed(() =>
 
 const listItemClasses = computed(() => getListItemClasses({ parent }));
 
-const filterResetClasses = computed(() =>
-    getFilterResetClasses({ filter: state.filter })
-);
-
-const filterResetClick = (event) => {
-    event.stopPropagation();
-    state.filter = "";
-};
-
-const inputUpArrowPress = (event) => {
-    if (event.key === "ArrowUp") {
-        const lastSubject = document.querySelector(
-            ".subjects__li:last-child button"
-        );
-
-        if (lastSubject) {
-            lastSubject.focus();
-        }
-    }
-};
-
-const inputDownArrowPress = (event) => {
-    if (event.key === "ArrowDown") {
-        const firstSubject = document.querySelector(".subjects__li");
-
-        if (firstSubject) {
-            firstSubject.querySelector("button").focus();
-        }
-    }
-};
-
 const liUpArrowPress = (event) => {
     if (event.key === "ArrowUp") {
         const currentSubject = event.currentTarget;
@@ -299,26 +262,6 @@ const liDownArrowPress = (event) => {
             </template>
             <template v-else>
                 <div :class="inputContainerClasses">
-                    <!--<form @submit.prevent>
-                        <input
-                            id="subjectReduce"
-                            v-model="state.filter"
-                            :aria-label="placeholder"
-                            :placeholder="placeholder"
-                            type="text"
-                            @keydown.up.prevent="inputUpArrowPress"
-                            @keydown.down.prevent="inputDownArrowPress"
-                        
-                        <button
-                            aria-label="Clear subject list filter"
-                            data-testid="clear-subject-filter"
-                            type="reset"
-                            :class="filterResetClasses"
-                            class="mdi mdi-close"
-                            @keydown.enter="filterResetClick"
-                            @click="filterResetClick"
-                        />
-                    </form>-->
                     <slot
                         name="selection"
                         :selected-subject="
