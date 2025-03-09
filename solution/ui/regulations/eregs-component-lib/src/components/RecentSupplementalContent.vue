@@ -42,17 +42,6 @@ export default {
     computed: {
         limitedContent() {
             return this.supplementalContent.slice(0, this.limit);
-        },
-        hasValidRegulations() {
-            return (item) => {
-                if (!item.cfr_citations || item.cfr_citations.length === 0) {
-                    return false;
-                }
-
-                return item.cfr_citations.some(citation =>
-                    this.partsLastUpdated[citation.part]
-                );
-            };
         }
     },
 
