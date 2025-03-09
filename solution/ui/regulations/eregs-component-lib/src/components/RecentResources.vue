@@ -23,11 +23,7 @@ export default {
             apiUrl: this.apiUrl,
         });
 
-        const subregulatoryGuidance = categoriesResult.results.filter(
-            (cat) => cat.name === "Subregulatory Guidance"
-        )[0];
-
-        // Remove the filtering logic to show all categories
+        // Show all categories on homepage
         this.categories = categoriesResult.results
             .map((cat) => `&categories=${cat.id}`)
             .join("");

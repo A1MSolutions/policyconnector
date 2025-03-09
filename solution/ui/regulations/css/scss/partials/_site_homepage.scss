@@ -688,8 +688,13 @@
         }
 
         .contact-signup__container {
+
+            h2 {
+                margin-top: 0 !important;
+            }
+
             container: contact-signup-container / inline-size;
-            background-color: $reverse_background_lighter;
+            /*background-color: $reverse_background_lighter;*/
             margin-bottom: 20px;
 
             @mixin column-common {
@@ -707,7 +712,7 @@
                         padding: 20px 0;
 
                         &.contact__column {
-                            border-bottom: 1px solid $secondary_border_color;
+                            /*border-bottom: 1px solid $secondary_border_color;*/
                         }
 
                         .column__icon {
@@ -723,11 +728,11 @@
                     flex-direction: row;
 
                     .contact-signup__column {
-                        margin: 20px 0;
-                        padding: 0 20px;
+                        /*margin: 20px 0;
+                        padding: 0 20px;*/
 
                         &.contact__column {
-                            border-right: 1px solid $secondary_border_color;
+                            /*border-right: 1px solid $secondary_border_color;*/
                             flex: 3; 
                         }
                         &.signup__column {
@@ -754,8 +759,8 @@
 
             .contact-signup {
                 display: flex;
-                background-color: $reverse_background_lighter;
-                color: $tertiary_color;
+                /*background-color: $reverse_background_lighter;*/
+                color: $primary_text_color;
 
                 .contact-signup__column {
                     .column__icon {
