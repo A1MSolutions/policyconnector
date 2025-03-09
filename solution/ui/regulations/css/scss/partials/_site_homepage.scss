@@ -688,6 +688,11 @@
         }
 
         .contact-signup__container {
+
+            h2 {
+                margin-top: 0 !important;
+            }
+
             container: contact-signup-container / inline-size;
             /*background-color: $reverse_background_lighter;*/
             margin-bottom: 20px;
