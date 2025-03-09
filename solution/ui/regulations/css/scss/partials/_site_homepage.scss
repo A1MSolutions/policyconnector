@@ -337,21 +337,22 @@
 	    .featured-eos {
             margin-top: 20px;
             margin-bottom: 20px;
-
             display: flex;
-            flex-direction: row; /* This makes boxes go side by side */
+            flex-direction: row;
             gap: 20px;
             width: 100%;
-            
-            /* For mobile/small screens */
-            @media (max-width: 629px) {
-                flex-direction: column;
-            }
-            
-            /* Make each box take equal width */
+
             > .policy-materials {
                 flex: 1;
-                min-width: 250px; /* Prevents boxes from becoming too narrow */
+                min-width: 200px;
+            }
+
+            @media (max-width: 629px) {
+                flex-direction: column;
+                
+                > .policy-materials {
+                    min-width: 100%;
+                }
             }
         }
 
@@ -362,22 +363,31 @@
             background-color: $featured_background_color;
             padding: 14px;
             border-radius: 3px;
-        }
 
-        .eo-text {
-            text-align: center;
-        }
+            .eo-text {
+                text-align: center;
 
-        .eo-text p {
-            margin: 0; /* This removes default paragraph margins */
-            font-size: 90%
-        }
+                p {
+                    margin: 0;
+                    font-size: 90%;
 
-        .eo-identifiers {
-            text-align: center;
-            color: $secondary_text_color;
-            font-size: 90%;
-            font-weight: 600;
+                    a {
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            .eo-identifiers {
+                text-align: center;
+                color: $secondary_text_color;
+                font-size: 90%;
+                font-weight: 600;
+                display: inline-block;
+
+                @media (max-width: 1040px) {
+                    white-space: pre-line;
+                }
+            }
         }
 
         .cta__container {
@@ -458,9 +468,6 @@
                     }
                 }
             }
-
-
-
 
             .cta {
                 display: flex;
