@@ -341,28 +341,17 @@
             flex-direction: row;
             gap: 20px;
             width: 100%;
-            flex-wrap: wrap;
-            
-            @media (max-width: 1040px) {
-                gap: 15px;
-            }
-            
-            @media (max-width: 629px) {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
+
             > .policy-materials {
                 flex: 1;
-                min-width: 300px;
-                max-width: calc(33.33% - 14px);
+                min-width: 200px;
+            }
+
+            @media (max-width: 629px) {
+                flex-direction: column;
                 
-                @media (max-width: 1040px) {
-                    max-width: calc(50% - 8px);
-                }
-                
-                @media (max-width: 629px) {
-                    max-width: 100%;
+                > .policy-materials {
+                    min-width: 100%;
                 }
             }
         }
@@ -393,6 +382,11 @@
                 color: $secondary_text_color;
                 font-size: 90%;
                 font-weight: 600;
+                display: inline-block;
+
+                @media (max-width: 1040px) {
+                    white-space: pre-line;
+                }
             }
         }
 
