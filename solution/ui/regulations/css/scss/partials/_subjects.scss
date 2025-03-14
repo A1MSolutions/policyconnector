@@ -333,8 +333,8 @@
         }
 
         @media (max-width: calc($width-sm - 1px)) {
-            padding-left: var(--spacer-4);
-            padding-right: var(--spacer-4);
+            padding-left: var(--spacer-2);
+            padding-right: var(--spacer-2);
         }
 
         h2 {
