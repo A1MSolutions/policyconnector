@@ -9,11 +9,10 @@ defineProps({
 
 <template>
     <div class="subj-landing__container">
-        <h1>Research Executive Actions</h1>
+        <h1>Find Related Policy</h1>
 
         <p>
-            <strong>Pick an executive order or memo</strong> 
-            to find related guidance, statutes, and prior executive orders.
+            Pick a subject to look up executive orders, guidance, statutes, and more.
         </p>
 
         <span>Or browse by category:</span>

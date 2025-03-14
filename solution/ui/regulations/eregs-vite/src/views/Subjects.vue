@@ -391,7 +391,7 @@ getDocSubjects();
                     </button>
                     <PolicySidebar>
                         <template #title>
-                            <h2>Find Policy</h2>
+                            <h2>Research a Subject</h2>
                         </template>
                         <template #filters>
                             <SubjectSelector

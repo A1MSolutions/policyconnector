@@ -22,6 +22,7 @@ const getStatuteUrl = (sectionNumber) =>
 /*
 Some sections have a letter at the end of the section number, such as 2101a.
 Two sections have a dash in the section number: 3598-1 and 5757-1.
+Some sections are [Repealed], [Renumbered], or [Omitted]. 5591-5594 is non-standard.
 */
 </script>
 
@@ -54,12 +55,11 @@ Two sections have a dash in the section number: 3598-1 and 5757-1.
             <div id="main-content" class="statute__container">
                 <div class="content">
                     <div>
-                        <h1>Statute Reference</h1>
+                        <h1>Look Up Statutes</h1>
 
-                        <h2>Tables for Policy Areas</h2>
+                        <h2>OPM Indexes of Laws and Regulations</h2>
 
-                        <p>OPM provides the following indexes of laws and regulations:</p>
-                        <ul style="font-weight: 600;">
+                        <ul style="padding-bottom:24px">
                             <li>
                                 <a
                                     href="https://www.opm.gov/policy-data-oversight/pay-leave/leave-administration/#url=Reference-Materials"
@@ -112,9 +112,7 @@ Two sections have a dash in the section number: 3598-1 and 5757-1.
                             </li>
                         </ul>
 
-                        <h2>U.S.C. Title 5 — Government Organization and Employees</h2>
-
-                        <h3>Part III — Employees</h3>
+                        <h2>U.S.C. Title 5 — Government Organization and Employees, Part III — Employees</h2>
 
                         <p>
                             This is a table of contents with links to 
@@ -4686,7 +4684,17 @@ Two sections have a dash in the section number: 3598-1 and 5757-1.
                         <h6>Subchapter IX — Severance Pay and Back Pay</h6>
 
                         <ul>
-                            <li><a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title5-section5591&num=0&edition=prelim">5591 to 5594. [Repealed]</a></li>
+                            <li>
+                                <a
+                                    :href="getStatuteUrl('5591')"
+                                    class="external"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <span class="section-number">5591 to 5594.</span>
+                                    [Repealed]
+                                </a>
+                            </li>
                             <li>
                                 <a
                                     :href="getStatuteUrl('5595')"
