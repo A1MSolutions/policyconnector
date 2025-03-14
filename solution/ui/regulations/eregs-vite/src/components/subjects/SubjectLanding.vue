@@ -9,7 +9,7 @@ defineProps({
 
 <template>
     <div class="subj-landing__container">
-        <h1>Find Policy</h1>
+        <h1>Find Related Policy</h1>
 
         <p>
             Pick a subject to look up executive orders, guidance, statutes, and more.
