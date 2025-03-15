@@ -57,6 +57,10 @@ Some sections are [Repealed], [Renumbered], or [Omitted]. 5591-5594 is non-stand
                     <div>
                         <h1>Look Up Statutes</h1>
 
+                        <p>
+                            Quick links to federal employment laws, for convenient reference.
+                        </p>
+
                         <h2>OPM Indexes of Laws and Regulations</h2>
 
                         <ul style="padding-bottom:24px">
@@ -115,16 +119,14 @@ Some sections are [Repealed], [Renumbered], or [Omitted]. 5591-5594 is non-stand
                         <h2>U.S.C. Title 5 — Government Organization and Employees, Part III — Employees</h2>
 
                         <p>
-                            This is a table of contents with links to 
+                            Excerpted from
                             <a 
                                 href="https://uscode.house.gov/browse/prelim@title5&edition=prelim"
                                 class="external"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                5 U.S.C. on the House U.S. Code website
-                            </a>
-                            . Jump to a section using Ctrl+F (or Command+F on a Mac).
+                                5 U.S.C. on the House U.S. Code website</a>.
                         </p>
 
                         <h4>Subpart A — General Provisions</h4>

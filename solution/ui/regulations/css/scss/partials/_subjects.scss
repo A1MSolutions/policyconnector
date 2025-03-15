@@ -439,11 +439,20 @@
             margin-bottom: 0px;
         }
 
+        p {
+            padding-bottom: 0px;
+        }
+
         ul {
-            /*margin-top: 0px;
-            padding-bottom: 0px;*/
-            
-            a { text-decoration: none; }
+            margin-top: 0px;
+            a {
+                text-decoration: none;
+            }
+            li {
+                font-weight: 500;
+                list-style-type: none;
+                margin: 0 0 4px 0;
+            }
         }
     }
 
