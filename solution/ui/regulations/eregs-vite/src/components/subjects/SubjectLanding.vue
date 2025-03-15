@@ -9,9 +9,9 @@ defineProps({
 
 <template>
     <div class="subj-landing__container">
-        <h1>Find Policy</h1>
+        <h1>Find Policy Documents</h1>
 
-        <p>Pick a subject to find related resources, or browse all resources:</p>
+        <p>Pick a subject to find related documents, or browse all:</p>
 
         <ul>
             <li><a href="?categories=4">Statutes</a></li>
