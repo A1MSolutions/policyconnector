@@ -11,11 +11,8 @@ defineProps({
     <div class="subj-landing__container">
         <h1>Find Policy</h1>
 
-        <p>
-            Pick a subject to find executive orders, rules, guidance, statutes, and more.
-        </p>
+        <p>Pick a subject to find related resources, or browse all resources:</p>
 
-        <span>Or browse by category:</span>
         <ul>
             <li><a href="?categories=4">Statutes</a></li>
             <li><a href="?categories=9">Court Cases</a></li>
