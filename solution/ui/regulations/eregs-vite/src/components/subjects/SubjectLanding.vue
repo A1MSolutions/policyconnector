@@ -9,26 +9,67 @@ defineProps({
 
 <template>
     <div class="subj-landing__container">
-        <h1>Find Policy Documents</h1>
+        <h1>Find Policy Related to a Subject</h1>
 
-        <p>Pick a subject to find related documents.</p>
+        <p>Select a subject to look up executive orders, subregulatory guidance, court cases, rules, and more.</p>
 
-        <h3>Browse All Documents</h3>
+        <h3>OPM Indexes of Laws and Regulations</h3>
+
+        <span>
+            Find legal authorities:
+        </span>
+
         <ul>
-            <li><a href="?categories=4">Statutes</a></li>
-            <li><a href="?categories=9">Court Cases</a></li>
-            <li><a href="?categories=1">Proposed and Final Rules</a></li>
-            <li><a href="?categories=5">Executive Orders and Memos</a></li>
-            <li><a href="?categories=22">Presidential Statements</a></li>
-            <li><a href="?categories=11">OPM Memos</a></li>
-            <li><a href="?categories=10">OPM Publications</a></li>
-            <li><a href="?categories=16">Equal Employment Opportunity Commission Publications</a></li>
-            <li><a href="?categories=13">Merit Systems Protection Board Publications</a></li>
-            <li><a href="?categories=17">OMB Memos and Publications</a></li>
-            <li><a href="?categories=20">Office of Special Counsel Documents</a></li>
-            <li><a href="?categories=3">GAO Reports</a></li>
-            <li><a href="?categories=2">Congressional Research Service Reports</a></li>
-            <li><a href="?categories=15">Other Agency Publications</a></li>
+            <li>
+                <a
+                    href="https://www.opm.gov/policy-data-oversight/pay-leave/leave-administration/#url=Reference-Materials"
+                    class="external"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Leave
+                </a>
+            </li>
+            <li>
+                <a
+                    href="https://www.opm.gov/policy-data-oversight/pay-leave/pay-administration/fact-sheets/laws-regulations-and-other-references-related-to-pay-administration/"
+                    class="external"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Pay Administration
+                </a>
+            </li>
+            <li>
+                <a
+                    href="https://www.opm.gov/policy-data-oversight/performance-management/legal-citations/"
+                    class="external"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Performance Management
+                </a>
+            </li>
+            <li>
+                <a
+                    href="https://www.opm.gov/policy-data-oversight/senior-executive-service/ses-desk-guide/statutes-regulations-and-desk-guide-citations/"
+                    class="external"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Senior Executive Service
+                </a>
+            </li>
+            <li>
+                <a
+                    href="https://www.opm.gov/wiki/training/Training-Administration-Fast-Facts-Index.ashx"
+                    class="external"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Training and Development
+                </a>
+            </li>
         </ul>
     </div>
 </template>

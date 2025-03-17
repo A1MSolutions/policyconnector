@@ -58,68 +58,7 @@ Some sections are [Repealed], [Renumbered], or [Omitted]. 5591-5594 is non-stand
                         <h1>Look Up Statutes</h1>
 
                         <p>
-                            Quick links to federal employment laws, for convenient reference.
-                        </p>
-
-                        <h2>OPM Indexes of Laws and Regulations</h2>
-
-                        <ul style="padding-bottom:24px">
-                            <li>
-                                <a
-                                    href="https://www.opm.gov/policy-data-oversight/pay-leave/leave-administration/#url=Reference-Materials"
-                                    class="external"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Leave
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="https://www.opm.gov/policy-data-oversight/pay-leave/pay-administration/fact-sheets/laws-regulations-and-other-references-related-to-pay-administration/"
-                                    class="external"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Pay Administration
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="https://www.opm.gov/policy-data-oversight/performance-management/legal-citations/"
-                                    class="external"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Performance Management
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="https://www.opm.gov/policy-data-oversight/senior-executive-service/ses-desk-guide/statutes-regulations-and-desk-guide-citations/"
-                                    class="external"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Senior Executive Service
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="https://www.opm.gov/wiki/training/Training-Administration-Fast-Facts-Index.ashx"
-                                    class="external"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Training and Development
-                                </a>
-                            </li>
-                        </ul>
-
-                        <h2>U.S.C. Title 5 — Government Organization and Employees, Part III — Employees</h2>
-
-                        <p>
-                            Excerpted from
+                            Quick links to relevant laws from
                             <a 
                                 href="https://uscode.house.gov/browse/prelim@title5&edition=prelim"
                                 class="external"
@@ -128,6 +67,12 @@ Some sections are [Repealed], [Renumbered], or [Omitted]. 5591-5594 is non-stand
                             >
                                 5 U.S.C. on the House U.S. Code website</a>.
                         </p>
+
+                        <h2>U.S.C. Title 5 — Government Organization and Employees</h2>
+
+                        <h3>
+                            Part III — Employees
+                        </h3>
 
                         <h4>Subpart A — General Provisions</h4>
 
