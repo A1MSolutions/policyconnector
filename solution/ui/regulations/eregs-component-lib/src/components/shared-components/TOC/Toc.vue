@@ -22,15 +22,15 @@ const titleLabel = computed(() =>
     )
 );
 
-const directChildren = computed(() =>
-    props.structure.children.filter(
+const directChild = computed(() =>
+    props.structure.children.find(
         (child) => child.type === "chapter" || child.type === "subtitle"
     )
 );
 
 const titleSubheading = computed(() =>
-    directChildren.value.length > 0
-        ? `${directChildren.value[0].label_level} - ${directChildren.value[0].label_description}`.replace(
+    directChild.value
+        ? `${directChild.value.label_level} - ${directChild.value.label_description}`.replace(
             /&amp;/g,
             "&"
         )
@@ -42,14 +42,9 @@ const titleSubheading = computed(() =>
     <div class="toc__container--inner">
         <TocTitle :title="titleLabel" :subheading="titleSubheading" />
         <TocSubchapter
-            v-for="chapter in directChildren"
-            :key="chapter.label_level"
-        >
-            <TocSubchapter
-                v-for="subchapter in chapter.children"
-                :key="subchapter.label_level"
-                :subchapter="subchapter"
-            />
-        </TocSubchapter>
+            v-for="subchapter in directChild.children"
+            :key="subchapter.label_lebel"
+            :subchapter="subchapter"
+        />
     </div>
 </template>
