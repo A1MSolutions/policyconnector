@@ -16,7 +16,7 @@ defineProps({
         <h3>OPM Indexes of Laws and Regulations</h3>
 
         <span>
-            Find legal authorities:
+            Another way to find legal authorities and related materials:
         </span>
 
         <ul>
