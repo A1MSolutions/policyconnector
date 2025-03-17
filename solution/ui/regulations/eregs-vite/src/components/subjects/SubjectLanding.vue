@@ -11,8 +11,9 @@ defineProps({
     <div class="subj-landing__container">
         <h1>Find Policy Documents</h1>
 
-        <p>Pick a subject to find related documents, or browse all:</p>
+        <p>Pick a subject to find related documents.</p>
 
+        <h3>Browse All Documents</h3>
         <ul>
             <li><a href="?categories=4">Statutes</a></li>
             <li><a href="?categories=9">Court Cases</a></li>
