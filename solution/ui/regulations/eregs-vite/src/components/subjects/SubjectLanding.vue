@@ -11,12 +11,12 @@ defineProps({
     <div class="subj-landing__container">
         <h1>Find Policy Related to a Subject</h1>
 
-        <p>Pick a subject to look up executive orders, subregulatory guidance, court cases, rules, and more.</p>
+        <p>Select a subject to look up executive orders, subregulatory guidance, court cases, rules, and more.</p>
 
         <h3>OPM Indexes of Laws and Regulations</h3>
 
         <span>
-            Find legal authorities for a subject:
+            Find legal authorities:
         </span>
 
         <ul>
