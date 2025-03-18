@@ -12,11 +12,7 @@
 
     main {
         display: flex;
-        flex-direction: row;
-
-        @media (max-width: $eds-xs-max) {
-            flex-direction: column;
-        }
+        flex-direction: column;
 
         .link-btn { //find related policy
             @include link-common;
@@ -50,11 +46,43 @@
         }
     }
 
+    /* New side-by-side layout container */
+    .main-content-wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        /* Stack vertically on mobile */
+        @media (max-width: $eds-xs-max) {
+            flex-direction: column;
+        }
+    }
+
+    /* Left side container */
+    .regulation-navigation {
+        display: flex;
+        flex-shrink: 0;
+
+        @media (max-width: $eds-xs-max) {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+
+    /* Right side container */
+    .content-section {
+        flex: 1;
+
+        @media (max-width: $eds-xs-max) {
+            padding-left: 0;
+        }
+    }
+
     nav {
         position: relative;
         color: $secondary_text_color;
         background-color: $secondary_background_color;
-        border-right: 1px solid $border_color;
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
 
         @mixin hover-background {
             &:hover,
@@ -692,6 +720,8 @@
 
         .value-proposition {
             background-color: $featured_background_color;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
             h2 {
                 margin-top: 0 !important;
                 margin-bottom: 0.5em !important;
@@ -704,7 +734,6 @@
             a {
                 text-decoration: none;
             }
-
         }
     }
 }

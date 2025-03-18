@@ -130,6 +130,9 @@ header {
             &--second {
                 height: 48px;
                 background: $tertiary_color;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+                position: relative;
+                z-index: 10;
             }
         }
 
