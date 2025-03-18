@@ -120,7 +120,7 @@ const btnAriaLabel = computed(() =>
                     btnIcon
                 }}
             </v-icon>
-            <span v-if="!navOpen" class="nav-toggle__button--label">Read<br/>Regulations</span>
+            <span v-if="!navOpen" class="nav-toggle__button--label">Read <br/>Regulations</span>
         </v-btn>
         <div v-show="navOpen">
             <slot name="nav-contents" />

@@ -135,6 +135,12 @@
             left: 5px;
             display: flex;
             align-items: center;
+
+            @media (max-width: $eds-xs-max) {
+                br {
+                    display: none;
+                }
+            }
         }
 
         .nav-toggle__button {
