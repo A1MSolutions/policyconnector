@@ -101,8 +101,8 @@
         }
 
         &.closed {
-            width: 75px;
-            min-width: 75px;
+            width: 114px;
+            min-width: 114px;
 
             @media (max-width: $eds-xs-max) {
                 width: 100%;
@@ -114,9 +114,9 @@
             min-height: 10px;
 
             @media (min-width: $eds-width-sm) {
-                width: 75px;
-                min-width: 75px;
-                max-width: 75px;
+                width: 114px;
+                min-width: 114px;
+                max-width: 114px;
             }
 
             @media (min-width: $eds-width-md) {
@@ -126,10 +126,26 @@
             }
         }
 
+        &.open .nav-toggle__button {
+            right: 8px;
+        }
+
+        &.closed .nav-toggle__button {
+            right: auto;
+            left: 5px;
+            display: flex;
+            align-items: center;
+
+            @media (max-width: $eds-xs-max) {
+                br {
+                    display: none;
+                }
+            }
+        }
+
         .nav-toggle__button {
             position: absolute;
             top: 8px;
-            right: 8px;
             cursor: pointer;
             border: none;
             border-radius: 4px;
@@ -139,8 +155,8 @@
 
             &.icon-only {
                 background-color: $secondary_background_color;
-                height: 18px;
-                width: 18px;
+                height: auto;
+                width: auto;
 
                 @media (max-width: $eds-xs-max) {
                     position: absolute;
@@ -153,6 +169,7 @@
                 }
 
                 i {
+                    align-self: flex-start;
                     background-color: $secondary_background_color;
                     border-radius: 4px;
                     font-size: 18px;
@@ -191,6 +208,10 @@
                 font-weight: 700;
                 text-transform: capitalize;
                 letter-spacing: normal;
+                text-align: left;
+                display: inline-block;
+                line-height: 1.2;
+                padding-left: 4px;
 
                 @media (max-width: $eds-xs-max) {
                     font-size: 16px;
@@ -694,6 +715,13 @@
             }
         }
 
+        .value-proposition {
+
+            h2 {
+                margin-top: 0 !important;
+            }
+
+        }
         .contact-signup__container {
 
             h2 {

@@ -51,8 +51,8 @@ const btnHoverClasses = computed(() => ({
 }));
 
 // Nav open or closed to start
-const explicitOpen = ref(windowWidth.value >= 1024);
-const responsiveOpen = computed(() => windowWidth.value >= 1024);
+const explicitOpen = ref(windowWidth.value >= 2048);
+const responsiveOpen = computed(() => windowWidth.value >= 2048);
 
 const userHasClicked = ref(false);
 
@@ -120,7 +120,7 @@ const btnAriaLabel = computed(() =>
                     btnIcon
                 }}
             </v-icon>
-            <span v-if="!navOpen" class="nav-toggle__button--label">Menu</span>
+            <span v-if="!navOpen" class="nav-toggle__button--label">Read <br/>Regulations</span>
         </v-btn>
         <div v-show="navOpen">
             <slot name="nav-contents" />

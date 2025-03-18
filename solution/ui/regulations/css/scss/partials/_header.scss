@@ -135,12 +135,26 @@ header {
 
         .header--brand {
             display: flex;
-            align-items: center;
+            align-items: baseline;
 
             @include header--brand-type;
 
             a {
                 @include header__anchor--bold;
+                display: inline-block;
+                padding-right: 7px;
+
+                br {
+                    @include custom-min(calc($eds-width-sm / 1px)) {
+                        display: none;
+                    }
+                }
+            }
+            
+            .subtext {
+                font-size: var(--font-size-sm);
+                color: $secondary_text_color;
+                display: inline-block;
 
                 br {
                     @include custom-min(calc($eds-width-sm / 1px)) {

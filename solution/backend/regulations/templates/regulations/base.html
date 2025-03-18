@@ -48,6 +48,10 @@ CSS/Javascript etc., should inherit from this template.
             <div id="app-container">
                 {% block pre_header %}{% endblock %}
 
+                {% block flash_banner %}
+                    {% include "regulations/partials/flash_banner.html" %}
+                {% endblock %}
+
                 {% block header %}
                 {% endblock %}
 
