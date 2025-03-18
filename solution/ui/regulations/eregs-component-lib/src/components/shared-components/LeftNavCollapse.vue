@@ -51,8 +51,8 @@ const btnHoverClasses = computed(() => ({
 }));
 
 // Nav open or closed to start
-const explicitOpen = ref(windowWidth.value >= 2048);
-const responsiveOpen = computed(() => windowWidth.value >= 2048);
+const explicitOpen = ref(windowWidth.value >= 1024);
+const responsiveOpen = computed(() => windowWidth.value >= 1024);
 
 const userHasClicked = ref(false);
 
