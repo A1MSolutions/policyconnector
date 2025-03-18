@@ -5,10 +5,10 @@
             class="link-btn"
             @click="clickHandler"
         >
-            <span class="bold">View {{ section }} Resources</span> ({{ count }})
+            <span class="bold">View {{ section }} Documents</span> ({{ count }})
         </button>
         <div v-else class="bold disabled">
-            No resources for {{ section }}.
+            No documents for {{ section }}.
         </div>
     </div>
     <div
@@ -21,11 +21,11 @@
             class="btn"
             @click="clickHandler"
         >
-            <span class="bold">View {{ section }} resources</span>
+            <span class="bold">View {{ section }} Documents</span>
             <span class="count"> ({{ count }})</span>
         </button>
         <button v-else class="btn disabled">
-            <span class="bold">{{ section }} Resources</span>
+            <span class="bold">{{ section }} Documents</span>
             <span class="count"> (0)</span>
         </button>
     </div>

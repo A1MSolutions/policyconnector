@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 id="subpart-resources-heading">
-            {{ activePart }} Resources
+            {{ activePart }} Documents
         </h1>
         <slot name="login-banner" />
         <slot name="public-label" />
