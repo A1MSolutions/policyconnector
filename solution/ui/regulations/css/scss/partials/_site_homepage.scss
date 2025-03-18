@@ -54,6 +54,7 @@
         position: relative;
         color: $secondary_text_color;
         background-color: $secondary_background_color;
+        border-right: 1px solid $border_color;
 
         @mixin hover-background {
             &:hover,
