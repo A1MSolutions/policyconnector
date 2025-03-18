@@ -338,20 +338,31 @@
 
         .top-container {
             width: 100%;
-            margin: 0 auto;
-            padding: var(--spacer-1-5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: calc(var(--spacer-1-5) * 0.5) var(--spacer-1-5);
             box-sizing: border-box;
 
-            @include screen-lg {
-                padding: 40px;
-            }
-
-            @include screen-xl {
+            > * {
+                width: 100%;
                 max-width: var(--media-width-xl);
             }
 
+            @include screen-lg {
+                padding: 20px 40px;
+            }
+
+            @include screen-xl {
+                > * {
+                    max-width: var(--media-width-xl);
+                }
+            }
+
             @include screen-xxl {
-                max-width: $width-xxl;
+                > * {
+                    max-width: $width-xxl;
+                }
             }
         }
         
@@ -377,6 +388,11 @@
             }
         }
 
+        h3 {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
         .featured-materials {
             display: flex;
             flex-direction: column;
@@ -390,11 +406,6 @@
             &.interactive {
                 background-color: $main_background_color;
             }
-
-            h3 {
-              margin-top: 0;
-            }
-
             .eo-text {
                 text-align: center;
 
@@ -680,8 +691,6 @@
 
         .value-proposition {
             background-color: $featured_background_color;
-            padding-top: 30px;
-
             h2 {
                 margin-top: 0 !important;
                 margin-bottom: 0.5em !important;
