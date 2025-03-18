@@ -716,9 +716,12 @@
         }
 
         .value-proposition {
+            background-color: $featured_background_color;
+            padding-top: 30px;
 
             h2 {
                 margin-top: 0 !important;
+                margin-bottom: 0.5em !important;
             }
 
         }
