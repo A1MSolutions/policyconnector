@@ -131,7 +131,7 @@ const onPopState = (event) => {
 
 const makeLabel = ({ type }) => {
     return `${DOCUMENT_TYPES_MAP[type]}${
-        type !== "regulations" ? " Resources" : ""
+        type !== "regulations" ? " Documents" : ""
     }`;
 };
 

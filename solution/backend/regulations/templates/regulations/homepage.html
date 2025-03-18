@@ -19,9 +19,9 @@
     <div id="main-content">
         <!-- Value proposition section at the top -->
         <div class="top-container value-proposition">
-            <div class="">
+            <div>
                 <h2>An easier way to navigate policy information</h2>
-                <p>
+                <p class="value-proposition__text">
                     Statute, regulations, and guidance in one place. Find what you need and discover how policies relate to each other.
                     Using real federal employment policy as a live example, <strong><a class="contact" href="{% url 'about' %}" >see how Policy Connector works →</a></strong>
                 </p>
@@ -52,12 +52,12 @@
                 <div class="featured-materials interactive">
                     <h3>One search, all sources</h3>
                     <div class="featured-materials__text">
-                        <p>Is something in statute, regulation, or guidance? What cited an executive order or statute? Search everything. <em>Try it</em>:</p>
+                        <p>Is something in statute, regulation, or guidance? What documents have cited an executive order? Search everything. <em>Try it</em>:</p>
                         <ul>
                             <li><a href="/search/?q=probationary+termination">probationary termination</a></li>
                             <li><a href="/search?q=adverse+action+due+process">adverse action due process</a></li>
                             <li><a href='/search?q="back+pay"'>back pay</a></li>
-                            <li><a href="/search?q=prohibited+discrimination">prohibited discrimination</a></li>
+                            <!-- <li><a href="/search?q=prohibited+discrimination">prohibited discrimination</a></li> -->
                             <li><a href="/search?q=11246">Executive Order 11246</a></li>
                         </ul>
                     </div>
@@ -80,10 +80,9 @@
                 </left-nav-collapse>
             </div>
 
-            <!-- Right side: Featured Subjects and other content -->
             <div class="content-section">
                 <div class="top-container">
-                    <h3>Featured Subjects</h3>
+                    <h3>Featured Documents</h3>
                     <div class="featured">
                         <div class="featured-materials">
                             <div class="featured-materials__categories--parent">

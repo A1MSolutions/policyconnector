@@ -99,7 +99,7 @@ header {
         }
 
         @mixin header--brand-type {
-            font-size: var(--font-size-lg);
+            font-size: var(--font-size-xl);
             line-height: 36px;
 
             @include custom-max(calc((calc($eds-width-sm - 1px)) / 1px)) {

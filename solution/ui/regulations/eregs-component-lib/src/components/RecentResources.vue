@@ -61,7 +61,7 @@ export default {
     <div>
         <v-tabs v-model="tab" grow>
             <v-tab class="content-tabs" tabindex="0">
-                Recent Resources
+                Recent Documents
             </v-tab>
             <v-tab class="content-tabs" tabindex="0">
                 Recent Rules

@@ -7123,9 +7123,6 @@ Some sections are [Repealed], [Renumbered], or [Omitted]. 5591-5594 is non-stand
                                     Definitions
                                 </a>
                             </li>
-                        </ul>
-
-                        <ul>
                             <li>
                                 <a
                                     :href="getStatuteUrl('7502')"
