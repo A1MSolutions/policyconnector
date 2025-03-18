@@ -111,18 +111,18 @@ $mark_highlight: #fce5af;
 
 // Base Colors - Policy Connector
 $mid_red: #782312;  /*top nav and popup border */
-$light_red: #FFEAEA;  /*doc slug background for policy repository*/
+$light_red: #FAFAFA;  /*doc slug background for policy repository*/
 
 $mid_beige: #D5BB9D; /*reg borders*/
 $light_beige: #F6EFE9; /*reg slug background & jump button*/
-$lightest_beige: #FAFAFA; /*featured background*/
+$lightest_beige: #F6EFE9; /*featured background*/
 
 $dark_blue: #07648D; /*main text link*/ 
-$darker_blue: #1A4480; /*side link and button background*/
+$darker_blue: #7B7792; /*side link and button background*/
 
-$darkest_purple: #222660; /*button hover and policy repository slug*/
-$dark_purple: #5e519e; /*visited link*/
-$light_purple: #C5C5F3; /*guidance label background and reverse link text*/
+$darkest_purple: #8b0a03; /*button hover and policy repository slug*/
+$dark_purple: #534891; /*visited link*/
+$light_purple: #DCDAEA; /*guidance label background and reverse link text*/
 
 $darkest_gray: #1B1B1B; /*base text*/
 $darker_gray: #5B616B; /*public and internal slug*/
@@ -240,7 +240,7 @@ $tertiary_indicator_background: $white;
 
 // Buttons
 
-$main_button_background: $dark_purple;
+$main_button_background: $darkest_purple;
 $main_button_color: $white;
 $main_button_hover: $light_purple; 
 $main_button_hover_background: $darker_blue;
