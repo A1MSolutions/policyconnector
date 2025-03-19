@@ -424,6 +424,9 @@
         .featured-materials {
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            min-height: 100px;
+            box-sizing: border-box;
             align-items: center;
             background-color: $featured_background_color;
             padding: 14px;
@@ -564,7 +567,7 @@
 
                             .v-tab__slider {
                                 height: 3px;
-                                background-color: $secondary_background_color;
+                                background-color: $reverse_background_color;
                             }
                         }
                     }

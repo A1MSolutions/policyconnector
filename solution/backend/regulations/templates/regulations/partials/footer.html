@@ -13,12 +13,6 @@
     </div>-->
     <div class="footer-middle match-middle">
         <h4>Limitations</h4>
-        <!--<p>
-            This tool is an unofficial compilation of publicly available materials provided for informational purposes only.
-            Not comprehensive or error-free; please verify information with original sources.
-            Additional relevant and up-to-date policy information is available from official government websites.
-            This independent project is not supported by or affiliated with any government agency.
-        </p>-->
         <p>
             This demo version of Policy Connector is an unofficial compilation of materials published by government organizations.
             It is provided for informational purposes only and is not comprehensive or error-free — it is a work in progress.
@@ -30,28 +24,23 @@
         </p>
     </div>
     <div class="footer-right match-sides">
-        <!--<h4 class="ds-text-heading--md last-update-footer">
-            Regulations up to date from <a href="https://www.ecfr.gov" target="_blank" rel="noopener noreferrer" class="external">
-                eCFR
-            </a> as of
-                {% if spa_footer %}
-                    <span class="last-updated-date">{{parser_last_success|parser_success_date_formatter}}</span>.
-                {% else %}
-                    <span class="last-updated-date">
-                        <last-parser-success-date api-url={{ API_BASE }} ></last-parser-success-date>
-                    </span>.
-                {% endif %}
-        </h4>-->
         <div class="about-footer">
-            <h4><a href="{% url 'about' %}">About Policy Connector and A1M Solutions</a></h4>
+            <a
+                href="https://www.a1msolutions.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <img src="{% static 'images/a1m_logo_horizontal_full_color.svg' %}" alt="A1M logo" />
+            </a>
+            <h5>
+                <a
+                    href="https://www.a1msolutions.com/hire-us"
+                    class="external"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Get in touch</a>
+            </h5>
         </div>
     </div>
-</div>
-
-<div class="print-footer">
-    <em>
-        Regulations up to date from <a href="https://www.ecfr.gov" target="_blank" rel="noopener noreferrer" class="external">eCFR</a> as of <span class="last-updated-date-print">
-            <last-parser-success-date api-url={{ API_BASE }} ></last-parser-success-date>
-        </span>.
-    </em>
 </div>

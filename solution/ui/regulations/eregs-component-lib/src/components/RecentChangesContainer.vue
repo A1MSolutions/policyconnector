@@ -66,7 +66,7 @@ export default {
         async getRules(catsObj = {}) {
             const args = {
                 page: 1,
-                pageSize: 10,
+                pageSize: 12,
                 type: this.type,
                 ...catsObj,
             };
@@ -98,7 +98,7 @@ export default {
             :supplemental-content="rules"
             :parts-last-updated="partsLastUpdated"
             :home-url="homeUrl"
-            :limit="10"
+            :limit="12"
         />
     </div>
 </template>
