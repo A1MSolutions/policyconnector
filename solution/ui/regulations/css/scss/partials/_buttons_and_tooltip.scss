@@ -129,7 +129,7 @@
         flex-direction: column;
         align-items: flex-start;
 
-        .close-btn {
+        .close-btn { /* this is for things like the close button on the regulation history box */
             cursor: pointer;
             position: absolute;
             top: 0;
@@ -138,14 +138,14 @@
             width: 40px;
 
             path {
-                stroke: $primary_color;
-                fill: $primary_color;
+                stroke: $primary_link_color;
+                fill: $primary_link_color;
             }
 
             &:hover {
                 path {
-                    stroke: $darkest_purple;
-                    fill: $darkest_purple;
+                    stroke: $primary_link_hover;
+                    fill: $primary_link_hover;
                 }
             }
         }

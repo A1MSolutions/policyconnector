@@ -14,7 +14,7 @@ const isLoginPage = window.location.pathname.includes("login");
         <div class="header__row header__row--first">
             <div class="header--brand">
                 <a :href="homeUrl">Policy <br>Connector</a>
-                <span class="recent-flag indicator">DEMO</span>
+                <span class="indicator">DEMO</span>
                 <span class="subtext">Federal <br>Employment</span>
             </div>
             <div class="header--search">

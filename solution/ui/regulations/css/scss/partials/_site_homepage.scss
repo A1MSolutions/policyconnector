@@ -30,9 +30,8 @@
 
         a.contact { //link to about pages
             @include link-common;
-            text-decoration: underline;
-
-            color: $tertiary_color;
+            font-weight: 600;
+            color: $accent_color;
 
             &:link::after {
                 filter: brightness(0.02) invert(1);
@@ -341,7 +340,7 @@
                         .toc-part__label {
                             font-size: 16px;
                             line-height: 24px;
-                            color: $secondary_text_color;
+                            color: $secondary_link_color;
                             padding: 6px 12px;
 
                             &--bold {
@@ -434,6 +433,10 @@
 
             &.interactive {
                 background-color: $main_background_color;
+
+                h3 {
+                    color: $tertiary_color;
+                }
             }
             .eo-text {
                 text-align: center;
@@ -450,7 +453,7 @@
 
             .eo-identifiers {
                 text-align: center;
-                color: $secondary_text_color;
+                color: $primary_text_color;
                 font-size: 90%;
                 font-weight: 600;
                 display: inline-block;
@@ -568,13 +571,6 @@
 
                     .category-labels {
                         margin-bottom: 0px;
-
-                        .result-label {
-                            &.category-label {
-                                font-weight: 400;
-                                background-color: $teritary_background_color;
-                            }
-                        }
                     }
 
                     .recent-rules-descriptive-text {
@@ -740,4 +736,16 @@
             }
         }
     }
+}
+
+/* Custom list style with Font Awesome carets */
+.featured-materials__text ul {
+  list-style: none;
+  padding-left: .3em;
+  margin-left: .3em;
+}
+
+.featured-materials__text ul li .fa {
+  margin-right: .4em;
+  color: $tertiary_text_color;
 }

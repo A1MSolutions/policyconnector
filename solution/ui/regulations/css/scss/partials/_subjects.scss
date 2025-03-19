@@ -8,14 +8,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $policy_subject_close_background;
-    color: $policy_subject_selected_chip_background;
+    color: $main_button_background;
     border-radius: 4px;
 
     &:hover,
     &:focus,
     &:active {
-        background-color: $policy_subject_close_background_hover;
+        background-color: $main_button_hover_background;
+        color: $main_button_color;
     }
 
     i {
@@ -444,6 +444,10 @@
         }
 
         ul {
+            list-style: none;
+            padding-left: .3em;
+            margin-left: .3em;
+
             a {
                 text-decoration: none;
             }
@@ -451,6 +455,11 @@
                 font-weight: 500;
                 list-style-type: none;
                 margin: 0 0 4px 0;
+
+                .fa {
+                    margin-right: .4em;
+                    color: $tertiary_text_color;
+                }
             }
         }
     }
@@ -586,8 +595,8 @@
         padding: 2px 8px;
 
         &:hover,
-        &:focus {
-            color: $main_button_hover;
+        &:focus { /* active state for subject chips */
+            color: $main_button_color;
             background-color: $main_button_hover_background;
         }
     }
