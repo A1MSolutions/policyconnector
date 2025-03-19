@@ -90,7 +90,7 @@ aside.left-sidebar {
     .subpart-name {
         font-size: var(--font-size-sm);
         font-weight: normal;
-        color: $secondary_text_color;
+        color: $primary_text_color;
         padding-right: var(--spacer-4);
     }
 
@@ -111,7 +111,7 @@ aside.left-sidebar {
     }
 
     .toc-section-name {
-        color: $secondary_text_color;
+        color: $primary_text_color;
         font-weight: normal;
         font-size: var(--font-size-sm);
     }
@@ -157,7 +157,7 @@ aside.left-sidebar {
                 background: $secondary_background_active;
 
                 .subpart-info {
-                    color: $secondary_text_color;
+                    color: $primary_text_color;
                 }
             }
 
@@ -240,7 +240,7 @@ aside.left-sidebar {
     border-bottom: 1px solid $tertiary_border_color;
     margin: 25px 40px 16px 32px;
     padding-bottom: 16px;
-    color: $secondary_text_color;
+    color: $primary_text_color;
 
     .toc-subchapter {
         font-size: 14px;
