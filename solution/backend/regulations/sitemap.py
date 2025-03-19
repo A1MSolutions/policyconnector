@@ -32,7 +32,7 @@ class PartSitemap(Sitemap):
 
     def items(self):
         date = datetime.now()
-        title = 42
+        title = 5
         query = Part.objects.filter(title=title).filter(date__lte=date).order_by("name", "-date").distinct("name")
         results = []
         for p in query:
