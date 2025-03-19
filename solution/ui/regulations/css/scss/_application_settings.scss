@@ -110,19 +110,21 @@ $mark_highlight: #fce5af;
 ------------------------------------------------*/
 
 // Base Colors - Policy Connector
-$mid_red: #782312;  /*top nav and popup border */
-$light_red: #FAFAFA;  /*doc slug background for policy repository*/
+$mid_red: #782312;  /*top nav; logged-in menu background. updated 3/18/25. */
+$between_red: #BC1C16; /* brand, certain links */
+$light_red: #FFEAEA;  /*doc slug background for policy repository*/
 
 $mid_beige: #D5BB9D; /*reg borders*/
-$light_beige: #F6EFE9; /*reg slug background & jump button*/
-$lightest_beige: #F6EFE9; /*featured background*/
+$light_beige: #F2E4D4; /*reg slug background & jump button; category labels*/
+$lightest_beige: #f6efe9; /*featured background; FR labels */
 
 $dark_blue: #07648D; /*main text link*/ 
-$darker_blue: #7B7792; /*side link and button background*/
+$darker_blue: #1A4480; /*side link and button background*/
 
-$darkest_purple: #8b0a03; /*button hover and policy repository slug*/
+/*$darkest_purple: #222660; button hover and policy repository slug*/
 $dark_purple: #534891; /*visited link*/
-$light_purple: #DCDAEA; /*guidance label background and reverse link text*/
+$light_purple: #7B7792; /*button hover and policy repository slug*/
+$lightest_purple: #DCDAEA; /*subject background*/
 
 $darkest_gray: #1B1B1B; /*base text*/
 $darker_gray: #5B616B; /*public and internal slug*/
@@ -143,7 +145,7 @@ $green: #2a7a3b;
 $primary_color: $dark_blue;
 $secondary_color: $light_beige;
 $tertiary_color: $mid_red; 
-
+$accent_color: $between_red;
 
 // Text
 
@@ -157,13 +159,13 @@ $reverse_text_color: $white;
 
 $primary_link_color: $dark_blue;
 $primary_link_hover: $dark_purple;
-$visited_link_color: $darkest_purple; 
+$visited_link_color: $dark_purple; 
 
 $secondary_link_color: $darker_blue;
-$secondary_link_hover: $darkest_purple;
+$secondary_link_hover: $light_purple;
 
 $teritary_link_color: $darker_blue;
-$teritary_link_hover: $darkest_purple;
+$teritary_link_hover: $light_purple;
 
 $reverse_link_color: $white;
 $reverse_link_hover: $light_purple;
@@ -182,15 +184,15 @@ $placeholder_color: $mid_gray;
 $main_background_color: $white;
 $secondary_background_color: $lightest_gray;
 $secondary_background_active: $light_gray;
-$teritary_background_color: $light_purple;
+$teritary_background_color: $lightest_beige;
 $reverse_background_color: $mid_red;
 $reverse_background_darker: $dark_purple;
 $reverse_background_lighter: $light_beige;
 $table_header_background_color: $light_gray;
 
 $hero_background_color: $mid_red; 
-$hero_link_color: $white; 
-$hero_link_hover: $light_red;
+/*$hero_link_color: $white;
+$hero_link_hover: $light_red; not used */
 
 $contact_link_color: $light_red;
 
@@ -223,13 +225,13 @@ $policy_subject_selected_chip_text: $white;
 
 // Indicators
 
-$primary_indicator_background: $light_beige;
+$primary_indicator_background: $lightest_beige;
 $primary_indicator_text: $darkest_gray;
 
-$secondary_indicator_background: $light_beige;
+$secondary_indicator_background: $lightest_beige;
 $secondary_indicator_text: $darkest_gray;
 
-$tertiary_indicator_background: $white;
+$tertiary_indicator_background: $lightest_beige;
 
 // Formulae
 
@@ -240,7 +242,7 @@ $tertiary_indicator_background: $white;
 
 // Buttons
 
-$main_button_background: $darkest_purple;
+$main_button_background: $dark_purple;
 $main_button_color: $white;
 $main_button_hover: $light_purple; 
 $main_button_hover_background: $darker_blue;
@@ -597,8 +599,8 @@ select {
 
 // Chips used for Resources selections and Policy Doc subjects
 @mixin common-chip-colors {
-    background: $main_button_background;
-    color: $main_button_color;
+    background: $lightest_purple;
+    color: $darkest_gray;
 }
 
 @mixin common-chip-styles {

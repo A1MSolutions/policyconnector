@@ -21,9 +21,8 @@
 
 .doc-type__label {
     @include common-label-styles;
-
-    color: $primary_text_color;
-    background: $teritary_background_color;
+    color: $primary_indicator_text;
+    background: $primary_indicator_background;
 }
 
 .category-labels {
@@ -34,18 +33,9 @@
     .result-label {
         @include common-label-styles;
 
-        background: $teritary_background_color;
-
-        &.category-label,
-        &.regulations-label {
-            font-weight: 600;
+        background: $reverse_background_lighter;
+        font-weight: 600;
         }
-
-        &.regulations-label {
-            color: $primary_text_color;
-;
-        }
-    }
 }
 
 .reg-results-container .result .category-labels {
