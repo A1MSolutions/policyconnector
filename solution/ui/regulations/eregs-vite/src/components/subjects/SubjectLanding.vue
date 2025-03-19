@@ -21,6 +21,7 @@ defineProps({
 
         <ul>
             <li>
+                <i class="fa fa-angle-right"></i>
                 <a
                     href="https://www.opm.gov/policy-data-oversight/pay-leave/leave-administration/#url=Reference-Materials"
                     class="external"
@@ -31,6 +32,7 @@ defineProps({
                 </a>
             </li>
             <li>
+                <i class="fa fa-angle-right"></i>
                 <a
                     href="https://www.opm.gov/policy-data-oversight/pay-leave/pay-administration/fact-sheets/laws-regulations-and-other-references-related-to-pay-administration/"
                     class="external"
@@ -41,6 +43,7 @@ defineProps({
                 </a>
             </li>
             <li>
+                <i class="fa fa-angle-right"></i>
                 <a
                     href="https://www.opm.gov/policy-data-oversight/performance-management/legal-citations/"
                     class="external"
@@ -51,6 +54,7 @@ defineProps({
                 </a>
             </li>
             <li>
+                <i class="fa fa-angle-right"></i>
                 <a
                     href="https://www.opm.gov/policy-data-oversight/senior-executive-service/ses-desk-guide/statutes-regulations-and-desk-guide-citations/"
                     class="external"
@@ -61,6 +65,7 @@ defineProps({
                 </a>
             </li>
             <li>
+                <i class="fa fa-angle-right"></i>
                 <a
                     href="https://www.opm.gov/wiki/training/Training-Administration-Fast-Facts-Index.ashx"
                     class="external"

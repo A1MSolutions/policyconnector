@@ -218,11 +218,6 @@ $hover_border_color: $mid_red;
 $table_border_color: $light_gray;
 $formula_left_border: $light_red;
 
-
-// Chips
-$policy_subject_selected_chip_background: $dark_purple; 
-$policy_subject_selected_chip_text: $white;
-
 // Indicators
 
 $primary_indicator_background: $lightest_beige;
@@ -245,12 +240,11 @@ $tertiary_indicator_background: $lightest_beige;
 $main_button_background: $dark_purple;
 $main_button_color: $white;
 $main_button_hover: $light_purple; 
-$main_button_hover_background: $darker_blue;
+$main_button_hover_background: $dark_purple;
 $main_button_disabled: $light_gray; 
 
 $copy_button_success: $green;
 
-$policy_subject_close_background: $light_gray;
 $policy_subject_close_background_hover: $mid_gray;
 
 //--------------------------
