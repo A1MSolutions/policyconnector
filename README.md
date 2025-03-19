@@ -10,10 +10,10 @@ Policy Connector is a web application for researching government policy informat
 This is an independent non-government adaptation of an open source codebase, [eRegulations](https://eregs.github.io/), that has had many contributors:
 
 1. The Consumer Financial Protection Bureau developed the first version of eRegulations in 2013 and [released it as an open source project](https://www.acus.gov/article/cfpbs-eregulations-tool-promises-help-users-navigate-federal-regulations). See its current iteration at [CFPB Interactive Bureau Regulations](https://www.consumerfinance.gov/rules-policy/regulations/).
-2. At the General Services Administration, [18F helped a few agencies adapt eRegulations for their needs]([https://18f.gsa.gov/our-work/eregulations/](https://web.archive.org/web/20250221231715/https://18f.gsa.gov/our-work/eregulations/), including the Bureau of Alcohol, Tobacco, Firearms, and Explosives: [ATF eRegulations](https://regulations.atf.gov/) ([archived repository](https://github.com/18F/atf-eregs)).
+2. At the General Services Administration, [18F helped a few agencies adapt eRegulations for their needs](https://web.archive.org/web/20250221231715/https://18f.gsa.gov/our-work/eregulations/), including the Bureau of Alcohol, Tobacco, Firearms, and Explosives: [ATF eRegulations](https://regulations.atf.gov/) ([archived repository](https://github.com/18F/atf-eregs)).
 3. The Center for Medicare & Medicaid Services reused eRegulations and developed additional features. This version is based on [the CMS codebase](https://github.com/Enterprise-CMCS/cmcs-eregulations).
 
-Please note that this specific repository is a quick adaptation of the upstream repository, with many broken tests and other terrible shortcuts because it's an experimental side project. If you want to see decent code, look upstream!
+Please note that this specific repository is a quick adaptation of the upstream repository, with many broken tests and other shortcuts, because it's a demonstration of adapting the codebase for a different policy area. If you want to see decent code, look upstream!
 
 # Local setup
 
