@@ -21,16 +21,16 @@ defineEmits(["link-clicked"]);
 
 const links = [
     {
-        name: "statutes",
-        label: "Look Up Statutes",
-        active: window.location.pathname.includes("statutes"),
-        href: props.statutesUrl,
-    },
-    {
         name: "subjects",
         label: "Research a Subject",
         active: window.location.pathname.includes("subjects"),
         href: props.subjectsUrl,
+    },
+    {
+        name: "statutes",
+        label: "Look Up Statutes",
+        active: window.location.pathname.includes("statutes"),
+        href: props.statutesUrl,
     },
 ];
 
