@@ -50,8 +50,11 @@ class PartSitemap(Sitemap):
         return obj['last_updated']
 
     def location(self, item):
-        kwargs = {}
-        for key in ['title', 'part', 'subpart']:
-            if item.get(key):
-                kwargs[key] = item[key]
-        return reverse("reader_view", kwargs=kwargs)
+        try:
+            kwargs = {}
+            for key in ['title', 'part', 'subpart']:
+                if item.get(key):
+                    kwargs[key] = item[key]
+            return reverse("reader_view", kwargs=kwargs)
+        except:
+            return None
