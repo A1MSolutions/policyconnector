@@ -50,6 +50,10 @@ footer {
     .about-footer {
         font-size: var(--font-size-sm);
         margin-bottom: var(--spacer-2);
+
+        a {
+            color: $accent_color;
+        }
     }
 
     .footer-left {

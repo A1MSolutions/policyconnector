@@ -424,7 +424,6 @@
         .featured-materials {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             min-height: 100px;
             box-sizing: border-box;
             align-items: center;
@@ -441,6 +440,11 @@
                     color: $tertiary_color;
                 }
             }
+
+            &.featured-documents {
+                justify-content: space-between;
+            }
+
             .eo-text {
                 text-align: center;
 
