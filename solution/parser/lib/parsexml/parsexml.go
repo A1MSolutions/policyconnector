@@ -353,6 +353,16 @@ func (c *AppendixChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElement) 
 			return err
 		}
 		*c = append(*c, child)
+	case "FP":
+		fallthrough
+	case "FP-1":
+		fallthrough
+	case "FP-2":
+		child := &FlushParagraph{Type: "FlushParagraph"}
+		if err := d.DecodeElement(child, &start); err != nil {
+			return err
+		}
+		*c = append(*c, child)
 	case "HD1":
 		child := &Heading{Type: "Heading"}
 		if err := d.DecodeElement(child, &start); err != nil {
@@ -385,6 +395,12 @@ func (c *AppendixChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElement) 
 		*c = append(*c, child)
 	case "FTNT":
 		child := &FootNote{Type: "FootNote"}
+		if err := d.DecodeElement(child, &start); err != nil {
+			return err
+		}
+		*c = append(*c, child)
+	case "CITA":
+		child := &Citation{Type: "Citation"}
 		if err := d.DecodeElement(child, &start); err != nil {
 			return err
 		}
