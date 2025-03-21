@@ -1,4 +1,4 @@
-<li class="{{ extra_class }}">
+<li class="{{ extra_class }} {% if appendix and item.identifier|join:'-' == appendix_data.identifier|join:'-' %}active{% endif %}">
     {% if item.reserved %}
     <span class="menu-section">
         <div class="toc-section-number">{{ item.label_level }}</div>
