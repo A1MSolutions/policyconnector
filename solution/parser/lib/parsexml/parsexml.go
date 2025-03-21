@@ -359,6 +359,18 @@ func (c *AppendixChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElement) 
 			return err
 		}
 		*c = append(*c, child)
+	case "HD2":
+		child := &Heading{Type: "Heading2"}
+		if err := d.DecodeElement(child, &start); err != nil {
+			return err
+		}
+		*c = append(*c, child)
+	case "HD3":
+		child := &Heading{Type: "Heading3"}
+		if err := d.DecodeElement(child, &start); err != nil {
+			return err
+		}
+		*c = append(*c, child)
 	case "DIV":
 		child := &Division{Type: "Division"}
 		if err := d.DecodeElement(child, &start); err != nil {
