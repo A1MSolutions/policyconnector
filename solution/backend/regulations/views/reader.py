@@ -250,7 +250,7 @@ class AppendixReaderView(ReaderView):
 
         for i, child in enumerate(toc['children']):
             if ('type' in child and child['type'] == 'appendix' and
-                    'identifier' in child):
+                'identifier' in child):
                 # Compare the full identifier to find the exact appendix
                 # Need to make a case-insensitive and format-insensitive comparison
 
@@ -264,24 +264,24 @@ class AppendixReaderView(ReaderView):
 
                 # Find the appendix number index (usually index 1 if present)
                 appendix_num_index = (1 if len(url_identifier) > 1 and
-                                     url_identifier[1] not in ["TO", "PART"] else None)
+                                      url_identifier[1] not in ["TO", "PART"] else None)
 
                 if appendix_num_index:
                     # Compare appendix number and part number
                     url_appendix_num = url_identifier[appendix_num_index]
                     child_appendix_num = (child_identifier[appendix_num_index]
-                                         if len(child_identifier) > appendix_num_index else None)
+                                          if len(child_identifier) > appendix_num_index else None)
 
                     # Get part numbers
                     url_part_index = (url_identifier.index("PART") + 1
-                                     if "PART" in url_identifier else None)
+                                      if "PART" in url_identifier else None)
                     child_part_index = (child_identifier.index("PART") + 1
-                                       if "PART" in child_identifier else None)
+                                        if "PART" in child_identifier else None)
 
                     url_part_num = (url_identifier[url_part_index]
-                                   if url_part_index and url_part_index < len(url_identifier) else None)
+                                    if url_part_index and url_part_index < len(url_identifier) else None)
                     child_part_num = (child_identifier[child_part_index]
-                                     if child_part_index and child_part_index < len(child_identifier) else None)
+                                      if child_part_index and child_part_index < len(child_identifier) else None)
 
                     # Match both appendix number and part number
                     if (url_appendix_num == child_appendix_num and
@@ -293,14 +293,14 @@ class AppendixReaderView(ReaderView):
                     # Handle case with no appendix number (just "Appendix to Part X")
                     # Compare just the part numbers
                     url_part_index = (url_identifier.index("PART") + 1
-                                     if "PART" in url_identifier else None)
+                                      if "PART" in url_identifier else None)
                     child_part_index = (child_identifier.index("PART") + 1
-                                       if "PART" in child_identifier else None)
+                                        if "PART" in child_identifier else None)
 
                     url_part_num = (url_identifier[url_part_index]
-                                   if url_part_index and url_part_index < len(url_identifier) else None)
+                                    if url_part_index and url_part_index < len(url_identifier) else None)
                     child_part_num = (child_identifier[child_part_index]
-                                     if child_part_index and child_part_index < len(child_identifier) else None)
+                                      if child_part_index and child_part_index < len(child_identifier) else None)
 
                     # If neither has an appendix number and part numbers match
                     if (("TO" in url_identifier and "TO" in child_identifier) and
