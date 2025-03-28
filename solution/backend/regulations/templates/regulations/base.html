@@ -22,13 +22,20 @@ CSS/Javascript etc., should inherit from this template.
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=EDGE">
         {% comment %} Tag for bing and google to show that I control the site. {% endcomment %}
-        <meta name="msvalidate.01" content="2564ADEFA9801CDF3DD1287C2109D2A9" />
-        <meta name="google-site-verification" content="iNAu2rAPdykHG6aKtClENiu_fRheE-TBM4drtyCVlWk" />
+        <meta name="msvalidate.01" content="" />
+        <meta name="google-site-verification" content="" />
+
+        <meta name="description" content="{{title}} CFR {{reg_part}} {% if subpart %}Subpart {{subpart}}{% endif %} with relevant statute, rules, and guidance">
+        <meta property="og:title" content="{{title}} CFR {{reg_part}} - {{ part_label }}{% if subpart %}, Subpart {{subpart}}{% endif %}">
+        <meta property="og:description" content="{{title}} CFR {{reg_part}} {% if subpart %}Subpart {{subpart}}{% endif %} with relevant statute, rules, and guidance">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Policy Connector">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% if not allow_indexing %}<meta name="robots" content="noindex" />{% endif %}
         <title>
             {% block title %}
-                {% block title_prefix %}{{title}} CFR {{reg_part}} {% if subpart %} Subpart {{subpart}} {% endif %} | {% endblock %}
+                {% block title_prefix %}{{title}} CFR {{reg_part}} - {{ part_label }}{% if subpart %}, Subpart {{subpart}}{% endif %} | {% endblock %}
                 Policy Connector
             {% endblock %}
         </title>
@@ -41,6 +48,38 @@ CSS/Javascript etc., should inherit from this template.
             href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
         />
         <link rel="stylesheet" href="{% static '/css/main.css' %}?{{ DEPLOY_NUMBER }}" />
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Policy Connector",
+                  "item": "{{ request.scheme }}://{{ request.get_host }}/"
+                }{% if title %},
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Title {{ title }} - {% if title == '5' %}Administrative Personnel{% elif title == '29' %}Labor{% else %}{{ title_name }}{% endif %}",
+                  "item": "{{ request.scheme }}://{{ request.get_host }}/{{ title }}/"
+                }{% endif %}{% if reg_part %},
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Part {{ reg_part }} - {{ part_label }}",
+                  "item": "{{ request.scheme }}://{{ request.get_host }}/{{ title }}/{{ reg_part }}/"
+                }{% endif %}{% if subpart %},
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "Subpart {{ subpart }}{% if subpart_label %} - {{ subpart_label }}{% endif %}",
+                  "item": "{{ request.scheme }}://{{ request.get_host }}/{{ title }}/{{ reg_part }}/Subpart-{{ subpart }}/{{ version }}/"
+                }{% endif %}
+              ]
+            }
+            </script>
     </head>
     <body class="ds-base {% block body_class %}{% endblock %}">
         {% block outside_vue %}{% endblock %}
