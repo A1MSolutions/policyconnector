@@ -18,7 +18,8 @@ RUN dnf install -y \
     gcc-c++ \
     python3-devel \
     && dnf clean all
-Add commentRUN pip install -r app/requirements.txt
+
+RUN pip install -r app/requirements.txt
 
 # Copy lambda-proxy
 COPY lambda-proxy /proxy
