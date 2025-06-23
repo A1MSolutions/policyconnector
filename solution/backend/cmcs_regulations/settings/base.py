@@ -28,7 +28,8 @@ FORCE_SCRIPT_NAME = os.environ.get("FORCE_SCRIPT_NAME")
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'),
                  'localhost',
                  'host.docker.internal',
-                 'policyconnector.digital']
+                 'policyconnector.digital',
+                 'www.policyconnector.digital']
 
 # Application definition
 
@@ -59,6 +60,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'regulations.middleware.WwwRedirectMiddleware',
     'django.middleware.security.SecurityMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
