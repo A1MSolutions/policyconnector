@@ -1,9 +1,27 @@
 import json
 import traceback
 
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponsePermanentRedirect
 
 from regulations.models import SiteConfiguration
+
+
+class WwwRedirectMiddleware:
+    """
+    Middleware to redirect www.policyconnector.digital to policyconnector.digital
+    """
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        host = request.get_host()
+        
+        # If request is specifically for www.policyconnector.digital, redirect to root domain
+        if host == 'www.policyconnector.digital':
+            new_url = f"{request.scheme}://policyconnector.digital{request.get_full_path()}"
+            return HttpResponsePermanentRedirect(new_url)
+        
+        return self.get_response(request)
 
 
 class ProcessResponse:
