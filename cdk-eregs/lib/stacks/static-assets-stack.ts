@@ -11,6 +11,7 @@ import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as route53Targets from 'aws-cdk-lib/aws-route53-targets';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
+import * as fs from 'fs';
 
 /**
  * Properties for the StaticAssetsStack
@@ -39,6 +40,7 @@ export class StaticAssetsStack extends cdk.Stack {
   private readonly assetsBucket: s3.Bucket;
   private readonly loggingBucket: s3.Bucket;
   private readonly distribution: cloudfront.Distribution;
+  private readonly redirectDistribution?: cloudfront.Distribution;
   private readonly certificate?: acm.ICertificate;
   private readonly domainName?: string;
 
@@ -88,9 +90,10 @@ export class StaticAssetsStack extends cdk.Stack {
     this.loggingBucket = this.createLoggingBucket();
     const waf = this.createWebACL();
     this.distribution = this.createCloudFrontDistribution(waf, props);
-
-    // Create Route53 record if domain name is provided
+    
+    // Create redirect distribution for www subdomain if domain name is provided
     if (props.domainName) {
+      this.redirectDistribution = this.createRedirectDistribution(waf, props);
       this.createDnsRecord(props.domainName);
     }
 
@@ -119,14 +122,16 @@ export class StaticAssetsStack extends cdk.Stack {
         zone: hostedZone,
       });
 
-      // Create a www subdomain record
-      new route53.ARecord(this, 'WwwSiteAliasRecord', {
-        recordName: `www.${domainName}`,
-        target: route53.RecordTarget.fromAlias(
-          new route53Targets.CloudFrontTarget(this.distribution)
-        ),
-        zone: hostedZone,
-      });
+      // Create a www subdomain record pointing to redirect distribution
+      if (this.redirectDistribution) {
+        new route53.ARecord(this, 'WwwSiteAliasRecord', {
+          recordName: `www.${domainName}`,
+          target: route53.RecordTarget.fromAlias(
+            new route53Targets.CloudFrontTarget(this.redirectDistribution)
+          ),
+          zone: hostedZone,
+        });
+      }
 
       // Store DNS record information in SSM
       new ssm.StringParameter(this, 'DomainAliasParameter', {
@@ -241,10 +246,9 @@ export class StaticAssetsStack extends cdk.Stack {
   ): cloudfront.Distribution {
     const domainNames = [];
 
-    // Add domain names if certificate is available
+    // Add only apex domain name if certificate is available
     if (this.certificate && props.domainName) {
       domainNames.push(props.domainName);
-      domainNames.push(`www.${props.domainName}`);
     }
 
     return new cloudfront.Distribution(this, 'CloudFrontDistribution', {
@@ -275,6 +279,62 @@ export class StaticAssetsStack extends cdk.Stack {
           ttl: cdk.Duration.minutes(30),
         },
       ],
+    });
+  }
+
+  /**
+   * Creates CloudFront distribution for www redirect
+   * @private
+   * @param {wafv2.CfnWebACL} waf - WAF Web ACL to attach to the distribution
+   * @param {StaticAssetsStackProps} props - Stack properties
+   * @returns {cloudfront.Distribution} Configured redirect CloudFront distribution
+   */
+  private createRedirectDistribution(
+    waf: wafv2.CfnWebACL,
+    props: StaticAssetsStackProps
+  ): cloudfront.Distribution {
+    // Read the CloudFront Function code
+    const redirectFunctionCode = fs.readFileSync(
+      path.join(__dirname, '../cloudfront-functions/www-redirect.js'),
+      'utf8'
+    );
+
+    // Create CloudFront Function
+    const redirectFunction = new cloudfront.Function(this, 'WwwRedirectFunction', {
+      code: cloudfront.FunctionCode.fromInline(redirectFunctionCode),
+      comment: 'Redirect www subdomain to apex domain',
+      functionName: this.stageConfig.getResourceName('www-redirect-function'),
+    });
+
+    const domainNames = [];
+    
+    // Add www domain name if certificate is available
+    if (this.certificate && props.domainName) {
+      domainNames.push(`www.${props.domainName}`);
+    }
+
+    return new cloudfront.Distribution(this, 'WwwRedirectDistribution', {
+      defaultBehavior: {
+        origin: origins.S3BucketOrigin.withOriginAccessControl(this.assetsBucket),
+        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD,
+        compress: true,
+        cachedMethods: cloudfront.CachedMethods.CACHE_GET_HEAD,
+        cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
+        functionAssociations: [{
+          function: redirectFunction,
+          eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
+        }],
+      },
+      comment: `CloudFront Distribution for www redirect - ${this.stageConfig.getResourceName('site')}`,
+      webAclId: waf.attrArn,
+      logBucket: this.loggingBucket,
+      logFilePrefix: 'cf-redirect-logs/',
+      logIncludesCookies: false,
+      httpVersion: cloudfront.HttpVersion.HTTP2,
+      minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
+      certificate: this.certificate,
+      domainNames: domainNames.length > 0 ? domainNames : undefined,
     });
   }
 
