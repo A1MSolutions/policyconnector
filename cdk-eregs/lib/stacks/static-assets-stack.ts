@@ -207,7 +207,7 @@ export class StaticAssetsStack extends cdk.Stack {
    */
   private createWebACL(): wafv2.CfnWebACL {
     return new wafv2.CfnWebACL(this, 'CloudFrontWebACL', {
-      defaultAction: { allow: {} },
+      defaultAction: { block: {} },
       scope: 'CLOUDFRONT',
       visibilityConfig: {
         sampledRequestsEnabled: true,
