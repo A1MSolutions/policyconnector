@@ -295,7 +295,7 @@ export class StaticAssetsStack extends cdk.Stack {
   ): cloudfront.Distribution {
     // Read the CloudFront Function code
     const redirectFunctionCode = fs.readFileSync(
-      path.join(__dirname, '../cloudfront-functions/www-redirect.js'),
+      path.join(__dirname, '../cloudfront-function/www-redirect.js'),
       'utf8'
     );
 
