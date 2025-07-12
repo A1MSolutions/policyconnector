@@ -23,6 +23,7 @@ services:
     volumes:
       - ./backend:/app/src
       - ./static-assets:/app/static-assets
+      - ~/.aws:/root/.aws:ro
     environment:
       ALLOWED_HOST: regulations
       HTTP_AUTH_USER: RpSS01rhbx
@@ -34,6 +35,9 @@ services:
       DEBUG: "True"
       SUPPLEMENTAL_CONTENT_PATH: /app/src/serverless/guidance
       DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE:-cmcs_regulations.settings.local}
+      AWS_PROFILE: a1m
+      AWS_REGION: us-east-1
+
     ports:
       - 8000:8000
     links:
