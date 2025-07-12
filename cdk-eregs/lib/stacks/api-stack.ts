@@ -442,6 +442,20 @@ export class BackendStack extends cdk.Stack {
     storageBucket.grantReadWrite(regSiteLambda);
     textExtractorQueue.grantSendMessages(regSiteLambda);
 
+    // Bedrock permissions for AI summarization
+    regSiteLambda.addToRolePolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: [
+          'bedrock:InvokeModel',
+          'bedrock:InvokeModelWithResponseStream'
+        ],
+        resources: [
+          'arn:aws:bedrock:*::foundation-model/amazon.titan-text-express-v1'
+        ],
+      }),
+    );
+
     // DB inspection permissions
     [createDbLambda, dropDbLambda, migrateLambda, createSuLambda].forEach(lambdaFn => {
       lambdaFn.addToRolePolicy(

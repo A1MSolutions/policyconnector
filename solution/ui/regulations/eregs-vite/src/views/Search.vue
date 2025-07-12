@@ -410,6 +410,10 @@ getDocsOnLoad();
 .search-summary {
     background: #f8f9fa;
     border-left: 4px solid #0074d9;
-    padding: .25em .5em;
+    padding: .5em;
+
+    h3 {
+        margin-top: 0;
+    }
 }
 </style>

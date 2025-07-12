@@ -40,10 +40,10 @@ class SummarizationService:
 
             # Simple concatenation of all cleaned headlines
             headline_text = " ".join(cleaned_headlines)
-            prompt = f"You are a government policy expert speaking to a policy expert audience. Summarize the following search results in one paragraph, fewer than 100 words, focusing on information most relevant to all words in the query term: '{query}'. Don't say you are summarizing the search results. These are the search results: '{headline_text}'"
+            prompt = f"You are a government policy expert speaking to a policy expert audience. Concisely summarize the following search results, in fewer than 100 words, in one paragraph with key details, focusing on information most relevant to all words in the query term: '{query}'. Don't say you are summarizing the search results. These are the search results: '{headline_text}'"
 
             response = self.client.invoke_model(
-                modelId='amazon.titan-text-express-v1',
+                modelId='amazon.titan-text-premier-v1:0',
                 body=json.dumps({'inputText': prompt})
             )
 
