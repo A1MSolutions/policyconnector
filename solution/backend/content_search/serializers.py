@@ -38,6 +38,7 @@ class ContentCountSerializer(serializers.Serializer):
     internal_resource_count = serializers.IntegerField()
     public_resource_count = serializers.IntegerField()
     regulation_text_count = serializers.IntegerField()
+    summary = serializers.CharField(required=False, allow_blank=True)
 
     subjects = SubjectCountSerializer(many=True)
     categories = CategoryCountSerializer(many=True)

@@ -370,6 +370,10 @@ getDocsOnLoad();
                     />
                 </template>
                 <template v-else>
+                    <div v-if="policyDocList.summary" class="search-summary">
+                        <h3>Summary</h3>
+                        <p>{{ policyDocList.summary }}</p>
+                    </div>
                     <PolicyResults
                         :categories="categoriesRef"
                         :results="policyDocList.results"
@@ -401,3 +405,15 @@ getDocsOnLoad();
         </main>
     </body>
 </template>
+
+<style scoped>
+.search-summary {
+    background: #f8f9fa;
+    border-left: 4px solid #0074d9;
+    padding: .5em;
+
+    h3 {
+        margin-top: 0;
+    }
+}
+</style>

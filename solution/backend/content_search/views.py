@@ -18,6 +18,7 @@ from resources.utils import get_citation_filter, string_to_bool
 
 from .models import ContentIndex, IndexedRegulationText
 from .serializers import ContentCountSerializer, ContentSearchSerializer
+from .services import SummarizationService
 
 
 class ContentSearchPagination(ViewSetPagination):
@@ -101,6 +102,13 @@ class ContentSearchPagination(ViewSetPagination):
                         "for multiple. Examples: 42, 42.433, 42.433.15, 42.433.D",
             location=OpenApiParameter.QUERY,
         ),
+        OpenApiParameter(
+            name="summarize",
+            required=False,
+            type=str,
+            description="Generate an AI summary of the top search results. Set to 'true' to enable.",
+            location=OpenApiParameter.QUERY,
+        ),
     ] + ViewSetPagination.QUERY_PARAMETERS,
 )
 class ContentSearchViewSet(viewsets.ReadOnlyModelViewSet):
@@ -120,6 +128,9 @@ class ContentSearchViewSet(viewsets.ReadOnlyModelViewSet):
         search_query = request.GET.get("q")
         if not search_query:
             raise BadRequest("A search query is required; provide 'q' parameter in the query string.")
+
+        # Check if summarization is requested
+        should_summarize = string_to_bool(request.GET.get("summarize"), False)
 
         # Defer all unnecessary text fields to reduce database load and memory usage
         query = ContentIndex.objects.defer_text()
@@ -172,9 +183,35 @@ class ContentSearchViewSet(viewsets.ReadOnlyModelViewSet):
         # Sort the current page by rank
         query = sorted(query, key=lambda x: current_page.index(x.pk))
 
+        # Generate summary if requested
+        summary = None
+        if should_summarize:
+            try:
+                # Collect headlines from top 20 results
+                headlines = []
+                for item in query[:20]:
+                    if hasattr(item, 'name_headline') and item.name_headline:
+                        headlines.append(item.name_headline)
+                    if hasattr(item, 'summary_headline') and item.summary_headline:
+                        headlines.append(item.summary_headline)
+                    if hasattr(item, 'content_headline') and item.content_headline:
+                        headlines.append(item.content_headline)
+                # Generate summary using AWS Bedrock
+                summarization_service = SummarizationService()
+                summary = summarization_service.summarize(headlines, search_query)
+            except Exception as e:
+                import sys
+                print(f"ERROR: Summarization failed: {str(e)}", file=sys.stderr, flush=True)
+
         # Serialize and return the results
         serializer = self.get_serializer_class()(query, many=True, context=self.get_serializer_context())
-        return self.get_paginated_response(serializer.data)
+        response = self.get_paginated_response(serializer.data)
+
+        # Add summary to response if available
+        if summary:
+            response.data['summary'] = summary
+
+        return response
 
 
 @extend_schema(
