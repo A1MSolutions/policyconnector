@@ -451,7 +451,7 @@ export class BackendStack extends cdk.Stack {
           'bedrock:InvokeModelWithResponseStream'
         ],
         resources: [
-          'arn:aws:bedrock:*::foundation-model/amazon.titan-text-express-v1'
+          'arn:aws:bedrock:*::foundation-model/amazon.titan-text-premier-v1:0'
         ],
       }),
     );
