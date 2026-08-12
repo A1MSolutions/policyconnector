@@ -3,6 +3,32 @@ from rest_framework import serializers
 from common.fields import HeadlineField
 from resources.serializers import AbstractResourceSerializer
 
+from .models import Synonym
+
+
+class SynonymSerializer(serializers.ModelSerializer):
+    baseWord = serializers.CharField(source="base_word")
+    isActive = serializers.BooleanField(source="is_active")
+    synonyms = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Synonym
+        fields = ("id", "baseWord", "isActive", "synonyms")
+
+    def get_synonyms(self, obj):
+        return [
+            {
+                "id": s.id,
+                "baseWord": s.base_word,
+                "isActive": s.is_active,
+                "synonyms": [
+                    {"id": n.id, "baseWord": n.base_word, "isActive": n.is_active}
+                    for n in s.synonyms.all()[:20]
+                ],
+            }
+            for s in obj.synonyms.all().order_by("base_word")
+        ]
+
 
 class IndexedRegulationTextSerializer(serializers.Serializer):
     title = serializers.IntegerField()

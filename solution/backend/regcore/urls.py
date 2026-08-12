@@ -1,5 +1,6 @@
 from django.urls import include, path
 
+from content_search.synonyms import SynonymViewSet
 from regcore.views import (
     contents,
     history,
@@ -13,6 +14,9 @@ urlpatterns = [
     path("v3/", include([
         path("resources/", include('resources.urls')),
         path("content-search/", include('content_search.urls')),
+        path("synonyms", SynonymViewSet.as_view({
+            "get": "list",
+        })),
         path("toc", title.TOCViewSet.as_view({
             "get": "list",
         })),

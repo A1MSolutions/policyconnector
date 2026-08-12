@@ -101,8 +101,65 @@ const allDocTypesOnly = (queryParams) => {
 
 // search query refs and methods
 const searchQuery = ref($route.query.q || "");
+const synonyms = ref([]);
 const clearSearchQuery = () => {
     searchQuery.value = "";
+};
+
+const processSynonymPayload = (payload, query) => {
+    const q = (query || "").trim().toLowerCase();
+    const words = q.replace(/["']/g, "").split(/\s+/).filter(Boolean);
+    const stop = new Set(["a", "an", "the", "of", "for", "and", "or"]);
+    const terms = [];
+    for (const item of payload || []) {
+        const base = item?.baseWord || item?.base_word || "";
+        const active = item?.isActive ?? item?.is_active;
+        if (base) {
+            if (!words.length) terms.push(base);
+            else if (words.length === 1) {
+                const w = words[0];
+                if (base.toLowerCase().includes(w) || w.includes(base.toLowerCase())) {
+                    if (active !== false || base.toLowerCase() !== w) terms.push(base);
+                } else if (active === false && base.toLowerCase().startsWith(w.slice(0, 2))) {
+                    terms.push(base);
+                }
+            } else if (words.some((w) => w.length > 1 && !stop.has(w) && base.toLowerCase().includes(w))) {
+                terms.push(base);
+            }
+        }
+        for (const syn of item?.synonyms || []) {
+            const synWord = typeof syn === "string" ? syn : syn.baseWord || syn.base_word;
+            const synActive = typeof syn === "string" ? true : syn.isActive ?? syn.is_active;
+            if (!synWord) continue;
+            if (synActive === false) {
+                if (!q || synWord.toLowerCase().includes(words[0] || "")) terms.push(synWord);
+            } else if (words.length > 1) {
+                if (words.some((w) => synWord.toLowerCase().includes(w))) terms.push(synWord);
+                for (const nested of syn.synonyms || []) {
+                    const nw = typeof nested === "string" ? nested : nested.baseWord || nested.base_word;
+                    if (nw && !terms.includes(nw)) terms.push(nw);
+                }
+            } else {
+                terms.push(synWord);
+            }
+        }
+    }
+    return [...new Set(terms.filter((t) => t.toLowerCase() !== q))].sort();
+};
+
+const fetchSynonyms = async (query) => {
+    if (!query) {
+        synonyms.value = [];
+        return;
+    }
+    try {
+        const response = await fetch(`${apiUrl}synonyms?q=${query}`).catch(() => null);
+        const payload = response?.ok ? await response.json() : [];
+        synonyms.value = processSynonymPayload(payload, query);
+    } catch (error) {
+        console.error(error);
+        synonyms.value = [];
+    }
 };
 
 const executeSearch = (payload) => {
@@ -172,6 +229,7 @@ const setTitle = (query) => {
 const getDocsOnLoad = async () => {
     if (!$route.query.q) {
         clearDocList();
+        synonyms.value = [];
         return;
     }
 
@@ -182,6 +240,8 @@ const getDocsOnLoad = async () => {
     Object.entries($route.query).forEach((param) => {
         setSelectedParams(param);
     });
+
+    fetchSynonyms($route.query.q);
 
     getDocList({
         apiUrl,
@@ -219,8 +279,11 @@ watch(
         // early return if there's no query
         if (!q) {
             clearDocList();
+            synonyms.value = [];
             return;
         }
+
+        fetchSynonyms(q);
 
         sanitizedQueryParams.value = sanitizeQueryParams(newQueryParams);
 
@@ -293,6 +356,8 @@ getDocsOnLoad();
                     label="Search for a document"
                     parent="search"
                     :search-query="searchQuery"
+                    :synonyms="synonyms"
+                    :show-suggestions="true"
                     @execute-search="executeSearch"
                     @clear-form="resetSearch"
                 />
